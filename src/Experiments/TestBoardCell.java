@@ -1,5 +1,6 @@
 package Experiments;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class TestBoardCell {
@@ -13,9 +14,12 @@ public class TestBoardCell {
 		location[0] = x;
 		location[1] = y;
 		isRoom = r;
+		
+		adjList = new HashSet<TestBoardCell>();
 	}
 	
 	public Set<TestBoardCell> getAdjList(){
+		
 		return adjList;
 	}
 	
@@ -32,6 +36,4 @@ public class TestBoardCell {
 		
 		return isOccupied;
 	}
-	
-	
 }
