@@ -80,7 +80,7 @@ class BoardTestExp {
 	
 	//calcTarget Tests
 	@Test
-	void testCalcTargetsNormal() {
+	void testCalcTargetsNormalTopLeft() {
 		TestBoardCell testUnit = testing.getCell(0, 0);
 		testing.calcTargets(testUnit, 4);
 		Set<TestBoardCell> targets = testing.getTargets();
@@ -94,7 +94,22 @@ class BoardTestExp {
 
 	}
 	
-	
+	@Test
+	void testCalcTargetsNormalMiddle() {
+		TestBoardCell testUnit = testing.getCell(2, 2);
+		testing.calcTargets(testUnit, 3);
+		Set<TestBoardCell> targets = testing.getTargets();
+		assertEquals(8, targets.size());
+		assertTrue(targets.contains(testing.getCell(1, 0)));
+		assertTrue(targets.contains(testing.getCell(0, 1)));
+		assertTrue(targets.contains(testing.getCell(3, 0)));
+		assertTrue(targets.contains(testing.getCell(2, 1)));
+		assertTrue(targets.contains(testing.getCell(1, 2)));
+		assertTrue(targets.contains(testing.getCell(0, 3)));
+		assertTrue(targets.contains(testing.getCell(3, 2)));
+		assertTrue(targets.contains(testing.getCell(2, 2)));
+
+	}
 	
 	
 	
