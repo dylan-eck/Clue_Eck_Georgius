@@ -27,6 +27,7 @@ class BoardTestExp {
 	 * (0,3) (1,3) (2,3)   X
 	 */
 	
+	// Adjacency tests
 	@Test
 	void testAdjacencyTopLeft() {
 		TestBoardCell testUnit = testing.getCell(0,0);
@@ -76,4 +77,28 @@ class BoardTestExp {
 		assertTrue(adjList.contains(testing.getCell(2,1)));
 		assertEquals(3,adjList.size());
 	}
+	
+	//calcTarget Tests
+	@Test
+	void testCalcTargetsNormal() {
+		TestBoardCell testUnit = testing.getCell(0, 0);
+		testing.calcTargets(testUnit, 4);
+		Set<TestBoardCell> targets = testing.getTargets();
+		assertEquals(6, targets.size());
+		assertTrue(targets.contains(testing.getCell(1, 1)));
+		assertTrue(targets.contains(testing.getCell(2, 2)));
+		assertTrue(targets.contains(testing.getCell(0, 2)));
+		assertTrue(targets.contains(testing.getCell(2, 0)));
+		assertTrue(targets.contains(testing.getCell(1, 3)));
+		assertTrue(targets.contains(testing.getCell(3, 1)));
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
