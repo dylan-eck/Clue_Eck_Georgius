@@ -10,11 +10,12 @@ public class TestBoardCell {
 	private boolean isOccupied;
 	
 	public TestBoardCell(int x, int y,boolean r) {
-		location = new int[2];
+		/*location = new int[2];
 		location[0] = x;
 		location[1] = y;
 		isRoom = r;
 		
+		*/
 		adjList = new HashSet<TestBoardCell>();
 	}
 	
@@ -28,12 +29,10 @@ public class TestBoardCell {
 	}
 	
 	public void setOccupied(boolean occupied) {
-		
 		isOccupied = occupied;
 	}
 	
 	public boolean isOccupied() {
-		
 		return isOccupied;
 	}
 }

@@ -1,0 +1,29 @@
+commit bd20833dc3cb6f57beba3e6655e068bc8a6df26d
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Thu Oct 1 15:49:32 2020 -0600
+
+    fixed test null pointer exceptions
+
+commit a03862d002d08548b428c3875dc84e8df7669b0d
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Thu Oct 1 15:22:59 2020 -0600
+
+    updated calcTarget tests
+
+commit 9acd80edae33a8bab00c2e9ec8748a18172970c4
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Thu Oct 1 14:53:50 2020 -0600
+
+    added calcTargets() unit test
+
+commit 2b32e0ec9ea47dd41335f242e2ca30fd7399c34b
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Thu Oct 1 13:01:27 2020 -0600
+
+    Added outline for TestBoard and TestBoardPiece and adjacency tests
+
+commit e87f242a0015c90729827186bebf29d6e454afc6
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Thu Oct 1 11:37:41 2020 -0600
+
+    Initial commit

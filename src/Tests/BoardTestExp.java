@@ -24,7 +24,7 @@ class BoardTestExp {
 	 *   X   (1,0)   X   (3,0)
 	 * (0,1) (1,1) (2,1)   X
 	 *   X   (2,1) (2,2) (3,2)
-	 * (0,3) (1,3) (2,3)   X
+	 * (0,3)   R     R     X
 	 */
 	
 	// Adjacency tests
@@ -34,7 +34,6 @@ class BoardTestExp {
 		Set<TestBoardCell> adjList = testUnit.getAdjList();
 		assertTrue(adjList.contains(testing.getCell(0,1)));
 		assertTrue(adjList.contains(testing.getCell(1,0)));
-		assertFalse(adjList.contains(testing.getCell(1,1)));
 		assertEquals(2,adjList.size());
 	}
 	
@@ -44,7 +43,6 @@ class BoardTestExp {
 		Set<TestBoardCell> adjList = testUnit.getAdjList();
 		assertTrue(adjList.contains(testing.getCell(2,3)));
 		assertTrue(adjList.contains(testing.getCell(3,2)));
-		assertFalse(adjList.contains(testing.getCell(2,2)));
 		assertEquals(2,adjList.size());
 	}
 	
@@ -95,11 +93,23 @@ class BoardTestExp {
 	}
 	
 	@Test
+	void testCalcTargetsNormalTopRight() {
+		TestBoardCell testUnit = testing.getCell(3, 0);
+		testing.calcTargets(testUnit, 2);
+		Set<TestBoardCell> targets = testing.getTargets();
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(testing.getCell(1, 0)));
+		assertTrue(targets.contains(testing.getCell(2, 1)));
+		assertTrue(targets.contains(testing.getCell(3, 2)));
+
+	}
+	
+	@Test
 	void testCalcTargetsNormalMiddle() {
 		TestBoardCell testUnit = testing.getCell(2, 2);
 		testing.calcTargets(testUnit, 3);
 		Set<TestBoardCell> targets = testing.getTargets();
-		assertEquals(8, targets.size());
+		assertEquals(10, targets.size());
 		assertTrue(targets.contains(testing.getCell(1, 0)));
 		assertTrue(targets.contains(testing.getCell(0, 1)));
 		assertTrue(targets.contains(testing.getCell(3, 0)));
@@ -108,12 +118,72 @@ class BoardTestExp {
 		assertTrue(targets.contains(testing.getCell(0, 3)));
 		assertTrue(targets.contains(testing.getCell(3, 2)));
 		assertTrue(targets.contains(testing.getCell(2, 2)));
+		//test for rooms
+		assertTrue(targets.contains(testing.getCell(2, 3)));
+		assertTrue(targets.contains(testing.getCell(1, 3)));
+	}
+	
+	@Test
+	void testCalcTargetsTop() {
+		TestBoardCell testUnit = testing.getCell(1, 0);
+		testing.calcTargets(testUnit, 1);
+		Set<TestBoardCell> targets = testing.getTargets();
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(testing.getCell(0, 0)));
+		assertTrue(targets.contains(testing.getCell(2, 0)));
+		assertTrue(targets.contains(testing.getCell(1, 1)));
+	}
+	
+	@Test
+	void testCalcTargetsBottomRight() {
+		TestBoardCell testUnit = testing.getCell(3, 3);
+		testing.calcTargets(testUnit, 6);
+		Set<TestBoardCell> targets = testing.getTargets();
+		assertEquals(8, targets.size());
+		assertTrue(targets.contains(testing.getCell(0, 0)));
+		assertTrue(targets.contains(testing.getCell(0, 2)));
+		assertTrue(targets.contains(testing.getCell(1, 1)));
+		assertTrue(targets.contains(testing.getCell(1, 3)));
+		assertTrue(targets.contains(testing.getCell(2, 0)));
+		assertTrue(targets.contains(testing.getCell(2, 2)));
+		assertTrue(targets.contains(testing.getCell(2, 3)));
+		assertTrue(targets.contains(testing.getCell(3, 1)));
 
 	}
 	
+	// Check that the player can move into rooms even if it requires fewer moves than their roll
+	@Test
+	void testCalcTargetsEnterRoom() {
+		TestBoardCell testUnit = testing.getCell(1, 2);
+		//has to be an even number of moves
+		testing.calcTargets(testUnit, 2);
+		Set<TestBoardCell> targets = testing.getTargets();
+		assertEquals(7, targets.size());
+		//the two rooms
+		assertTrue(targets.contains(testing.getCell(1, 3)));
+		assertTrue(targets.contains(testing.getCell(2, 3)));
+		
+		assertTrue(targets.contains(testing.getCell(3, 2)));
+		assertTrue(targets.contains(testing.getCell(2, 1)));
+		assertTrue(targets.contains(testing.getCell(1, 0)));
+		assertTrue(targets.contains(testing.getCell(0, 1)));
+		assertTrue(targets.contains(testing.getCell(0, 3)));
+	}
 	
-	
-	
-	
+	// Make sure the player cannot move onto occupied squares
+	@Test
+	void testCalcTargetsOccupied() {
+		TestBoardCell testUnit = testing.getCell(0, 0);
+		testing.getCell(2, 1).setOccupied(true);
+		testing.getCell(0,3).setOccupied(true);
+		
+		testing.calcTargets(testUnit, 3);
+		Set<TestBoardCell> targets = testing.getTargets();
+		assertEquals(4, targets.size());
+		assertTrue(targets.contains(testing.getCell(1, 0)));
+		assertTrue(targets.contains(testing.getCell(0, 1)));
+		assertTrue(targets.contains(testing.getCell(1, 2)));
+		assertTrue(targets.contains(testing.getCell(3, 0)));
+	}
 	
 }
