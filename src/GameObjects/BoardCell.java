@@ -6,6 +6,6 @@
 
 package GameObjects;
 
-public class GameBoard {
+public class BoardCell {
 
 }

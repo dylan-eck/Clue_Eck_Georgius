@@ -1,3 +1,9 @@
+commit 3a50525e7b4942ebe2869db7dd17b9149aea8895
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Thu Oct 1 16:47:02 2020 -0600
+
+    Finnished unit tests
+
 commit bd20833dc3cb6f57beba3e6655e068bc8a6df26d
 Author: Dylan Eck <dylaneck@mymail.mines.edu>
 Date:   Thu Oct 1 15:49:32 2020 -0600

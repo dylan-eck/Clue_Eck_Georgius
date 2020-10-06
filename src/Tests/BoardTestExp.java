@@ -1,3 +1,9 @@
+/*  Dylan Eck
+ *  Riley Georgius
+ *  Section B
+ *  Group 23
+ */
+
 package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,7 +37,7 @@ class BoardTestExp {
 	@Test
 	void testAdjacencyTopLeft() {
 		TestBoardCell testUnit = testing.getCell(0,0);
-		Set<TestBoardCell> adjList = testUnit.getAdjList();
+		Set<TestBoardCell> adjList = testUnit.getAdjList(testing);
 		assertTrue(adjList.contains(testing.getCell(0,1)));
 		assertTrue(adjList.contains(testing.getCell(1,0)));
 		assertEquals(2,adjList.size());
@@ -40,7 +46,7 @@ class BoardTestExp {
 	@Test
 	void testAdjacencyBottomRight() {
 		TestBoardCell testUnit = testing.getCell(3,3);
-		Set<TestBoardCell> adjList = testUnit.getAdjList();
+		Set<TestBoardCell> adjList = testUnit.getAdjList(testing);
 		assertTrue(adjList.contains(testing.getCell(2,3)));
 		assertTrue(adjList.contains(testing.getCell(3,2)));
 		assertEquals(2,adjList.size());
@@ -49,7 +55,7 @@ class BoardTestExp {
 	@Test
 	void testAdjacencyRightEdge() {
 		TestBoardCell testUnit = testing.getCell(3,1);
-		Set<TestBoardCell> adjList = testUnit.getAdjList();
+		Set<TestBoardCell> adjList = testUnit.getAdjList(testing);
 		assertTrue(adjList.contains(testing.getCell(3,0)));
 		assertTrue(adjList.contains(testing.getCell(2,1)));
 		assertTrue(adjList.contains(testing.getCell(3,2)));
@@ -59,7 +65,7 @@ class BoardTestExp {
 	@Test
 	void testAdjacencyLeftEdge() {
 		TestBoardCell testUnit = testing.getCell(0,2);
-		Set<TestBoardCell> adjList = testUnit.getAdjList();
+		Set<TestBoardCell> adjList = testUnit.getAdjList(testing);
 		assertTrue(adjList.contains(testing.getCell(0,1)));
 		assertTrue(adjList.contains(testing.getCell(1,2)));
 		assertTrue(adjList.contains(testing.getCell(0,3)));
@@ -69,7 +75,7 @@ class BoardTestExp {
 	@Test
 	void testAdjacencyTopEdge() {
 		TestBoardCell testUnit = testing.getCell(2,0);
-		Set<TestBoardCell> adjList = testUnit.getAdjList();
+		Set<TestBoardCell> adjList = testUnit.getAdjList(testing);
 		assertTrue(adjList.contains(testing.getCell(1,0)));
 		assertTrue(adjList.contains(testing.getCell(3,0)));
 		assertTrue(adjList.contains(testing.getCell(2,1)));
@@ -82,6 +88,7 @@ class BoardTestExp {
 		TestBoardCell testUnit = testing.getCell(0, 0);
 		testing.calcTargets(testUnit, 4);
 		Set<TestBoardCell> targets = testing.getTargets();
+		
 		assertEquals(6, targets.size());
 		assertTrue(targets.contains(testing.getCell(1, 1)));
 		assertTrue(targets.contains(testing.getCell(2, 2)));
@@ -89,27 +96,30 @@ class BoardTestExp {
 		assertTrue(targets.contains(testing.getCell(2, 0)));
 		assertTrue(targets.contains(testing.getCell(1, 3)));
 		assertTrue(targets.contains(testing.getCell(3, 1)));
-
+		
 	}
+	
 	
 	@Test
 	void testCalcTargetsNormalTopRight() {
 		TestBoardCell testUnit = testing.getCell(3, 0);
 		testing.calcTargets(testUnit, 2);
 		Set<TestBoardCell> targets = testing.getTargets();
+		
 		assertEquals(3, targets.size());
 		assertTrue(targets.contains(testing.getCell(1, 0)));
 		assertTrue(targets.contains(testing.getCell(2, 1)));
 		assertTrue(targets.contains(testing.getCell(3, 2)));
-
 	}
+	
 	
 	@Test
 	void testCalcTargetsNormalMiddle() {
 		TestBoardCell testUnit = testing.getCell(2, 2);
 		testing.calcTargets(testUnit, 3);
 		Set<TestBoardCell> targets = testing.getTargets();
-		assertEquals(10, targets.size());
+		
+		assertEquals(9, targets.size());
 		assertTrue(targets.contains(testing.getCell(1, 0)));
 		assertTrue(targets.contains(testing.getCell(0, 1)));
 		assertTrue(targets.contains(testing.getCell(3, 0)));
@@ -117,11 +127,11 @@ class BoardTestExp {
 		assertTrue(targets.contains(testing.getCell(1, 2)));
 		assertTrue(targets.contains(testing.getCell(0, 3)));
 		assertTrue(targets.contains(testing.getCell(3, 2)));
-		assertTrue(targets.contains(testing.getCell(2, 2)));
 		//test for rooms
 		assertTrue(targets.contains(testing.getCell(2, 3)));
 		assertTrue(targets.contains(testing.getCell(1, 3)));
 	}
+
 	
 	@Test
 	void testCalcTargetsTop() {
@@ -179,6 +189,7 @@ class BoardTestExp {
 		
 		testing.calcTargets(testUnit, 3);
 		Set<TestBoardCell> targets = testing.getTargets();
+		
 		assertEquals(4, targets.size());
 		assertTrue(targets.contains(testing.getCell(1, 0)));
 		assertTrue(targets.contains(testing.getCell(0, 1)));
