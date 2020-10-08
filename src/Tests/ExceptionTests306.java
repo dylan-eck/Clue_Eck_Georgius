@@ -1,4 +1,4 @@
-package tests;
+package Tests;
 
 /*
  * This program tests that, when loading config files, exceptions 

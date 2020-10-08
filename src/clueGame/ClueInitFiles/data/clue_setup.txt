@@ -1,0 +1,13 @@
+﻿// Rooms and room cards
+Room, Entry Way, E
+Room, Garden, G
+Room, Dining Room, D
+Room, Movie Theater, M
+Room, Court Yard, C
+Room, Kitchen, K
+Room, Bathroom, B
+Room, Planetarium, P
+Room, Office, O
+//Other spaces
+Space, Hallway, H
+Space, Unused, X

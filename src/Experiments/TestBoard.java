@@ -69,8 +69,6 @@ public class TestBoard {
 		}
 	}
 	
-	
-	
 	public Set<TestBoardCell> getTargets() {
 		return targets;
 	}
