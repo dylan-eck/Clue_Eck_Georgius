@@ -18,20 +18,39 @@ public class BoardCell {
 	
 	private Set<BoardCell> adjList;
 	
-	public BoardCell(int xpos, int ypos) {
+	public BoardCell(int xpos, int ypos, char l,boolean isR) {
 		location = new int[2];
 		location[0] = xpos;
 		location[1] = ypos;
+		letter = l;
+		isRoom = isR;
+		
+		//set to false by default can be changed later in layout
+		isRoomCenter = false;
+		isRoomLabel = false;
+		doorDirection = DoorDirection.NONE;
 		
 		adjList = new HashSet<BoardCell>();
+	}
+	
+	public void setRoomLabel() {
+		isRoomLabel = true;
+	}
+	
+	public void setRoomCenter() {
+		isRoomCenter = true;
+	}
+	
+	public void setSecretPassage(char exit) {
+		secretPassage = exit;
+	}
+	
+	public void setDoorDirection(DoorDirection d) {
+		doorDirection = d;
 	}
 
 	public boolean isRoom() {
 		return isRoom;
-	}
-	
-	public void setIsRoom(boolean isRoom) {
-		this.isRoom = isRoom;
 	}
 	
 	public boolean isOccupied() {

@@ -23,4 +23,6 @@ public class BadConfigFormatException extends Throwable{
 		temp.println("Error: Format of "+fileName+" does not match expected format.");
 		temp.close();
 	}
+	
+	//TODO: Add toString
 }
