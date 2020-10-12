@@ -1,0 +1,9 @@
+Most of our tests were quite similar to the provided tests.
+
+For the Doorway test we used the left facing doorway by the Garden, the up facing door into the Entry Way, the right facing door into the Dining Room and the down facing door into the Office.
+We also tested the two doorways that are next to two rooms but only enter one.
+
+The other major difference is that we have a isRoom() function for BoardCells which we use mostly instead of room!=null
+
+Other than that we mostly just changed the names of the rooms and their positions.
+We also changed the number of doorways to 20 since that's how many we have.

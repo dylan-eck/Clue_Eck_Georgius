@@ -6,7 +6,7 @@ import java.util.Set;
 public class BoardCell {
 	
 	private int[] location;
-	private String initial;
+	private char letter;
 	private DoorDirection doorDirection;
 	
 	private boolean isOccupied;
@@ -43,6 +43,8 @@ public class BoardCell {
 	}
 	
 	private void setAdj(Board board) {
+		adjList.clear();
+		
 		for(int i = -1;i<2;i+=2) {
 			int tempX = location[0]+i;
 			if(tempX>=0 && tempX<=3) {
@@ -63,9 +65,8 @@ public class BoardCell {
 	}
 	
 	public boolean isDoorway() {
-		/*if(doorDirection != DoorDirection.NONE) 
+		if(doorDirection != DoorDirection.NONE) 
 			return true;
-		return false;*/
 		return false;
 	}
 	
@@ -82,10 +83,11 @@ public class BoardCell {
 	}
 	
 	public DoorDirection getDoorDirection() {
-		//return doorDirection;
-		return DoorDirection.NONE;
+		return doorDirection;
 	}
 	
-	
+	public char getChar() {
+		return letter;
+	}
 	
 }

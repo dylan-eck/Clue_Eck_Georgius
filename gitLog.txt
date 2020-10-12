@@ -1,4 +1,12 @@
-commit d7cd4c0ed18735e112cf2213638fa5796162b067 (HEAD -> main)
+//Did all work as a pair
+
+commit 2955b9e35ceb8f1f9cce3d05ca8677fea019f126 (HEAD -> main, origin/main, origin/HEAD)
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Thu Oct 8 14:27:23 2020 -0600
+
+    Added all unit tests for Initialization
+
+commit d7cd4c0ed18735e112cf2213638fa5796162b067
 Author: rlord222 <63765345+rlord222@users.noreply.github.com>
 Date:   Thu Oct 8 11:08:18 2020 -0600
 
@@ -9,7 +17,6 @@ Author: rlord222 <63765345+rlord222@users.noreply.github.com>
 Date:   Tue Oct 6 16:17:00 2020 -0600
 
     Filled out the body of TestBoard and TestBoardCell
-
 
 commit 3a50525e7b4942ebe2869db7dd17b9149aea8895
 Author: rlord222 <63765345+rlord222@users.noreply.github.com>

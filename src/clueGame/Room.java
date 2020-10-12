@@ -7,6 +7,12 @@ public class Room {
 	private BoardCell centerCell;
 	private char letter;
 	
+	public Room(String name,char let) {
+		roomName = name;
+		letter = let;
+		
+	}
+	
 	public String getName() {
 		return roomName;
 	}
@@ -17,6 +23,10 @@ public class Room {
 
 	public BoardCell getCenterCell() {
 		return null;
+	}
+	
+	public char getLetter() {
+		return letter;
 	}
 	
 }
