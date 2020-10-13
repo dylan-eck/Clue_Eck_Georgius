@@ -84,25 +84,44 @@ public class BoardCell {
 		this.isOccupied = isOccupied;
 	}
 	
-	private void setAdj(Board board) {
-		adjList.clear();
-		
-		for(int i = -1;i<2;i+=2) {
-			int tempX = location[0]+i;
-			if(tempX>=0 && tempX<=3) {
-				adjList.add(board.getCell(tempX,location[1]));
+	public void setAdj(Board board) {	
+		//check to see if it is a hallway
+		if(letter == board.getHallways()) {
+			for(int i = -1;i<2;i+=2) {
+				int tempX = location[0]+i;
+				if(tempX>=0 && tempX<=(board.getNumColumns()-1) && board.getCell(location[1],tempX).getChar()==board.getHallways()) {
+					adjList.add(board.getCell(location[1],tempX));
+				}
+			}
+			for(int j = -1;j<2;j+=2) {
+				int tempY = location[1]+j;
+				if(tempY>=0 && tempY<=(board.getNumRows()-1) && board.getCell(tempY,location[0]).getChar()==board.getHallways()) {
+					adjList.add(board.getCell(tempY,location[0]));
+				}
+			}
+			
+			if(isDoorway()) {
+				switch(doorDirection) {
+					case UP:
+						adjList.add(board.getRoom(board.getCell(location[1]-1,location[0])).getCenterCell());
+						break;
+					case DOWN:
+						adjList.add(board.getRoom(board.getCell(location[1]+1,location[0])).getCenterCell());
+						break;
+					case RIGHT:
+						adjList.add(board.getRoom(board.getCell(location[1],location[0]+1)).getCenterCell());
+						break;
+					case LEFT:
+						adjList.add(board.getRoom(board.getCell(location[1],location[0]-1)).getCenterCell());
+						break;
+					case NONE:
+						break;
+				}
 			}
 		}
-		for(int j = -1;j<2;j+=2) {
-			int tempY = location[1]+j;
-			if(tempY>=0 && tempY<=3) {
-				adjList.add(board.getCell(location[0],tempY));
-			}
-		}	
 	}
 	
-	public Set<BoardCell> getAdjList(Board board){
-		setAdj(board);
+	public Set<BoardCell> getAdjList(){
 		return adjList;
 	}
 	

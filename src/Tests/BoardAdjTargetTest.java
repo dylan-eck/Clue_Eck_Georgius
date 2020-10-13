@@ -173,7 +173,7 @@ class BoardAdjTargetTest {
 	}
 	
 	@Test
-	public void testGetTargets() {
+	public void testGetTargetsHallways() {
 		
 		board.calcTargets(board.getCell(15, 9), 1);
 		Set<BoardCell> targets= board.getTargets();

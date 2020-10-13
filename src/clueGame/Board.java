@@ -22,6 +22,7 @@ public class Board {
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	private Set<Room> rooms;
+	private char hallwayLetter;
 	
 	private static Board theInstance = new Board();
 	
@@ -43,6 +44,15 @@ public class Board {
 			setupFile.close();
 			loadLayoutConfig();
 			layoutFile.close();
+			
+			//setAdjList of all board cells
+			for(BoardCell b[]:boardCellArray) {
+				for(BoardCell a:b) {
+					//Only place we set Adjacency
+					a.setAdj(theInstance);
+				}
+			}
+			
 		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
@@ -50,8 +60,7 @@ public class Board {
 	
 	// setup to read data from setup and 
 	public void setConfigFiles(String layOutFile, String setUpFile) {
-		
-		//useful for teling where an error occured and when we have to close and re-open a file
+
 		layoutFileName = layOutFile;
 		setupFileName = setUpFile;
 		
@@ -75,8 +84,11 @@ public class Board {
 			if(temp.charAt(0)!='/') {
 				if(!tempArr[0].equals("Room") && !tempArr[0].equals("Space")) {
 					throw new BadConfigFormatException(setupFileName);
-				}else{
-					//we start at index one because the format files have a space in the at the beginning
+				}else if(tempArr[0].equals("Space") && !tempArr[1].equals("Unused")){
+					hallwayLetter = tempArr[2].charAt(1);
+					rooms.add(new Room(tempArr[1].substring(1),tempArr[2].charAt(1)));
+				}else {
+					//we start at index one because the format files have a space before each word or letter
 					rooms.add(new Room(tempArr[1].substring(1),tempArr[2].charAt(1)));
 				}
 			}
@@ -239,7 +251,7 @@ public class Board {
 	
 	public void findAllTargets(BoardCell startCell, int pathlength) {
 			
-			for(BoardCell adjCell : startCell.getAdjList(this)) {
+			for(BoardCell adjCell : startCell.getAdjList()) {
 				if(adjCell.isRoom()) {
 					targets.add(adjCell);
 				}
@@ -286,6 +298,14 @@ public class Board {
 	}
 	
 	public Set<BoardCell> getAdjList(int x, int y){
-		return getCell(x,y).getAdjList(theInstance);
+		return getCell(x,y).getAdjList();
+	}
+	
+	public char getHallways() {
+		return hallwayLetter;
+	}
+	
+	public Set<Room> getAllRooms(){
+		return rooms;
 	}
 }
