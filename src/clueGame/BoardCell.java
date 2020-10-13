@@ -28,6 +28,7 @@ public class BoardCell {
 		//set to false by default can be changed later in layout
 		isRoomCenter = false;
 		isRoomLabel = false;
+		isOccupied = false;
 		doorDirection = DoorDirection.NONE;
 		
 		adjList = new HashSet<BoardCell>();
@@ -37,18 +38,40 @@ public class BoardCell {
 		isRoomLabel = true;
 	}
 	
+	public boolean isLabel() {
+		return isRoomLabel;
+	}
+	
 	public void setRoomCenter() {
 		isRoomCenter = true;
+	}
+	
+	public boolean isRoomCenter() {
+		return isRoomCenter;
 	}
 	
 	public void setSecretPassage(char exit) {
 		secretPassage = exit;
 	}
 	
+	public char getSecretPassage() {
+		return secretPassage;
+	}
+	
 	public void setDoorDirection(DoorDirection d) {
 		doorDirection = d;
 	}
 
+	public DoorDirection getDoorDirection() {
+		return doorDirection;
+	}
+	
+	public boolean isDoorway() {
+		if(doorDirection != DoorDirection.NONE) 
+			return true;
+		return false;
+	}
+	
 	public boolean isRoom() {
 		return isRoom;
 	}
@@ -81,28 +104,6 @@ public class BoardCell {
 	public Set<BoardCell> getAdjList(Board board){
 		setAdj(board);
 		return adjList;
-	}
-	
-	public boolean isDoorway() {
-		if(doorDirection != DoorDirection.NONE) 
-			return true;
-		return false;
-	}
-	
-	public boolean isLabel() {
-		return isRoomLabel;
-	}
-	
-	public boolean isRoomCenter() {
-		return isRoomCenter;
-	}
-	
-	public char getSecretPassage() {
-		return secretPassage;
-	}
-	
-	public DoorDirection getDoorDirection() {
-		return doorDirection;
 	}
 	
 	public char getChar() {

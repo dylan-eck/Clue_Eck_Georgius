@@ -16,20 +16,20 @@ public class Room {
 		labelCell = cell;
 	}
 	
+	public BoardCell getLabelCell() {
+		return labelCell;
+	}
+	
 	public void setCenterCell(BoardCell cell) {
 		centerCell = cell;
 	}
 	
-	public String getName() {
-		return roomName;
-	}
-	
-	public BoardCell getLabelCell() {
-		return labelCell;
-	}
-
 	public BoardCell getCenterCell() {
 		return centerCell;
+	}
+	
+	public String getName() {
+		return roomName;
 	}
 	
 	public char getLetter() {
