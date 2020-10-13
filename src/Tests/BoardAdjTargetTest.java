@@ -108,21 +108,27 @@ class BoardAdjTargetTest {
 		
 		board.calcTargets(board.getCell(3, 3), 1);
 		Set<BoardCell> targets= board.getTargets();
-		assertEquals(2, targets.size());
+		assertEquals(3, targets.size());
 		assertTrue(targets.contains(board.getCell(7, 4)));
 		assertTrue(targets.contains(board.getCell(3, 7)));	
+		//secret passage
+		assertTrue(targets.contains(board.getCell(21, 21)));
+		
 		
 		board.calcTargets(board.getCell(3, 3), 2);
 		targets= board.getTargets();
-		assertEquals(6, targets.size());
+		assertEquals(8, targets.size());
 		assertTrue(targets.contains(board.getCell(7, 3)));
 		assertTrue(targets.contains(board.getCell(8, 4)));	
 		assertTrue(targets.contains(board.getCell(3, 8)));
 		assertTrue(targets.contains(board.getCell(2, 7)));	
 		
+		assertTrue(targets.contains(board.getCell(19, 17)));
+		assertTrue(targets.contains(board.getCell(17, 21)));	
+		
 		board.calcTargets(board.getCell(3, 3), 5);
 		targets= board.getTargets();
-		assertEquals(17, targets.size());
+		assertEquals(25, targets.size());
 		assertTrue(targets.contains(board.getCell(6, 7)));
 		assertTrue(targets.contains(board.getCell(0, 8)));	
 		assertTrue(targets.contains(board.getCell(7, 0)));
@@ -130,6 +136,9 @@ class BoardAdjTargetTest {
 		//The two rooms
 		assertTrue(targets.contains(board.getCell(12, 3)));
 		assertTrue(targets.contains(board.getCell(3, 12)));
+		//through passage
+		assertTrue(targets.contains(board.getCell(21, 17)));
+		assertTrue(targets.contains(board.getCell(17, 23)));
 		
 	}
 	

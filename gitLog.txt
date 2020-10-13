@@ -1,3 +1,26 @@
+commit cf20b75110fa56b12d26fbdb6be2ca95aa4ac8d0 (HEAD -> main, origin/main, origin/HEAD)
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Oct 12 23:45:03 2020 -0600
+
+    Added remaining test and an updated map
+
+commit ec48b50af53b997ca9d63c87497c4e29e735cd5d
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Oct 12 23:00:26 2020 -0600
+
+    added adjancency tests
+
+commit 376585521e7e8f146e0e6f162149bbc3b299a752
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Oct 12 22:14:48 2020 -0600
+
+    Added our own test class (it's empty tho)
+
+commit 7f05ee529a1bd57f1adf9594b80a40c6b5db84fb
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Oct 12 22:10:57 2020 -0600
+
+
 commit 0d870cf7940d5e0ebff144770a4b219fce926437
 Author: Dylan Eck <dylaneck@mymail.mines.edu>
 Date:   Mon Oct 12 21:45:40 2020 -0600
