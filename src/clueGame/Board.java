@@ -18,6 +18,9 @@ public class Board {
 	private Scanner layoutFile;
 	private Scanner setupFile;
 	
+	private String layoutFileName;
+	private String setupFileName;
+	
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	private Set<Room> rooms;
@@ -30,10 +33,16 @@ public class Board {
 	
 	// set up game board
 	public void initialize() {
-		loadSetupConfig();
-		setupFile.close();
-		loadLayoutConfig();
-		layoutFile.close();
+		
+		rooms = new HashSet<Room>();
+		try {
+			loadSetupConfig();
+			setupFile.close();
+			loadLayoutConfig();
+			layoutFile.close();
+		} catch (BadConfigFormatException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public static Board getInstance() {
@@ -41,6 +50,10 @@ public class Board {
 	}
 	
 	public void setConfigFiles(String layOutFile, String setUpFile) {
+		
+		//useful for teling where an error occured and when we have to close and re-open a file
+		layoutFileName = layOutFile;
+		setupFileName = setUpFile;
 		
 		try {
 			layoutFile = new Scanner(new File(layOutFile));
@@ -58,70 +71,85 @@ public class Board {
 		
 	}
 	
-	public void loadSetupConfig() {
+	public void loadSetupConfig() throws BadConfigFormatException {
+		
+		System.out.println("You have reached the setup part.");
+		
 		String temp = "";
-
-		try {
+		
+		while(setupFile.hasNextLine()) {
 			temp = setupFile.nextLine();
-			String tempArr[] = temp.split(",");
 			
-			while(tempArr[0]!="Space") {
-				if(temp.charAt(0)!='/') {
-					if(tempArr[0]!="Room") {
-						throw new BadConfigFormatException();
-					}else {
-						rooms.add(new Room(tempArr[1],tempArr[2].charAt(1)));
-					}
+			String tempArr[] = temp.split(",");
+			if(temp.charAt(0)!='/') {
+				if(!tempArr[0].equals("Room") && !tempArr[0].equals("Space")) {
+					throw new BadConfigFormatException(setupFileName);
+				}else{
+					//we start at index one because the format files have a space in the at the beginning
+					rooms.add(new Room(tempArr[1].substring(1),tempArr[2].charAt(1)));
 				}
-				temp = setupFile.nextLine();
-				tempArr = temp.split(",");
 			}
-		}catch(BadConfigFormatException e){
-			System.out.println("The file is formated incorectly. please reformat and try again.");
 		}
 	}
 	
-	public void loadLayoutConfig() {
+	public void loadLayoutConfig() throws BadConfigFormatException {
 
+		System.out.println("You have reached the layout part.");
+		
+		String theWholeThing = "";
+		
 		String temp = "";
 		int tempColCount = 0;
 		//set to one initialy because we read in one line to give us the row length and test for bad formating
 		int tempRowCount = 1;
 
 		//first loop to determine the size of the board
-		try {
-			temp = layoutFile.nextLine();
-			String tempArr[] = temp.split(",");
-			tempColCount = tempArr.length;
-		
-			while(layoutFile.hasNextLine()){
-				temp=layoutFile.nextLine();
-				tempArr = temp.split(",");
-				if(tempArr.length != tempColCount) {
-					//TODO: add a way to retrieve the files name so that an error message can be printed to a file
-					throw new BadConfigFormatException();
-				}
-				tempRowCount++;
+		temp = layoutFile.nextLine();
+		theWholeThing += temp;
+		String tempArr[] = temp.split(",");
+		tempColCount = tempArr.length;
+	
+		while(layoutFile.hasNextLine()){
+			temp=layoutFile.nextLine();
+			theWholeThing += ("\n"+ temp);
+			tempArr = temp.split(",");
+			if(tempArr.length != tempColCount) {
+				//TODO: add a way to retrieve the files name so that an error message can be printed to a file
+				throw new BadConfigFormatException(layoutFileName);
 			}
-		}catch(BadConfigFormatException e){
-			System.out.println("The file is formated incorectly. please reformat and try again.");
+			tempRowCount++;
 		}
+		
 		
 		numRows = tempRowCount;
 		numCols = tempColCount;
 		
 		boardCellArray = new BoardCell[numCols][numRows];
 		
+		String theWholeThingSplit[] = theWholeThing.split("\n"); 
+		String temp2;
+		String tempArr2[];
+		
 		//second loop to actualy get the data
-		try {
 			//runs once for each row
 			for(int j = 0;j<numRows;j++) {
 				int i = 0;
-				temp = layoutFile.nextLine();
-				String tempArr[] = temp.split(",");
-				for(String str:tempArr) {
-					//if the space is just a generic place with nothing special
+				temp2 = theWholeThingSplit[j];
+				tempArr2 = temp2.split(",");
+				for(String str:tempArr2) {
+					//if the space is just a generic cell with nothing special
 					if(str.length() == 1) {
+						
+						boolean testInitial = false;
+						for(Room r:rooms) {
+							if(r.getLetter()==str.charAt(0)) {
+								testInitial = true;
+							}
+						}
+						if(!testInitial) {
+							throw new BadConfigFormatException(layoutFileName);
+						}
+						
 						boolean isRoom=false;
 						for(Room r:rooms) {
 							if(str.charAt(0)==r.getLetter()) {
@@ -136,6 +164,17 @@ public class Board {
 						
 					//All the doorways, secret passages, room labels, room centers
 					}else if(str.length()==2){
+						
+						boolean testInitial = false;
+						for(Room r:rooms) {
+							if(r.getLetter()==str.charAt(0)) {
+								testInitial = true;
+							}
+						}
+						if(!testInitial) {
+							throw new BadConfigFormatException(layoutFileName);
+						}
+						
 						boolean isRoom=false;
 						for(Room r:rooms) {
 							if(str.charAt(0)==r.getLetter()) {
@@ -159,19 +198,28 @@ public class Board {
 							boardCellArray[i][j].setDoorDirection(DoorDirection.LEFT);
 						}else if(str.charAt(1)=='*') {
 							boardCellArray[i][j].setRoomCenter();
+							for(Room r:rooms) {
+								if(r.getLetter()==str.charAt(0)) 
+									r.setCenterCell(boardCellArray[i][j]);
+							}
 						}else if(str.charAt(1)=='#') {
 							boardCellArray[i][j].setRoomLabel();
+							for(Room r:rooms) {
+								if(r.getLetter()==str.charAt(0)) 
+									r.setLabelCell(boardCellArray[i][j]);
+							}
 						}
+						//TODO: add secret passage clause
 							
 					}else {
-						throw new BadConfigFormatException();
+						System.out.println("Ended in square " + i+" "+j);
+						System.out.println(temp2);
+						throw new BadConfigFormatException(layoutFileName);
 					}
 					i++;
 				}
 			}
-		}catch(BadConfigFormatException e){
-			System.out.println("The file is formated incorectly. Please reformat and try again.");
-		}
+	
 	}
 	
 	public Room getRoom(char letter) {
@@ -240,7 +288,7 @@ public class Board {
 		return targets;
 	}
 	
-	public BoardCell getCell(int col, int row) {
+	public BoardCell getCell(int row, int col) {
 		return boardCellArray[col][row];
 	}
 }
