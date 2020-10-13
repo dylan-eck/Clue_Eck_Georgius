@@ -1,6 +1,52 @@
-//Did all work as a pair
+commit 0d870cf7940d5e0ebff144770a4b219fce926437
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Oct 12 21:45:40 2020 -0600
 
-commit 2955b9e35ceb8f1f9cce3d05ca8677fea019f126 (HEAD -> main, origin/main, origin/HEAD)
+    Refactored Code
+
+commit 3512674e3aba458abd46bb869111955a181415f5
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Oct 12 21:19:19 2020 -0600
+
+    Passed all of our initial tests
+
+commit 9896655b49a178d64817c3d605c84c87587a7a17
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Oct 12 20:43:46 2020 -0600
+
+    Need to reformat input files so that they don't have pointless charecters at the beginning
+
+commit e740830d9b6adea506e283b9e5aa78d4aaeced02
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Oct 12 19:35:47 2020 -0600
+
+    All instructor provided tests now pass
+
+commit 00348b3cd69c7e4a1cb4749c325aed4aa259e056
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Oct 12 19:29:16 2020 -0600
+
+    all fileInitTests pass
+
+commit 9717159ae301f254a1a657972f1b7cc08a129ba6
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Oct 12 19:15:31 2020 -0600
+
+    Continued trying to pass tests
+
+commit 29473eba4d9f6bc497b0a739218bd63371de5e27
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Oct 12 14:21:00 2020 -0600
+
+    Changed BufferedReader's into scanners and set up the rest of the functions. Scanners are giving line not found exceptions.
+
+commit 409e5051750a139d0f7be9332efbf0fe4c131160
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Sun Oct 11 22:11:23 2020 -0600
+
+    Added the begining text neciffary for reading in files. Not finnished
+
+commit 2955b9e35ceb8f1f9cce3d05ca8677fea019f126
 Author: rlord222 <63765345+rlord222@users.noreply.github.com>
 Date:   Thu Oct 8 14:27:23 2020 -0600
 
@@ -12,7 +58,7 @@ Date:   Thu Oct 8 11:08:18 2020 -0600
 
     Added the initial files for testing
 
-commit 3a3da84dd43f8a6df3598d0e58d6c844279e73ec (origin/main, origin/HEAD)
+commit 3a3da84dd43f8a6df3598d0e58d6c844279e73ec
 Author: rlord222 <63765345+rlord222@users.noreply.github.com>
 Date:   Tue Oct 6 16:17:00 2020 -0600
 
