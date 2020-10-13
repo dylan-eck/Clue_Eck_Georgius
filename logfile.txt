@@ -1,1 +1,0 @@
-Error: Format of Clue_setup.txt does not match expected format.

@@ -1,0 +1,1 @@
+Error: Format of ClueLayout.txt does not match expected format.

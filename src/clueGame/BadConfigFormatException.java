@@ -15,7 +15,7 @@ public class BadConfigFormatException extends Throwable{
 		PrintWriter temp = null;
 		//auto generated try/catch
 		try {
-			temp = new PrintWriter("logfile.txt");
+			temp = new PrintWriter("ErrorLoggingFile.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

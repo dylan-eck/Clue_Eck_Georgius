@@ -72,16 +72,13 @@ public class Board {
 	}
 	
 	public void loadSetupConfig() throws BadConfigFormatException {
-		
 		rooms = new HashSet<Room>();
-		
-		System.out.println("You have reached the setup part.");
 		
 		String temp = "";
 		
 		while(setupFile.hasNextLine()) {
 			temp = setupFile.nextLine();
-			
+
 			String tempArr[] = temp.split(",");
 			if(temp.charAt(0)!='/') {
 				if(!tempArr[0].equals("Room") && !tempArr[0].equals("Space")) {
@@ -95,9 +92,6 @@ public class Board {
 	}
 	
 	public void loadLayoutConfig() throws BadConfigFormatException {
-
-		System.out.println("You have reached the layout part.");
-		
 		String theWholeThing = "";
 		
 		String temp = "";
