@@ -29,7 +29,7 @@ public class Room {
 	}
 
 	public BoardCell getCenterCell() {
-		return null;
+		return centerCell;
 	}
 	
 	public char getLetter() {

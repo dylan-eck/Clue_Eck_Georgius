@@ -208,8 +208,9 @@ public class Board {
 								if(r.getLetter()==str.charAt(0)) 
 									r.setLabelCell(boardCellArray[i][j]);
 							}
+						}else {
+							boardCellArray[i][j].setSecretPassage(str.charAt(1));
 						}
-						//TODO: add secret passage clause
 							
 					}else {
 						System.out.println("Ended in square " + i+" "+j);
