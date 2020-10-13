@@ -73,6 +73,8 @@ public class Board {
 	
 	public void loadSetupConfig() throws BadConfigFormatException {
 		
+		rooms = new HashSet<Room>();
+		
 		System.out.println("You have reached the setup part.");
 		
 		String temp = "";
