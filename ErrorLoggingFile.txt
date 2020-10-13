@@ -1,1 +1,1 @@
-Error: Format of ClueLayout.txt does not match expected format.
+Error: Format of ClueLayout.csv does not match expected format.

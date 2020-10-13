@@ -102,12 +102,13 @@ public class Board {
 		//first loop to determine the size of the board
 		temp = layoutFile.nextLine();
 		theWholeThing += temp;
+		
 		String tempArr[] = temp.split(",");
 		tempColCount = tempArr.length;
 	
 		while(layoutFile.hasNextLine()){
 			temp=layoutFile.nextLine();
-			theWholeThing += ("\n"+ temp);
+			theWholeThing += ("\n"+ temp);			
 			tempArr = temp.split(",");
 			if(tempArr.length != tempColCount) {
 				//TODO: add a way to retrieve the files name so that an error message can be printed to a file
@@ -132,8 +133,10 @@ public class Board {
 				int i = 0;
 				temp2 = theWholeThingSplit[j];
 				tempArr2 = temp2.split(",");
+				
 				for(String str:tempArr2) {
 					//if the space is just a generic cell with nothing special
+
 					if(str.length() == 1) {
 						
 						boolean testInitial = false;

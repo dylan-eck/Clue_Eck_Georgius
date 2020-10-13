@@ -71,10 +71,10 @@ class InitializationTest {
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.DOWN, cell.getDoorDirection());
 		//Tests the two doors in the one tile wide walkway
-		cell = board.getCell(19, 3);
+		cell = board.getCell(17, 3);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.DOWN, cell.getDoorDirection());
-		cell = board.getCell(19, 5);
+		cell = board.getCell(17, 5);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.UP, cell.getDoorDirection());
 		// Test that walkways are not doors
@@ -96,7 +96,7 @@ class InitializationTest {
 					if (cell.isDoorway())
 						numDoors++;
 				}
-			Assert.assertEquals(20, numDoors);
+			Assert.assertEquals(22, numDoors);
 		}
 
 		// Test a few room cells to ensure the room initial is correct.
@@ -105,7 +105,7 @@ class InitializationTest {
 			// tests movie theater for center cell
 			BoardCell cell = board.getCell( 12, 3);
 			Room room = board.getRoom( cell ) ;
-			assertTrue(cell.isRoom());
+			assertTrue( room != null );
 			assertEquals( room.getName(), "Movie Theater" ) ;
 			assertFalse( cell.isLabel() );
 			assertTrue( cell.isRoomCenter() ) ;
@@ -115,7 +115,7 @@ class InitializationTest {
 			// tests entry way for label cell
 			cell = board.getCell(1, 12);
 			room = board.getRoom( cell );
-			assertTrue(cell.isRoom());
+			assertTrue( room != null );
 			assertEquals( room.getName(), "Entry Way" ) ;
 			assertTrue( cell.isLabel() );
 			assertTrue( room.getLabelCell() == cell );
@@ -123,7 +123,7 @@ class InitializationTest {
 			// tests bottom corner of kitchen
 			cell = board.getCell(15, 18);
 			room = board.getRoom( cell ) ;
-			assertTrue(cell.isRoom());
+			assertTrue( room != null );
 			assertEquals( room.getName(), "Kitchen" ) ;
 			assertFalse(cell.isRoomCenter());
 			assertFalse(cell.isLabel());
@@ -134,28 +134,28 @@ class InitializationTest {
 			room = board.getRoom( cell ) ;
 			assertEquals( room.getName(), "Hallway" ) ;
 			assertTrue(cell.isDoorway());
-			assertFalse(cell.isRoom());
+			assertTrue( room != null );
 			assertFalse(cell.isRoomCenter());
 			
 			//tests bottom door out of kitchen
 			cell = board.getCell(15, 21);
 			room = board.getRoom( cell ) ;
-			assertTrue(cell.isRoom());
+			assertTrue( room != null );
 			assertEquals( room.getName(), "Kitchen" ) ;
-			assertTrue(cell.isDoorway());
+			assertFalse(cell.isDoorway());
 			assertFalse(cell.isRoomCenter());
 			
 			// tests secret passage from office to garden
 			cell = board.getCell(24, 24);
 			room = board.getRoom( cell ) ;
-			assertTrue(cell.isRoom());
+			assertTrue( room != null );
 			assertEquals( room.getName(), "Office" ) ;
 			assertTrue( cell.getSecretPassage() == 'G' );
 			
 			// test a walkway
 			cell = board.getCell(7, 7);
 			room = board.getRoom( cell );
-			assertFalse(cell.isRoom());
+			assertTrue( room != null );
 			assertEquals( room.getName(), "Hallway" ) ;
 			assertFalse( cell.isRoomCenter() );
 			assertFalse( cell.isLabel() );
@@ -163,7 +163,7 @@ class InitializationTest {
 			//tests a starting position
 			cell = board.getCell(17, 0);
 			room = board.getRoom( cell );
-			assertFalse(cell.isRoom());
+			assertTrue( room != null );
 			assertEquals( room.getName(), "Unused" ) ;
 			assertFalse( cell.isRoomCenter() );
 			assertFalse( cell.isLabel() );

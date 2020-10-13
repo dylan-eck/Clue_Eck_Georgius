@@ -35,5 +35,8 @@ public class Room {
 	public char getLetter() {
 		return letter;
 	}
-	
+
+	public String toString() {
+		return roomName + ", " +letter;
+	}
 }
