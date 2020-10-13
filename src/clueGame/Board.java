@@ -284,4 +284,8 @@ public class Board {
 	public BoardCell getCell(int row, int col) {
 		return boardCellArray[col][row];
 	}
+	
+	public Set<BoardCell> getAdjList(int x, int y){
+		return getCell(x,y).getAdjList(theInstance);
+	}
 }
