@@ -2,4 +2,4 @@ Thomas Georgius
 Dylan Eck
 
 Section B
-Griup 23
+Group 23
