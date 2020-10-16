@@ -30,6 +30,8 @@ public class BoardCell {
 		isRoomLabel = false;
 		isOccupied = false;
 		doorDirection = DoorDirection.NONE;
+		//reserved char so it will never appear as a room symbol
+		secretPassage = '*';
 		
 		adjList = new HashSet<BoardCell>();
 	}
@@ -54,6 +56,7 @@ public class BoardCell {
 		secretPassage = exit;
 	}
 	
+	//TODO: Might not need this
 	public char getSecretPassage() {
 		return secretPassage;
 	}
@@ -104,21 +107,35 @@ public class BoardCell {
 				switch(doorDirection) {
 					case UP:
 						adjList.add(board.getRoom(board.getCell(location[1]-1,location[0])).getCenterCell());
+						//Setting adj from room to doorways here because it's hard doing it from the room center 
+						(board.getRoom(board.getCell(location[1]-1,location[0])).getCenterCell()).addAdjCell(this);
 						break;
 					case DOWN:
 						adjList.add(board.getRoom(board.getCell(location[1]+1,location[0])).getCenterCell());
+						(board.getRoom(board.getCell(location[1]+1,location[0])).getCenterCell()).addAdjCell(this);
 						break;
 					case RIGHT:
 						adjList.add(board.getRoom(board.getCell(location[1],location[0]+1)).getCenterCell());
+						(board.getRoom(board.getCell(location[1],location[0]+1)).getCenterCell()).addAdjCell(this);
 						break;
 					case LEFT:
 						adjList.add(board.getRoom(board.getCell(location[1],location[0]-1)).getCenterCell());
+						(board.getRoom(board.getCell(location[1],location[0]-1)).getCenterCell()).addAdjCell(this);
 						break;
 					case NONE:
 						break;
 				}
 			}
 		}
+		
+		if(secretPassage!='*') {
+			//This finds the room that maches the char of secretPassage and then adds it's center cell to the adjList of this cells room it's in
+			(board.getRoom(this).getCenterCell()).addAdjCell(board.getRoom(secretPassage).getCenterCell());
+		}
+	}
+	
+	public void addAdjCell(BoardCell cell) {
+		adjList.add(cell);
 	}
 	
 	public Set<BoardCell> getAdjList(){
@@ -129,4 +146,7 @@ public class BoardCell {
 		return letter;
 	}
 	
+	public String toString() {
+		return letter+" x: "+location[0]+ " y: "+location[1];
+	}
 }
