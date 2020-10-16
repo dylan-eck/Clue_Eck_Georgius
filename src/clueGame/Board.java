@@ -228,12 +228,11 @@ public class Board {
 	}
 	
 	public void calcTargets(BoardCell startCell, int pathlength) {
-		visited = new HashSet<BoardCell>();
+		//visited = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
 		
-		visited.add(startCell);
-		
-		findAllTargets(startCell, pathlength);
+		//visited.add(startCell);
+		findAllTargets(startCell,new HashSet<BoardCell>(), pathlength);
 		targets.remove(startCell);
 		
 		//removes all occupies spaces from targets
@@ -249,7 +248,7 @@ public class Board {
 		}
 	}
 	
-	public void findAllTargets(BoardCell startCell, int pathlength) {
+	/*public void findAllTargets(BoardCell startCell, int pathlength) {
 			
 			for(BoardCell adjCell : startCell.getAdjList()) {
 				if(adjCell.isRoom()) {
@@ -267,6 +266,27 @@ public class Board {
 				}
 			}
 		}
+	*/
+	
+	public void findAllTargets(BoardCell startCell, Set<BoardCell> previousCells, int pathlength) {		
+		if(pathlength == 1) {
+			for(BoardCell b:startCell.getAdjList()) {
+				if(!previousCells.contains(b)) {
+					targets.add(b);
+				}
+			}
+		}else {
+			for(BoardCell b:startCell.getAdjList()) {
+				if(b.isRoomCenter()) {
+					targets.add(b);
+				}else if(!previousCells.contains(b)) {
+					previousCells.add(startCell);
+					Set<BoardCell> temp = new HashSet<>(previousCells);
+					findAllTargets(b,temp,pathlength-1);
+				}
+			}
+		}
+	}
 	
 	public Set<BoardCell> getTargets() {
 		return targets;
