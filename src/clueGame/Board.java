@@ -238,7 +238,7 @@ public class Board {
 		//removes all occupies spaces from targets
 		Set<BoardCell> toBeDel = new HashSet<BoardCell>();
 		for(BoardCell target : targets) {
-			if(target.isOccupied()) {
+			if(target.isOccupied() && !target.isRoomCenter()) {
 				toBeDel.add(target);
 			}
 		}
@@ -247,26 +247,6 @@ public class Board {
 			targets.remove(target);
 		}
 	}
-	
-	/*public void findAllTargets(BoardCell startCell, int pathlength) {
-			
-			for(BoardCell adjCell : startCell.getAdjList()) {
-				if(adjCell.isRoom()) {
-					targets.add(adjCell);
-				}
-				if(!visited.contains(adjCell)) {
-					visited.add(adjCell);
-					if(pathlength == 1) {
-						targets.add(adjCell);
-					}else {
-						findAllTargets(adjCell,pathlength-1);
-					}
-					
-					visited.remove(startCell);
-				}
-			}
-		}
-	*/
 	
 	public void findAllTargets(BoardCell startCell, Set<BoardCell> previousCells, int pathlength) {		
 		if(pathlength == 1) {
@@ -279,10 +259,12 @@ public class Board {
 			for(BoardCell b:startCell.getAdjList()) {
 				if(b.isRoomCenter()) {
 					targets.add(b);
-				}else if(!previousCells.contains(b)) {
-					previousCells.add(startCell);
-					Set<BoardCell> temp = new HashSet<>(previousCells);
-					findAllTargets(b,temp,pathlength-1);
+				}else if(!(previousCells.contains(b))) {
+					if(!(b.isOccupied())) {
+						previousCells.add(startCell);
+						Set<BoardCell> temp = new HashSet<>(previousCells);
+						findAllTargets(b,temp,pathlength-1);
+					}
 				}
 			}
 		}

@@ -282,15 +282,16 @@ class BoardAdjTargetTest {
 		board.calcTargets(board.getCell(8, 24), 2);
 		board.getCell(8, 23).setOccupied(false);
 		targets= board.getTargets();
-		assertEquals(2, targets.size());
-		assertTrue(targets.contains(board.getCell(8, 22)));
-		assertTrue(targets.contains(board.getCell(7, 23)));	
+		assertEquals(0, targets.size());
 
+		//test moving out of a room with occupied squares nearby
 		board.getCell(17, 20).setOccupied(true);
 		board.getCell(20, 17).setOccupied(true);
+		board.getCell(3, 3).setOccupied(true);
 		board.calcTargets(board.getCell(21, 21), 2);
 		board.getCell(17, 20).setOccupied(false);
 		board.getCell(20, 17).setOccupied(false);
+		board.getCell(3, 3).setOccupied(false);
 		targets= board.getTargets();
 		assertEquals(5, targets.size());
 		//top door
