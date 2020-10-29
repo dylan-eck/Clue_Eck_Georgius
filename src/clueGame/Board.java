@@ -23,6 +23,7 @@ public class Board {
 	private Set<BoardCell> visited;
 	private Set<Room> rooms;
 	private char hallwayLetter;
+	public final char UNREACHABLE = 'X';
 	
 	private static Board theInstance = new Board();
 	
@@ -217,8 +218,6 @@ public class Board {
 						}
 							
 					}else {
-						System.out.println("Ended in square " + i+" "+j);
-						System.out.println(currentLine);
 						throw new BadConfigFormatException(layoutFileName);
 					}
 					i++;

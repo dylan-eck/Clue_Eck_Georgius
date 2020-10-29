@@ -90,59 +90,58 @@ public class BoardCell {
 	public void setAdj(Board board) {	
 		//check to see if it is a hallway
 		if(letter == board.getHallways()) {
-			for(int i = -1;i<2;i+=2) {
-				int tempX = location[0]+i;
-				if(tempX>=0 && tempX<=(board.getNumColumns()-1) && board.getCell(location[1],tempX).getChar()==board.getHallways()) {
-					adjList.add(board.getCell(location[1],tempX));
-				}
-			}
-			for(int j = -1;j<2;j+=2) {
-				int tempY = location[1]+j;
-				if(tempY>=0 && tempY<=(board.getNumRows()-1) && board.getCell(tempY,location[0]).getChar()==board.getHallways()) {
-					adjList.add(board.getCell(tempY,location[0]));
-				}
-			}
+			
+			forHallways(board);
 			
 			if(isDoorway()) {
-				switch(doorDirection) {
-					case UP:
-						adjList.add(board.getRoom(board.getCell(location[1]-1,location[0])).getCenterCell());
-						//Setting adj from room to doorways here because it's hard doing it from the room center 
-						(board.getRoom(board.getCell(location[1]-1,location[0])).getCenterCell()).addAdjCell(this);
-						break;
-					case DOWN:
-						adjList.add(board.getRoom(board.getCell(location[1]+1,location[0])).getCenterCell());
-						(board.getRoom(board.getCell(location[1]+1,location[0])).getCenterCell()).addAdjCell(this);
-						break;
-					case RIGHT:
-						adjList.add(board.getRoom(board.getCell(location[1],location[0]+1)).getCenterCell());
-						(board.getRoom(board.getCell(location[1],location[0]+1)).getCenterCell()).addAdjCell(this);
-						break;
-					case LEFT:
-						adjList.add(board.getRoom(board.getCell(location[1],location[0]-1)).getCenterCell());
-						(board.getRoom(board.getCell(location[1],location[0]-1)).getCenterCell()).addAdjCell(this);
-						break;
-					case NONE:
-						break;
-				}
+				forDoors(board);
 			}
+			
 		}else if(secretPassage!='*') {
 			//This finds the room that maches the char of secretPassage and then adds it's center cell to the adjList of this cells room it's in
 			(board.getRoom(this).getCenterCell()).addAdjCell(board.getRoom(secretPassage).getCenterCell());
-			//lazy solution TODO: make a better way to keep track of un-reachable cells
-		}else if(letter == 'X') {
-			for(int i = -1;i<2;i+=2) {
-				int tempX = location[0]+i;
-				if(tempX>=0 && tempX<=(board.getNumColumns()-1) && board.getCell(location[1],tempX).getChar()==board.getHallways()) {
-					adjList.add(board.getCell(location[1],tempX));
-				}
+
+		}else if(letter == board.UNREACHABLE) {
+			forHallways(board);
+		}
+	}
+	
+	private void forHallways(Board board) {
+		for(int i = -1;i<2;i+=2) {
+			int tempX = location[0]+i;
+			if(tempX>=0 && tempX<=(board.getNumColumns()-1) && board.getCell(location[1],tempX).getChar()==board.getHallways()) {
+				adjList.add(board.getCell(location[1],tempX));
 			}
-			for(int j = -1;j<2;j+=2) {
-				int tempY = location[1]+j;
-				if(tempY>=0 && tempY<=(board.getNumRows()-1) && board.getCell(tempY,location[0]).getChar()==board.getHallways()) {
-					adjList.add(board.getCell(tempY,location[0]));
-				}
+		}
+		for(int j = -1;j<2;j+=2) {
+			int tempY = location[1]+j;
+			if(tempY>=0 && tempY<=(board.getNumRows()-1) && board.getCell(tempY,location[0]).getChar()==board.getHallways()) {
+				adjList.add(board.getCell(tempY,location[0]));
 			}
+		}
+	}
+	
+	private void forDoors(Board board) {
+		switch(doorDirection) {
+			case UP:
+				adjList.add(board.getRoom(board.getCell(location[1]-1,location[0])).getCenterCell());
+				//Setting adj from room to doorways here because it's hard doing it from the room center 
+				(board.getRoom(board.getCell(location[1]-1,location[0])).getCenterCell()).addAdjCell(this);
+				break;
+			case DOWN:
+				adjList.add(board.getRoom(board.getCell(location[1]+1,location[0])).getCenterCell());
+				(board.getRoom(board.getCell(location[1]+1,location[0])).getCenterCell()).addAdjCell(this);
+				break;
+			case RIGHT:
+				adjList.add(board.getRoom(board.getCell(location[1],location[0]+1)).getCenterCell());
+				(board.getRoom(board.getCell(location[1],location[0]+1)).getCenterCell()).addAdjCell(this);
+				break;
+			case LEFT:
+				adjList.add(board.getRoom(board.getCell(location[1],location[0]-1)).getCenterCell());
+				(board.getRoom(board.getCell(location[1],location[0]-1)).getCenterCell()).addAdjCell(this);
+				break;
+			case NONE:
+				break;
 		}
 	}
 	

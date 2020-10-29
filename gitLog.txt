@@ -1,3 +1,45 @@
+commit 1ca3cf0f14f5e2372810ef484a0197f2a0d1fa06 (HEAD -> main, origin/main, origin/HEAD)
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Fri Oct 16 20:21:10 2020 -0600
+
+    Fixed last test to match game rules
+
+commit 4fd022615871d317254980bfe32c119067008457
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Oct 16 19:07:15 2020 -0600
+
+    fixed to BoardAdjTargetTest to allign with Clue rules
+
+commit dc7aa58fe1f40aeb74b0263f197b57a8a514d39a
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Fri Oct 16 17:35:53 2020 -0600
+
+    Fixed calcTargets function so that it stopes once it enters a room
+
+commit fffa325cbeee7ee9303f76a44e4e786cc44f6cd5
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Thu Oct 15 21:33:52 2020 -0600
+
+    Finished and tested the setAdj function. The calcTargets function isn't working.
+
+commit 9d2000c05d02b151d689253c24ecb53a2a0fdfc6
+Author: dylan-eck <70920172+dylan-eck@users.noreply.github.com>
+Date:   Thu Oct 15 14:49:08 2020 -0600
+
+    Update ReadMe.txt
+
+commit 148472b8dbe1fd129ea95026600be5de15087fc7
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Tue Oct 13 12:45:40 2020 -0600
+
+    Began editing the setAdj Function
+
+commit 6d85ee26701a477b5163c1be34e3020cc52c0433
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Oct 12 23:51:51 2020 -0600
+
+    Corrected tests
+
 commit cf20b75110fa56b12d26fbdb6be2ca95aa4ac8d0 (HEAD -> main, origin/main, origin/HEAD)
 Author: rlord222 <63765345+rlord222@users.noreply.github.com>
 Date:   Mon Oct 12 23:45:03 2020 -0600
