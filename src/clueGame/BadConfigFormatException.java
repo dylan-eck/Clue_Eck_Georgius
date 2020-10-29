@@ -5,24 +5,26 @@ import java.io.PrintWriter;
 
 public class BadConfigFormatException extends Throwable{
 
+
 	public BadConfigFormatException() {
-		super("Error: Format of the input file does not match expected format.");
+		super("error: input file does not match expected format.");
 	}
 	
-	public BadConfigFormatException(String fileName) {
-		super("Error: Format of "+fileName+" does not match expected format.");
+	
+	/**
+	 * Constructor that writes an error message to a log file.
+	 * 
+	 * @param badFileName -> name of the file that caused the exception
+	 */
+	public BadConfigFormatException(String badFileName) {
+		super("Error: " + badFileName + " does not match expected format.");
 		
-		PrintWriter temp = null;
-		//auto generated try/catch
 		try {
-			temp = new PrintWriter("ErrorLoggingFile.txt");
+			PrintWriter temp = new PrintWriter("errorlog.txt");
+			temp.println("error: " + badFileName + " does not match expected format.");
+			temp.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("log file not found");
 		}
-		temp.println("Error: Format of "+fileName+" does not match expected format.");
-		temp.close();
 	}
-	
-	//TODO: Add toString
 }
