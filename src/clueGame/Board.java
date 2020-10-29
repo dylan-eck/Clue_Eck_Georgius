@@ -117,7 +117,6 @@ public class Board {
 			layoutFileData += ("\n"+ layoutFileLineIn);			
 			lineInSplit = layoutFileLineIn.split(",");
 			if(lineInSplit.length != collumnCount) {
-				//TODO: add a way to retrieve the files name so that an error message can be printed to a file
 				throw new BadConfigFormatException(layoutFileName);
 			}
 			rowCount++;
@@ -129,101 +128,112 @@ public class Board {
 		
 		boardCellArray = new BoardCell[numCols][numRows];
 		
-		String layoutFileDataSplit[] = layoutFileData.split("\n"); 
-		String currentLine;
-		String currentLineSplit[];
-		
-		//second loop to actualy get the data
-			//runs once for each row
-			for(int j = 0;j<numRows;j++) {
-				int i = 0;
-				currentLine = layoutFileDataSplit[j];
-				currentLineSplit = currentLine.split(",");
-				
-				for(String tileString:currentLineSplit) {
-					//if the space is just a generic cell with nothing special
-
-					if(tileString.length() == 1) {
-						
-						boolean testInitial = false;
-						for(Room r:rooms) {
-							if(r.getLetter()==tileString.charAt(0)) {
-								testInitial = true;
-							}
+		makeCells(layoutFileData,numRows,numCols);
+	}
+	
+	private void makeCells(String layoutFileData, int numRows, int numCols) throws BadConfigFormatException{
+	
+	String layoutFileDataSplit[] = layoutFileData.split("\n"); 
+	String currentLine;
+	String currentLineSplit[];
+	
+	//second loop to actualy get the data
+		//runs once for each row
+		for(int j = 0;j<numRows;j++) {
+			int i = 0;
+			currentLine = layoutFileDataSplit[j];
+			currentLineSplit = currentLine.split(",");
+			
+			for(String tileString:currentLineSplit) {
+				//if the space is just a generic cell with nothing special
+				if(tileString.length() == 1) {
+					
+					hallwaysAndUnreachable(tileString,i,j);
+					
+				//All the doorways, secret passages, room labels, room centers
+				}else if(tileString.length()==2){
+					
+					boolean testInitial = false;
+					for(Room r:rooms) {
+						if(r.getLetter()==tileString.charAt(0)) {
+							testInitial = true;
 						}
-						if(!testInitial) {
-							throw new BadConfigFormatException(layoutFileName);
-						}
-						
-						boolean isRoom=false;
-						for(Room r:rooms) {
-							if(tileString.charAt(0)==r.getLetter()) {
-								isRoom = true;
-								boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),true);
-							}
-						}
-						
-						if(!isRoom) {
-							boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),false);
-						}
-						
-					//All the doorways, secret passages, room labels, room centers
-					}else if(tileString.length()==2){
-						
-						boolean testInitial = false;
-						for(Room r:rooms) {
-							if(r.getLetter()==tileString.charAt(0)) {
-								testInitial = true;
-							}
-						}
-						if(!testInitial) {
-							throw new BadConfigFormatException(layoutFileName);
-						}
-						
-						boolean isRoom=false;
-						for(Room r:rooms) {
-							if(tileString.charAt(0)==r.getLetter()) {
-								isRoom = true;
-								boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),true);
-							}
-						}
-						
-						if(!isRoom) {
-							boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),false);
-						}
-						
-						//a bit messy but better than creating a set and using contains()
-						if(tileString.charAt(1)=='^') {
-							boardCellArray[i][j].setDoorDirection(DoorDirection.UP);
-						}else if(tileString.charAt(1)=='>') {
-							boardCellArray[i][j].setDoorDirection(DoorDirection.RIGHT);
-						}else if(tileString.charAt(1)=='v') {
-							boardCellArray[i][j].setDoorDirection(DoorDirection.DOWN);
-						}else if(tileString.charAt(1)=='<') {
-							boardCellArray[i][j].setDoorDirection(DoorDirection.LEFT);
-						}else if(tileString.charAt(1)=='*') {
-							boardCellArray[i][j].setRoomCenter();
-							for(Room r:rooms) {
-								if(r.getLetter()==tileString.charAt(0)) 
-									r.setCenterCell(boardCellArray[i][j]);
-							}
-						}else if(tileString.charAt(1)=='#') {
-							boardCellArray[i][j].setRoomLabel();
-							for(Room r:rooms) {
-								if(r.getLetter()==tileString.charAt(0)) 
-									r.setLabelCell(boardCellArray[i][j]);
-							}
-						}else {
-							boardCellArray[i][j].setSecretPassage(tileString.charAt(1));
-						}
-							
-					}else {
+					}
+					if(!testInitial) {
 						throw new BadConfigFormatException(layoutFileName);
 					}
-					i++;
+					
+					boolean isRoom=false;
+					for(Room r:rooms) {
+						if(tileString.charAt(0)==r.getLetter()) {
+							isRoom = true;
+							boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),true);
+						}
+					}
+					
+					if(!isRoom) {
+						boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),false);
+					}
+					
+					specialTiles(tileString, i, j);
+						
+				}else{
+					throw new BadConfigFormatException(layoutFileName);
 				}
+				i++;
 			}
+		}
+	}
 	
+	private void hallwaysAndUnreachable(String tileString, int i, int j) throws BadConfigFormatException{
+		boolean testInitial = false;
+		for(Room r:rooms) {
+			if(r.getLetter()==tileString.charAt(0)) {
+				testInitial = true;
+			}
+		}
+		if(!testInitial) {
+			throw new BadConfigFormatException(layoutFileName);
+		}
+		
+		boolean isRoom=false;
+		for(Room r:rooms) {
+			if(tileString.charAt(0)==r.getLetter()) {
+				isRoom = true;
+				boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),true);
+			}
+		}
+		
+		if(!isRoom) {
+			boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),false);
+		}
+	}
+	
+	private void specialTiles(String tileString, int i, int j) throws BadConfigFormatException{
+		//first 4 check for doorways
+		if(tileString.charAt(1)=='^') {
+			boardCellArray[i][j].setDoorDirection(DoorDirection.UP);
+		}else if(tileString.charAt(1)=='>') {
+			boardCellArray[i][j].setDoorDirection(DoorDirection.RIGHT);
+		}else if(tileString.charAt(1)=='v') {
+			boardCellArray[i][j].setDoorDirection(DoorDirection.DOWN);
+		}else if(tileString.charAt(1)=='<') {
+			boardCellArray[i][j].setDoorDirection(DoorDirection.LEFT);
+		}else if(tileString.charAt(1)=='*') {
+			boardCellArray[i][j].setRoomCenter();
+			for(Room r:rooms) {
+				if(r.getLetter()==tileString.charAt(0)) 
+					r.setCenterCell(boardCellArray[i][j]);
+			}
+		}else if(tileString.charAt(1)=='#') {
+			boardCellArray[i][j].setRoomLabel();
+			for(Room r:rooms) {
+				if(r.getLetter()==tileString.charAt(0)) 
+					r.setLabelCell(boardCellArray[i][j]);
+			}
+		}else {
+			boardCellArray[i][j].setSecretPassage(tileString.charAt(1));
+		}
 	}
 	
 	public void calcTargets(BoardCell startCell, int pathlength) {
