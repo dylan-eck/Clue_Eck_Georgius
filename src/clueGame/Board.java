@@ -8,8 +8,7 @@ import java.util.Set;
 
 public class Board {
 	
-//	private Map roomMap<Character, Room> roomMap;
-	
+	//	private Map roomMap<Character, Room> roomMap;
 	private BoardCell[][] boardCellArray;
 	private int numRows;
 	private int numCols;
