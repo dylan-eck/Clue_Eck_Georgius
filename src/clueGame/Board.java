@@ -59,7 +59,13 @@ public class Board {
 		}
 	}
 	
-	// setup to read data from setup and 
+	/**
+	 * This function sets and attempts to open the files that contain 
+	 * the board setup and layout information.
+	 * 
+	 * @param layOutFile
+	 * @param setUpFile
+	 */
 	public void setConfigFiles(String layOutFile, String setUpFile) {
 
 		layoutFileName = layOutFile;
@@ -131,13 +137,20 @@ public class Board {
 		makeCells(layoutFileData,numRows,numCols);
 	}
 	
+	/**
+	 * This function loads the cell information from the layout configuration file.
+	 * 
+	 * @param layoutFileData				-> string of data read in from layout configuration file
+	 * @param numRows						-> dimensions of the game board
+	 * @param numCols
+	 * @throws BadConfigFormatException		-> exception thrown if the format of the layout file is incorrect
+	 */
 	private void makeCells(String layoutFileData, int numRows, int numCols) throws BadConfigFormatException{
 	
-	String layoutFileDataSplit[] = layoutFileData.split("\n"); 
-	String currentLine;
-	String currentLineSplit[];
+		String layoutFileDataSplit[] = layoutFileData.split("\n"); 
+		String currentLine;
+		String currentLineSplit[];
 	
-	//second loop to actualy get the data
 		//runs once for each row
 		for(int j = 0;j<numRows;j++) {
 			int i = 0;
@@ -185,6 +198,15 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * This helper function takes care of setting up cells from the layout configuration file 
+	 * that are either hallways or unreachable.
+	 * 
+	 * @param tileString 				-> 	cell information read in from file
+	 * @param i 						-> 	row number of cell
+	 * @param j 						-> 	column number of cell
+	 * @throws BadConfigFormatException -> 	exception thrown if the input file format is incorrect
+	 */
 	private void hallwaysAndUnreachable(String tileString, int i, int j) throws BadConfigFormatException{
 		boolean testInitial = false;
 		for(Room r:rooms) {
@@ -209,6 +231,15 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * 
+	 * This helper function sets up cells that are doors, room centers, or secret passages.
+	 * 
+	 * @param tileString 				-> 	cell information read in from file
+	 * @param i 						-> 	row number of cell
+	 * @param j 						-> 	column number of cell
+	 * @throws BadConfigFormatException -> 	exception thrown if the input file format is incorrect
+	 */
 	private void specialTiles(String tileString, int i, int j) throws BadConfigFormatException{
 		//first 4 check for doorways
 		if(tileString.charAt(1)=='^') {
@@ -236,6 +267,14 @@ public class Board {
 		}
 	}
 	
+	
+	/**
+	 * This function acts as an entry point for findAllTargets, which find all reachable cells
+	 * based on a given start cell and path length
+	 * 
+	 * @param startCell
+	 * @param pathlength
+	 */
 	public void calcTargets(BoardCell startCell, int pathlength) {
 		//visited = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
@@ -257,7 +296,19 @@ public class Board {
 		}
 	}
 	
+	
+	/**
+	 * This function recursively finds all cells reachable from a given cell based
+	 * on a given path length. 
+	 * 
+	 * @param startCell
+	 * @param previousCells
+	 * @param pathlength
+	 */
 	public void findAllTargets(BoardCell startCell, Set<BoardCell> previousCells, int pathlength) {		
+		
+		// TODO consider moving for loop outside of if statement
+		// so that there is only one for loop if possible
 		if(pathlength == 1) {
 			for(BoardCell b:startCell.getAdjList()) {
 				if(!previousCells.contains(b)) {
@@ -268,19 +319,13 @@ public class Board {
 			for(BoardCell b:startCell.getAdjList()) {
 				if(b.isRoomCenter()) {
 					targets.add(b);
-				}else if(!(previousCells.contains(b))) {
-					if(!(b.isOccupied())) {
-						previousCells.add(startCell);
-						Set<BoardCell> temp = new HashSet<>(previousCells);
-						findAllTargets(b,temp,pathlength-1);
-					}
+				}else if(!previousCells.contains(b) && !b.isOccupied()) {
+					previousCells.add(startCell);
+					Set<BoardCell> temp = new HashSet<>(previousCells);
+					findAllTargets(b,temp,pathlength-1);
 				}
 			}
 		}
-	}
-	
-	public Set<BoardCell> getTargets() {
-		return targets;
 	}
 	
 	public int getNumRows() {
@@ -289,6 +334,14 @@ public class Board {
 	
 	public int getNumColumns() {
 		return numCols;
+	}
+	
+	public Set<BoardCell> getAdjList(int x, int y){
+		return getCell(x,y).getAdjList();
+	}
+	
+	public Set<BoardCell> getTargets() {
+		return targets;
 	}
 	
 	public Room getRoom(char letter) {
@@ -304,19 +357,15 @@ public class Board {
 		return getRoom(cell.getChar());
 	}
 
+	public Set<Room> getAllRooms(){
+		return rooms;
+	}
+	
 	public BoardCell getCell(int row, int col) {
 		return boardCellArray[col][row];
 	}
 	
-	public Set<BoardCell> getAdjList(int x, int y){
-		return getCell(x,y).getAdjList();
-	}
-	
 	public char getHallways() {
 		return hallwayLetter;
-	}
-	
-	public Set<Room> getAllRooms(){
-		return rooms;
 	}
 }
