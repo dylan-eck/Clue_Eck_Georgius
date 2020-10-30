@@ -87,6 +87,12 @@ public class BoardCell {
 		this.isOccupied = isOccupied;
 	}
 	
+	/**
+	 * This function is called to set the Adjacency list of the cell
+	 * 
+	 * @param board
+	 */
+	
 	public void setAdj(Board board) {	
 		//check to see if it is a hallway
 		if(letter == board.getHallways()) {
@@ -106,6 +112,12 @@ public class BoardCell {
 		}
 	}
 	
+	/**
+	 * Helper function for setAdj. Handles all of the hallways that aren't doors as well as unreachable tiles.
+	 * 
+	 * @param board
+	 */
+	
 	private void forHallways(Board board) {
 		for(int i = -1;i<2;i+=2) {
 			int tempX = location[0]+i;
@@ -120,6 +132,12 @@ public class BoardCell {
 			}
 		}
 	}
+	
+	/**
+	 * Helper function for setAdj. Handles all of the doors in hallways.
+	 * 
+	 * @param board
+	 */
 	
 	private void forDoors(Board board) {
 		switch(doorDirection) {
