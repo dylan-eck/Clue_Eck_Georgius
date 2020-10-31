@@ -8,18 +8,13 @@ import java.util.Set;
 
 public class Board {
 	
-	//	private Map roomMap<Character, Room> roomMap;
 	private BoardCell[][] boardCellArray;
-	private int numRows;
-	private int numCols;
+	private int numRows, numCols;
 	
-	private Scanner layoutFile;
-	private String layoutFileName;
-	private Scanner setupFile;
-	private String setupFileName;
+	private Scanner layoutFile, setupFile;
+	private String layoutFileName, setupFileName;
 	
-	private Set<BoardCell> targets;
-	private Set<BoardCell> visited;
+	private Set<BoardCell> targets, visited;
 	private Set<Room> rooms;
 	private char hallwayLetter;
 	public final char UNREACHABLE = 'X';
@@ -37,7 +32,7 @@ public class Board {
 	// set up the game board
 	public void initialize() {
 		
-		rooms = new HashSet<Room>();
+		this.rooms = new HashSet<Room>();
 		
 		try {
 			loadSetupConfig();
@@ -48,7 +43,6 @@ public class Board {
 			//setAdjList of all board cells
 			for(BoardCell b[]:boardCellArray) {
 				for(BoardCell a:b) {
-					//Only place we set Adjacency
 					a.setAdj(theInstance);
 				}
 			}
@@ -62,78 +56,87 @@ public class Board {
 	 * This function sets and attempts to open the files that contain 
 	 * the board setup and layout information.
 	 * 
-	 * @param layOutFile
-	 * @param setUpFile
+	 * @param layoutFileName
+	 * @param setupFileName
 	 */
-	public void setConfigFiles(String layOutFile, String setUpFile) {
+	public void setConfigFiles(String layoutFileName, String setupFileName) {
 
-		layoutFileName = layOutFile;
-		setupFileName = setUpFile;
+		this.layoutFileName = layoutFileName;
+		this.setupFileName = setupFileName;
 		
 		try {
-			layoutFile = new Scanner(new File(layOutFile));
-			setupFile = new Scanner(new File(setUpFile));
+			layoutFile = new Scanner(new File(this.layoutFileName));
+			setupFile = new Scanner(new File(this.setupFileName));
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 			System.out.println("Unable to locate setup and/or layout file");
 		}
 	}
 	
+	/**
+	 * This function loads the information stored in the setup configuration file.
+	 * 
+	 * @throws BadConfigFormatException -> exception thrown if the setup configuration file is incorrectly formatted.
+	 */
 	public void loadSetupConfig() throws BadConfigFormatException {
 		
-		String temp = "";
+		String lineIn = new String();
 		
 		while(setupFile.hasNextLine()) {
-			temp = setupFile.nextLine();
+			lineIn = setupFile.nextLine();
 
-			String tempArr[] = temp.split(",");
-			if(temp.charAt(0)!='/') {
-				if(!tempArr[0].equals("Room") && !tempArr[0].equals("Space")) {
+			String lineInSplit[] = lineIn.split(",");
+			
+			if(lineIn.charAt(0)!='/') {
+				if(!lineInSplit[0].equals("Room") && !lineInSplit[0].equals("Space")) {
 					throw new BadConfigFormatException(setupFileName);
-				}else if(tempArr[0].equals("Space") && !tempArr[1].equals("Unused")){
-					hallwayLetter = tempArr[2].charAt(1);
-					rooms.add(new Room(tempArr[1].substring(1),tempArr[2].charAt(1)));
+				}else if(lineInSplit[0].equals("Space") && !lineInSplit[1].equals("Unused")){
+					hallwayLetter = lineInSplit[2].charAt(1);
+					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
 				}else {
 					//we start at index one because the format files have a space before each word or letter
-					rooms.add(new Room(tempArr[1].substring(1),tempArr[2].charAt(1)));
+					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
 				}
 			}
 		}
 	}
 	
+	/**
+	 * This function loads the information stored in the layout configuration file.
+	 * 
+	 * @throws BadConfigFormatException -> exception thrown if the layout configuration file is incorrectly formatted.
+	 */
 	public void loadLayoutConfig() throws BadConfigFormatException {
 		
-		String layoutFileData = "";
+		String layoutFileData = new String(); 
+		String layoutFileLineIn = new String();
 		
-		String layoutFileLineIn = "";
-		int collumnCount = 0;
 		//set to one initialy because we read in one line to give us the row length and test for bad formating
 		int rowCount = 1;
-
+		int collumnCount = 0;
+		
 		//first loop to determine the size of the board
 		layoutFileLineIn = layoutFile.nextLine();
 		layoutFileData += layoutFileLineIn;
 		
-		String lineInSplit[] = layoutFileLineIn.split(",");
-		collumnCount = lineInSplit.length;
+		String layoutFileLineInSplit[] = layoutFileLineIn.split(",");
+		collumnCount = layoutFileLineInSplit.length;
 	
 		while(layoutFile.hasNextLine()){
 			layoutFileLineIn=layoutFile.nextLine();
 			layoutFileData += ("\n"+ layoutFileLineIn);			
-			lineInSplit = layoutFileLineIn.split(",");
-			if(lineInSplit.length != collumnCount) {
+			layoutFileLineInSplit = layoutFileLineIn.split(",");
+			if(layoutFileLineInSplit.length != collumnCount) {
 				throw new BadConfigFormatException(layoutFileName);
 			}
 			rowCount++;
 		}
-		
 		
 		numRows = rowCount;
 		numCols = collumnCount;
 		
 		boardCellArray = new BoardCell[numCols][numRows];
 		
-		makeCells(layoutFileData,numRows,numCols);
+		loadCells(layoutFileData,numRows,numCols);
 	}
 	
 	/**
@@ -144,37 +147,32 @@ public class Board {
 	 * @param numCols
 	 * @throws BadConfigFormatException		-> exception thrown if the format of the layout file is incorrect
 	 */
-	private void makeCells(String layoutFileData, int numRows, int numCols) throws BadConfigFormatException{
+	private void loadCells(String layoutFileData, int numRows, int numCols) throws BadConfigFormatException{
 	
 		String layoutFileDataSplit[] = layoutFileData.split("\n"); 
-		String currentLine;
 		String currentLineSplit[];
 	
 		//runs once for each row
 		for(int j = 0;j<numRows;j++) {
 			int i = 0;
-			currentLine = layoutFileDataSplit[j];
-			currentLineSplit = currentLine.split(",");
+			currentLineSplit = layoutFileDataSplit[j].split(",");
 			
 			for(String tileString:currentLineSplit) {
 				//if the space is just a generic cell with nothing special
 				if(tileString.length() == 1) {
-					
-					hallwaysAndUnreachable(tileString,i,j);
+					handleHallwaysAndUnreachable(tileString,i,j);
 					
 				//All the doorways, secret passages, room labels, room centers
 				}else if(tileString.length()==2){
-					
-					boolean testInitial = false;
+					boolean testLetter = false;
 					for(Room r:rooms) {
 						if(r.getLetter()==tileString.charAt(0)) {
-							testInitial = true;
+							testLetter = true;
 						}
 					}
-					if(!testInitial) {
+					if(!testLetter) {
 						throw new BadConfigFormatException(layoutFileName);
 					}
-					
 					boolean isRoom=false;
 					for(Room r:rooms) {
 						if(tileString.charAt(0)==r.getLetter()) {
@@ -182,7 +180,6 @@ public class Board {
 							boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),true);
 						}
 					}
-					
 					if(!isRoom) {
 						boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),false);
 					}
@@ -206,17 +203,16 @@ public class Board {
 	 * @param j 						-> 	column number of cell
 	 * @throws BadConfigFormatException -> 	exception thrown if the input file format is incorrect
 	 */
-	private void hallwaysAndUnreachable(String tileString, int i, int j) throws BadConfigFormatException{
-		boolean testInitial = false;
+	private void handleHallwaysAndUnreachable(String tileString, int i, int j) throws BadConfigFormatException{
+		boolean testLetter = false;
 		for(Room r:rooms) {
 			if(r.getLetter()==tileString.charAt(0)) {
-				testInitial = true;
+				testLetter = true;
 			}
 		}
-		if(!testInitial) {
+		if(!testLetter) {
 			throw new BadConfigFormatException(layoutFileName);
 		}
-		
 		boolean isRoom=false;
 		for(Room r:rooms) {
 			if(tileString.charAt(0)==r.getLetter()) {
@@ -282,15 +278,15 @@ public class Board {
 		findAllTargets(startCell,new HashSet<BoardCell>(), pathlength);
 		targets.remove(startCell);
 		
-		//removes all occupies spaces from targets
-		Set<BoardCell> toBeDel = new HashSet<BoardCell>();
+		//removes all occupied spaces from targets
+		Set<BoardCell> toBeDeleted = new HashSet<BoardCell>();
 		for(BoardCell target : targets) {
 			if(target.isOccupied() && !target.isRoomCenter()) {
-				toBeDel.add(target);
+				toBeDeleted.add(target);
 			}
 		}
 		
-		for(BoardCell target:toBeDel) {
+		for(BoardCell target:toBeDeleted) {
 			targets.remove(target);
 		}
 	}
@@ -302,29 +298,23 @@ public class Board {
 	 * 
 	 * @param startCell
 	 * @param previousCells
-	 * @param pathlength
+	 * @param pathLength
 	 */
-	public void findAllTargets(BoardCell startCell, Set<BoardCell> previousCells, int pathlength) {		
+	public void findAllTargets(BoardCell startCell, Set<BoardCell> previousCells, int pathLength) {		
 		
-		// TODO consider moving for loop outside of if statement
-		// so that there is only one for loop if possible
-		if(pathlength == 1) {
-			for(BoardCell b:startCell.getAdjList()) {
+		for(BoardCell b : startCell.getAdjList()) {
+			if(pathLength == 1) {
 				if(!previousCells.contains(b)) {
 					targets.add(b);
-				}
+				}	
+			} else if(b.isRoomCenter()) {
+				targets.add(b);
+			} else if(!previousCells.contains(b) && !b.isOccupied()) {
+				previousCells.add(startCell);
+				Set<BoardCell> temp = new HashSet<>(previousCells);
+				findAllTargets(b,temp,pathLength-1);
 			}
-		}else {
-			for(BoardCell b:startCell.getAdjList()) {
-				if(b.isRoomCenter()) {
-					targets.add(b);
-				}else if(!previousCells.contains(b) && !b.isOccupied()) {
-					previousCells.add(startCell);
-					Set<BoardCell> temp = new HashSet<>(previousCells);
-					findAllTargets(b,temp,pathlength-1);
-				}
-			}
-		}
+		}		
 	}
 	
 	public int getNumRows() {
