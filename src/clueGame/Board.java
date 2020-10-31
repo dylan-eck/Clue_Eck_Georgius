@@ -180,12 +180,7 @@ public class Board {
 							boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),true);
 						}
 					}
-					if(!isRoom) {
-						boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),false);
-					}
-					
-					specialTiles(tileString, i, j);
-						
+					specialTiles(tileString, i, j);	
 				}else{
 					throw new BadConfigFormatException(layoutFileName);
 				}
@@ -219,10 +214,6 @@ public class Board {
 				isRoom = true;
 				boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),true);
 			}
-		}
-		
-		if(!isRoom) {
-			boardCellArray[i][j] = new BoardCell(i,j,tileString.charAt(0),false);
 		}
 	}
 	

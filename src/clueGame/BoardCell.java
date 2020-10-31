@@ -30,7 +30,7 @@ public class BoardCell {
 	/**
 	 * This function is called to set the Adjacency list of the cell
 	 * 
-	 * @param board
+	 * @param board				-> a reference to the board that the cell is in
 	 */
 	public void setAdj(Board board) {	
 		//check to see if it is a hallway
@@ -54,7 +54,7 @@ public class BoardCell {
 	/**
 	 * Helper function for setAdj. Handles all of the hallways that aren't doors as well as unreachable tiles.
 	 * 
-	 * @param board
+	 * @param board			-> a reference to the board that the cell is in
 	 */
 	private void handleHallways(Board board) {
 		for(int i = -1;i<2;i+=2) {
@@ -74,7 +74,7 @@ public class BoardCell {
 	/**
 	 * Helper function for setAdj. Handles all of the doors.
 	 * 
-	 * @param board
+	 * @param board			-> a reference to the board that the cell is in
 	 */
 	private void handleDoors(Board board) {
 		switch(doorDirection) {
