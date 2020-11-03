@@ -22,7 +22,7 @@ public class Board {
 	
 	private Set<Player> players;
 	private Set<String> weapons;
-	private Set<Card> cards;
+	private Set<Card> deck;
 	
 	private static Board theInstance = new Board();
 	
@@ -40,7 +40,7 @@ public class Board {
 		this.rooms = new HashSet<Room>();
 		this.players = new HashSet<Player>();
 		this.weapons = new HashSet<String>();
-		this.cards = new HashSet<Card>();
+		this.deck = new HashSet<Card>();
 		
 		try {
 			loadSetupConfig();
@@ -101,19 +101,27 @@ public class Board {
 					hallwayLetter = lineInSplit[2].charAt(1);
 					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
 				}else if(lineInSplit[0].equals("Player")){
+					makeCard(lineInSplit[1],"Person");
 					if(lineInSplit[5].equals("H")) {
 						players.add(new HumanPlayer(lineInSplit[1],lineInSplit[2],Integer.parseInt(lineInSplit[3]),Integer.parseInt(lineInSplit[4])));
 					}else {	
 						players.add(new ComputerPlayer(lineInSplit[1],lineInSplit[2],Integer.parseInt(lineInSplit[3]),Integer.parseInt(lineInSplit[4])));
 					}
 				}else if(lineInSplit[0].equals("Weapon")){
+					makeCard(lineInSplit[1],"Person");
 					weapons.add(lineInSplit[1]);
 				}else {
 					//we start at index one because the format files have a space before each word or letter
+					makeCard(lineInSplit[1].substring(1),"Person");
 					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
 				}
 			}
 		}
+	}
+	
+	//Helper function that's called whenever a weapon, room or player is loaded
+	private void makeCard(String name,String type) {
+		deck.add(new Card(name,type));
 	}
 	
 	/**
@@ -383,10 +391,15 @@ public class Board {
 	}
 	
 	public Set<Card> getCards(){
-		return cards;
+		return deck;
 	}
 	
 	public Card getCard(String name) {
+		for(Card c:deck) {
+			if(c.getName().equals(name)) {
+				return c;
+			}
+		}
 		return null;
 	}
 }
