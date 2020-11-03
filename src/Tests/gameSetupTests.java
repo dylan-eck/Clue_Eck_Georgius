@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 import clueGame.Card;
+import clueGame.CardType;
 import clueGame.Player;
 
 class gameSetupTests {
@@ -66,6 +67,19 @@ class gameSetupTests {
 		assertTrue(cards.contains(board.getCard("Mrs. White")));
 		assertTrue(cards.contains(board.getCard("Miss Scarlett")));
 		assertTrue(cards.contains(board.getCard("Professor Plum")));
+	}
+	
+	@Test
+	public void testCardTypes() {
+		assertEquals(board.getCard("Knife").getType(),CardType.WEAPON);
+		assertEquals(board.getCard("Rope").getType(),CardType.WEAPON);
+		assertEquals(board.getCard("Wrench").getType(),CardType.WEAPON);
+		assertEquals(board.getCard("Entry Way").getType(),CardType.ROOM);
+		assertEquals(board.getCard("Bathroom").getType(),CardType.ROOM);
+		assertEquals(board.getCard("Court Yard").getType(),CardType.ROOM);
+		assertEquals(board.getCard("Mrs. Peacock").getType(),CardType.PERSON);
+		assertEquals(board.getCard("Reverend Green").getType(),CardType.PERSON);
+		assertEquals(board.getCard("Colonel Mustard").getType(),CardType.PERSON);
 	}
 
 }
