@@ -5,10 +5,6 @@ public class Solution {
 	private Card room;
 	private Card person;
 	
-	public Solution() {
-		
-	}
-	
 	public Card getWeapon() {
 		return weapon;
 	}
@@ -21,15 +17,15 @@ public class Solution {
 		return person;
 	}
 	
-	public void setWeapon(Card wep) {
-		weapon = wep;
+	public void setWeapon(Card weapon) {
+		this.weapon = weapon;
 	}
 	
 	public void setRoom(Card room) {
 		this.room = room;
 	}
 	
-	public void setPerson(Card per) {
-		person = per;
+	public void setPerson(Card person) {
+		this.person = person;
 	}
 }

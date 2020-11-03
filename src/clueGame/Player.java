@@ -3,6 +3,7 @@ package clueGame;
 import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
+
 public abstract class Player {
 
 	private String name;
@@ -11,10 +12,9 @@ public abstract class Player {
 	private Set<Card> hand;
 	
 	public Player(String name,String color,int x,int y) throws BadConfigFormatException {
-		location = new int[2];
 		this.name = name;
-		location[0] = x;
-		location[1] = y;
+		this.location = new int[] {x,y};
+		hand = new HashSet<Card>();
 		
 		if(color.equals("White")) {
 			this.color=Color.WHITE; 
@@ -31,23 +31,21 @@ public abstract class Player {
 		}else {
 			throw new BadConfigFormatException();
 		}
-		
-		hand = new HashSet<Card>();
 	}
 	
 	public Color getColor() {
 		return this.color;
 	}
-	
-	public String toString() {
-		return name + ": " + color + ", @ " + "("+location[0]+","+location[1]+")";
-	}
-	
-	public void set1Card(Card c) {
+
+	public void addCard(Card c) {
 		hand.add(c);
 	}
 	
 	public Set<Card> getHand(){
 		return hand;
+	}
+	
+	public String toString() {
+		return name + ": " + color + ", @ " + "("+location[0]+","+location[1]+")";
 	}
 }

@@ -23,8 +23,7 @@ public class Board {
 	
 	private Set<Player> players;
 	private Set<String> weapons;
-	private Set<Card> deck;
-	private Set<Card> removableDeck;
+	private Set<Card> deck, removableDeck;
 	private Solution solution;
 	
 	private static Board theInstance = new Board();
@@ -37,8 +36,8 @@ public class Board {
 		super();
 	}
 	
-	/*
-	 * 
+	/**
+	 * This function reads in the setup files and initializes the board, players, and cards
 	 */
 	public void initialize() {
 		
@@ -342,6 +341,25 @@ public class Board {
 		}		
 	}
 	
+	/**
+	 * This function deals the cards to the players
+	 */
+	public void deal() {
+		for(Player p:players) {
+			//stops when all the cards have been delt out
+			if(removableDeck.size()==0)
+				break;
+			Card temp = getCard();
+			removableDeck.remove(temp);
+			p.addCard(temp);
+		}
+		//I'm using a recursive call in case we have to add a mode with less that 6 players 
+		//this method should still deal one card to each player till the deck is empty.
+		if(removableDeck.size()!=0) {
+			deal();
+		}
+	}
+	
 	public int getNumRows() {
 		return numRows;
 	}
@@ -445,22 +463,6 @@ public class Board {
 		}
 		solution.setRoom(temp);
 		removableDeck.remove(temp);
-	}
-	
-	public void deal() {
-		for(Player p:players) {
-			//stops when all the cards have been delt out
-			if(removableDeck.size()==0)
-				break;
-			Card temp = getCard();
-			removableDeck.remove(temp);
-			p.set1Card(temp);
-		}
-		//I'm using a recursive call in case we have to add a mode with less that 6 players 
-		//this method should still deal one card to each player till the deck is empty.
-		if(removableDeck.size()!=0) {
-			deal();
-		}
 	}
 	
 	public Solution getSolution() {

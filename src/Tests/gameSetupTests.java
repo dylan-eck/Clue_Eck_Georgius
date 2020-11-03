@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -117,6 +116,7 @@ class gameSetupTests {
 		for(int i = 0;i<=1000;i++) {
 			Player player1 = getRandomPlayer(players);
 			Player player2 = getRandomPlayer(players);
+			//ensures that player1 and player2 are not the same player
 			while(player2 == player1) {
 				player2 = getRandomPlayer(players);
 			}
