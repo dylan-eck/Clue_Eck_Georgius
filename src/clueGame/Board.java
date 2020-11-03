@@ -36,6 +36,7 @@ public class Board {
 	public void initialize() {
 		
 		this.rooms = new HashSet<Room>();
+		this.players = new HashSet<Player>();
 		
 		try {
 			loadSetupConfig();
@@ -95,8 +96,13 @@ public class Board {
 				}else if(lineInSplit[0].equals("Space") && !lineInSplit[1].equals("Unused")){
 					hallwayLetter = lineInSplit[2].charAt(1);
 					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
-				}else if(lineInSplit[0].equals("Player")) {
-					players.add(new Player(lineInSplit[1],lineInSplit[2],Integer.parseInt(lineInSplit[3]),Integer.parseInt(lineInSplit[4])));
+				}else if(lineInSplit[0].equals("Player")){
+					System.out.println(lineInSplit[5]);
+					if(lineInSplit[5].equals("H")) {
+						players.add(new HumanPlayer(lineInSplit[1],lineInSplit[2],Integer.parseInt(lineInSplit[3]),Integer.parseInt(lineInSplit[4])));
+					}else {	
+						players.add(new ComputerPlayer(lineInSplit[1],lineInSplit[2],Integer.parseInt(lineInSplit[3]),Integer.parseInt(lineInSplit[4])));
+					}
 				}else {
 					//we start at index one because the format files have a space before each word or letter
 					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
@@ -359,6 +365,11 @@ public class Board {
 	}
 	
 	public Player getPlayer(Color color) {
+		for(Player p:players) {
+			if(p.getColor()==color) {
+				return p;
+			}
+		}
 		return null;
 	}
 }

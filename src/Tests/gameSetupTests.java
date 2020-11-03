@@ -26,7 +26,7 @@ class gameSetupTests {
 		board.initialize();
 	}
 	
-	//@Test
+	@Test
 	public void testPlayers() {
 		Set<Player> players = board.getPlayers();
 		
