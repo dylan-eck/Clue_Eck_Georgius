@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
@@ -18,6 +19,8 @@ public class Board {
 	private Set<Room> rooms;
 	private char hallwayLetter;
 	public final char UNREACHABLE = 'X';
+	
+	private Set<Player> players;
 	
 	private static Board theInstance = new Board();
 	
@@ -87,11 +90,13 @@ public class Board {
 			String lineInSplit[] = lineIn.split(",");
 			
 			if(lineIn.charAt(0)!='/') {
-				if(!lineInSplit[0].equals("Room") && !lineInSplit[0].equals("Space")) {
+				if(!lineInSplit[0].equals("Room") && !lineInSplit[0].equals("Space")&& !lineInSplit[0].equals("Player")&& !lineInSplit[0].equals("Weapon")) {
 					throw new BadConfigFormatException(setupFileName);
 				}else if(lineInSplit[0].equals("Space") && !lineInSplit[1].equals("Unused")){
 					hallwayLetter = lineInSplit[2].charAt(1);
 					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
+				}else if(lineInSplit[0].equals("Player")) {
+					players.add(new Player(lineInSplit[1],lineInSplit[2],Integer.parseInt(lineInSplit[3]),Integer.parseInt(lineInSplit[4])));
 				}else {
 					//we start at index one because the format files have a space before each word or letter
 					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
@@ -347,5 +352,13 @@ public class Board {
 	
 	public char getHallways() {
 		return hallwayLetter;
+	}
+	
+	public Set<Player> getPlayers(){
+		return players;
+	}
+	
+	public Player getPlayer(Color color) {
+		return null;
 	}
 }
