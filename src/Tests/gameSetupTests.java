@@ -44,7 +44,7 @@ class gameSetupTests {
 	public void testWeapons() {
 		Set<String> weapons = board.getWeapons();
 		
-		assertEquals(weapons,6);
+		assertEquals(weapons.size(),6);
 		assertTrue(weapons.contains("Hand Gun"));
 		assertTrue(weapons.contains("Knife"));
 		assertTrue(weapons.contains("Lead Pipe"));
