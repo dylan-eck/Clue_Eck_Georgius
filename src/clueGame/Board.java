@@ -22,6 +22,7 @@ public class Board {
 	
 	private Set<Player> players;
 	private Set<String> weapons;
+	private Set<Card> cards;
 	
 	private static Board theInstance = new Board();
 	
@@ -39,6 +40,7 @@ public class Board {
 		this.rooms = new HashSet<Room>();
 		this.players = new HashSet<Player>();
 		this.weapons = new HashSet<String>();
+		this.cards = new HashSet<Card>();
 		
 		try {
 			loadSetupConfig();
@@ -378,5 +380,13 @@ public class Board {
 	
 	public Set<String> getWeapons(){
 		return weapons;
+	}
+	
+	public Set<Card> getCards(){
+		return cards;
+	}
+	
+	public Card getCard(String name) {
+		return null;
 	}
 }

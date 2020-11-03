@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
+import clueGame.Card;
 import clueGame.Player;
 
 class gameSetupTests {
@@ -48,6 +49,23 @@ class gameSetupTests {
 		assertTrue(weapons.contains("Hand Gun"));
 		assertTrue(weapons.contains("Knife"));
 		assertTrue(weapons.contains("Lead Pipe"));
+	}
+	
+	@Test
+	public void testCards() {
+		Set<Card> cards = board.getCards(); 
+		
+		assertEquals(cards.size(),21);
+		assertTrue(cards.contains(board.getCard("Hand Gun")));
+		assertTrue(cards.contains(board.getCard("Rope")));
+		assertTrue(cards.contains(board.getCard("Candlestick")));
+		assertTrue(cards.contains(board.getCard("Kitchen")));
+		assertTrue(cards.contains(board.getCard("Bathroom")));
+		assertTrue(cards.contains(board.getCard("Garden")));
+		assertTrue(cards.contains(board.getCard("Office")));
+		assertTrue(cards.contains(board.getCard("Mrs. White")));
+		assertTrue(cards.contains(board.getCard("Miss Scarlett")));
+		assertTrue(cards.contains(board.getCard("Professor Plum")));
 	}
 
 }
