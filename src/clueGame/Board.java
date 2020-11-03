@@ -108,11 +108,11 @@ public class Board {
 						players.add(new ComputerPlayer(lineInSplit[1],lineInSplit[2],Integer.parseInt(lineInSplit[3]),Integer.parseInt(lineInSplit[4])));
 					}
 				}else if(lineInSplit[0].equals("Weapon")){
-					makeCard(lineInSplit[1],"Person");
+					makeCard(lineInSplit[1],"Weapon");
 					weapons.add(lineInSplit[1]);
 				}else {
 					//we start at index one because the format files have a space before each word or letter
-					makeCard(lineInSplit[1].substring(1),"Person");
+					makeCard(lineInSplit[1].substring(1),"Room");
 					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
 				}
 			}
