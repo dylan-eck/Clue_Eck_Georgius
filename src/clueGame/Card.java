@@ -19,6 +19,17 @@ public class Card {
 		}
 	}
 	
+	@Override
+	public String toString() {
+		return "Card [name=" + name + "]";
+	}
+
+	public boolean equals(Card target) {
+		
+		return this.name == target.getName();
+		
+	}
+	
 	public String getName() {
 		return name;
 	}

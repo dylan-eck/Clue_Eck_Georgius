@@ -37,7 +37,9 @@ public class Board {
 		super();
 	}
 	
-	// set up the game board
+	/*
+	 * 
+	 */
 	public void initialize() {
 		
 		this.rooms = new HashSet<Room>();
@@ -65,7 +67,7 @@ public class Board {
 		removableDeck = new HashSet<Card>(deck);
 		solution = new Solution();
 		setSolution();
-		setPlayerHands();
+		deal();
 	}
 	
 	/**
@@ -445,7 +447,7 @@ public class Board {
 		removableDeck.remove(temp);
 	}
 	
-	public void setPlayerHands() {
+	public void deal() {
 		for(Player p:players) {
 			//stops when all the cards have been delt out
 			if(removableDeck.size()==0)
@@ -457,7 +459,7 @@ public class Board {
 		//I'm using a recursive call in case we have to add a mode with less that 6 players 
 		//this method should still deal one card to each player till the deck is empty.
 		if(removableDeck.size()!=0) {
-			setPlayerHands();
+			deal();
 		}
 	}
 	

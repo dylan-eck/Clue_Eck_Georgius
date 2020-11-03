@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -108,14 +109,20 @@ class gameSetupTests {
 	}
 	
 	//Makes sure that the players all get random hands with no repeats
-	//@Test
+	@Test
 	public void testPlayerHands() {
 		Set<Player> players = board.getPlayers();
 		
 		//test 1000 random cards against another 1000 random cards in other players hands
 		for(int i = 0;i<=1000;i++) {
-			Set<Card> hand1 = (getRandomPlayer(players)).getHand();
-			Set<Card> hand2 = (getRandomPlayer(players)).getHand();
+			Player player1 = getRandomPlayer(players);
+			Player player2 = getRandomPlayer(players);
+			while(player2 == player1) {
+				player2 = getRandomPlayer(players);
+			}
+			
+			Set<Card> hand1 = player1.getHand();
+			Set<Card> hand2 = player2.getHand();
 			
 			Card card1 = getRandomCard(hand1);
 			Card card2 = getRandomCard(hand2);
@@ -138,15 +145,15 @@ class gameSetupTests {
 	}
 	
 	//helper function for the above test
-		private Card getRandomCard(Set<Card> h) {
-			Random r = new Random();
-			int iter2 = r.nextInt(h.size());
-			int i = 0;
-			for(Card temp:h) {
-				if(i == iter2) 
-					return temp;
-				i++;
-			}
-			return null;
+	private Card getRandomCard(Set<Card> h) {
+		Random r = new Random();
+		int iter2 = r.nextInt(h.size());
+		int i = 0;
+		for(Card temp:h) {
+			if(i == iter2) 
+				return temp;
+			i++;
 		}
+		return null;
+	}
 }
