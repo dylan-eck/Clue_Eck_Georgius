@@ -40,6 +40,14 @@ class gameSetupTests {
 		assertTrue(players.contains(red));
 	}
 	
-	
+	@Test
+	public void testWeapons() {
+		Set<String> weapons = board.getWeapons();
+		
+		assertEquals(weapons,6);
+		assertTrue(weapons.contains("Hand Gun"));
+		assertTrue(weapons.contains("Knife"));
+		assertTrue(weapons.contains("Lead Pipe"));
+	}
 
 }

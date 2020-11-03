@@ -11,10 +11,17 @@ Room, Court Yard, C
 // other spaces on board
 Space, Unused, X
 Space, Hallway, H
-// the charecters
+// the Players
 Player,Miss Scarlett,Red,8,0,H
 Player,Reverend Green,Green,16,0,C
 Player,Colonel Mustard,Yellow,24,7,C
 Player,Professor Plum,Purple,17,24,C
 Player,Mrs. Peacock,Blue,7,24,C
 Player,Mrs. White,White,0,17,C
+// the Weapons
+Weapon,Hand Gun
+Weapon,Rope
+Weapon,Lead Pipe
+Weapon,Candlestick
+Weapon,Wrench
+Weapon,Knife

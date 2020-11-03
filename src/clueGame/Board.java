@@ -21,6 +21,7 @@ public class Board {
 	public final char UNREACHABLE = 'X';
 	
 	private Set<Player> players;
+	private Set<String> weapons;
 	
 	private static Board theInstance = new Board();
 	
@@ -37,6 +38,7 @@ public class Board {
 		
 		this.rooms = new HashSet<Room>();
 		this.players = new HashSet<Player>();
+		this.weapons = new HashSet<String>();
 		
 		try {
 			loadSetupConfig();
@@ -103,6 +105,8 @@ public class Board {
 					}else {	
 						players.add(new ComputerPlayer(lineInSplit[1],lineInSplit[2],Integer.parseInt(lineInSplit[3]),Integer.parseInt(lineInSplit[4])));
 					}
+				}else if(lineInSplit[0].equals("Weapon")){
+					
 				}else {
 					//we start at index one because the format files have a space before each word or letter
 					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
@@ -371,5 +375,9 @@ public class Board {
 			}
 		}
 		return null;
+	}
+	
+	public Set<String> getWeapons(){
+		return weapons;
 	}
 }
