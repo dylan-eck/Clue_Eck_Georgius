@@ -1,11 +1,14 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.HashSet;
+import java.util.Set;
 public abstract class Player {
 
 	private String name;
 	private Color color;
 	private int[] location;
+	private Set<Card> hand;
 	
 	public Player(String name,String color,int x,int y) throws BadConfigFormatException {
 		location = new int[2];
@@ -28,6 +31,8 @@ public abstract class Player {
 		}else {
 			throw new BadConfigFormatException();
 		}
+		
+		hand = new HashSet<Card>();
 	}
 	
 	public Color getColor() {
@@ -36,5 +41,13 @@ public abstract class Player {
 	
 	public String toString() {
 		return name + ": " + color + ", @ " + "("+location[0]+","+location[1]+")";
+	}
+	
+	public void set1Card(Card c) {
+		hand.add(c);
+	}
+	
+	public Set<Card> getHand(){
+		return hand;
 	}
 }

@@ -23,6 +23,7 @@ public class Board {
 	private Set<Player> players;
 	private Set<String> weapons;
 	private Set<Card> deck;
+	private Set<Card> removableDeck;
 	
 	private static Board theInstance = new Board();
 	

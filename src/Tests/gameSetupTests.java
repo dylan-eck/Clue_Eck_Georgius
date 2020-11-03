@@ -3,6 +3,7 @@ package Tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
+import java.util.Random;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -28,6 +29,7 @@ class gameSetupTests {
 		board.initialize();
 	}
 	
+	//Tests that the players are properly loaded
 	@Test
 	public void testPlayers() {
 		Set<Player> players = board.getPlayers();
@@ -42,6 +44,7 @@ class gameSetupTests {
 		assertTrue(players.contains(red));
 	}
 	
+	//Tests that the weapons are properly loaded
 	@Test
 	public void testWeapons() {
 		Set<String> weapons = board.getWeapons();
@@ -52,6 +55,7 @@ class gameSetupTests {
 		assertTrue(weapons.contains("Lead Pipe"));
 	}
 	
+	//Tests that the deck is created
 	@Test
 	public void testCards() {
 		Set<Card> cards = board.getCards(); 
@@ -69,6 +73,7 @@ class gameSetupTests {
 		assertTrue(cards.contains(board.getCard("Professor Plum")));
 	}
 	
+	//Tests that the cards are properly loaded
 	@Test
 	public void testCardTypes() {
 		assertEquals(board.getCard("Knife").getType(),CardType.WEAPON);
@@ -82,4 +87,57 @@ class gameSetupTests {
 		assertEquals(board.getCard("Colonel Mustard").getType(),CardType.PERSON);
 	}
 
+	//Test is the players were assigned a hand of the right size
+	@Test
+	public void testPlayerHand() {
+		Set<Player> players = board.getPlayers();
+		
+		//checks every hand to see if it has 2-3 cards (one will have 2 all others will have 3)
+		for(Player p:players) {
+			assertTrue(p.getHand().size()==3 || p.getHand().size()==2);
+		}
+	}
+	
+	//Makes sure that the players all get random hands with no repeats
+	//@Test
+	public void testPlayerHands() {
+		Set<Player> players = board.getPlayers();
+		
+		//test 1000 random cards against another 1000 random cards in other players hands
+		for(int i = 0;i<=1000;i++) {
+			Set<Card> hand1 = (getRandomPlayer(players)).getHand();
+			Set<Card> hand2 = (getRandomPlayer(players)).getHand();
+			
+			Card card1 = getRandomCard(hand1);
+			Card card2 = getRandomCard(hand2);
+			
+			assertFalse(card1.equals(card2));
+		}
+	}
+	
+	//helper function for the above test
+	private Player getRandomPlayer(Set<Player> p) {
+		Random r = new Random();
+		int iter = r.nextInt(p.size());
+		int i = 0;
+		for(Player temp:p) {
+			if(i == iter) 
+				return temp;
+			i++;
+		}
+		return null;
+	}
+	
+	//helper function for the above test
+		private Card getRandomCard(Set<Card> h) {
+			Random r = new Random();
+			int iter2 = r.nextInt(h.size());
+			int i = 0;
+			for(Card temp:h) {
+				if(i == iter2) 
+					return temp;
+				i++;
+			}
+			return null;
+		}
 }
