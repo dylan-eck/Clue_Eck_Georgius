@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -24,6 +25,7 @@ public class Board {
 	private Set<String> weapons;
 	private Set<Card> deck;
 	private Set<Card> removableDeck;
+	private Solution solution;
 	
 	private static Board theInstance = new Board();
 	
@@ -59,6 +61,11 @@ public class Board {
 		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
+		
+		removableDeck = new HashSet<Card>(deck);
+		solution = new Solution();
+		setSolution();
+		setPlayerHands();
 	}
 	
 	/**
@@ -403,4 +410,59 @@ public class Board {
 		}
 		return null;
 	}
+	
+	public Card getCard() {
+		Random r = new Random();
+		int iter = r.nextInt(removableDeck.size());
+		int i = 0;
+		for(Card temp:removableDeck) {
+			if(i == iter) {
+				return temp;
+			}
+			i++;
+		}
+		return null;
+	}
+	
+	public void setSolution(){
+		Card temp = getCard();
+		//Not the most efficient way since it's chosing randomly until it finds the type it wants 
+		//but it should work on such a small set with reativly even numbers of each type
+		while(temp.getType()!=CardType.PERSON) {
+			temp = getCard();
+		}
+		solution.setPerson(temp);
+		removableDeck.remove(temp);
+		while(temp.getType()!=CardType.WEAPON) {
+			temp = getCard();
+		}
+		solution.setWeapon(temp);
+		removableDeck.remove(temp);
+		while(temp.getType()!=CardType.ROOM) {
+			temp = getCard();
+		}
+		solution.setRoom(temp);
+		removableDeck.remove(temp);
+	}
+	
+	public void setPlayerHands() {
+		for(Player p:players) {
+			//stops when all the cards have been delt out
+			if(removableDeck.size()==0)
+				break;
+			Card temp = getCard();
+			removableDeck.remove(temp);
+			p.set1Card(temp);
+		}
+		//I'm using a recursive call in case we have to add a mode with less that 6 players 
+		//this method should still deal one card to each player till the deck is empty.
+		if(removableDeck.size()!=0) {
+			setPlayerHands();
+		}
+	}
+	
+	public Solution getSolution() {
+		return solution;
+	}
+	
 }

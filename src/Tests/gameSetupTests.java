@@ -1,5 +1,6 @@
 package Tests;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
@@ -89,8 +90,16 @@ class gameSetupTests {
 
 	//Test is the players were assigned a hand of the right size
 	@Test
-	public void testPlayerHand() {
+	public void testPlayerHandSizeAndSolution() {
 		Set<Player> players = board.getPlayers();
+		
+		Card weapon = board.getSolution().getWeapon();
+		Card room = board.getSolution().getRoom();
+		Card person = board.getSolution().getPerson();
+		
+		assertEquals(weapon.getType(),CardType.WEAPON);
+		assertEquals(room.getType(),CardType.ROOM);
+		assertEquals(person.getType(),CardType.PERSON);
 		
 		//checks every hand to see if it has 2-3 cards (one will have 2 all others will have 3)
 		for(Player p:players) {
