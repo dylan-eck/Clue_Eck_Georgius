@@ -2,6 +2,10 @@ package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.awt.Color;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -24,16 +28,21 @@ class AccusationSuggestionTest {
 	}
 	
 	@Test
-	void correctAcusationTest() {
-		 Card personAns = board.getSolution().getPerson();
-		 Card weaponAns = board.getSolution().getWeapon();
-		 Card roomAns = board.getSolution().getRoom();
+	void AcusationTest() {
+		 board.getSolution().setPerson(board.getCard("Mrs. White"));
+		 board.getSolution().setWeapon(board.getCard("Knife"));
+		 board.getSolution().setRoom(board.getCard("Office"));
 		 
-		 Card personGus = board.getCard(personAns.getName());
-		 Card weaponGus = board.getCard(weaponAns.getName());
-		 Card roomGus = board.getCard(roomAns.getName());
+		 Card personGus = board.getCard("Mrs. White");
+		 Card weaponGus = board.getCard("Knife");
+		 Card roomGus = board.getCard("Office");
+		 
+		 Card personWrong = board.getCard("Miss Scarlett");
+		 Card weaponWrong = board.getCard("Hand Gun");
+		 Card roomWrong = board.getCard("Bathroom");
 		 
 		 assertTrue(board.checkAccusation(personGus,weaponGus,roomGus));
+		 assertFalse(board.checkAccusation(personWrong,weaponWrong,roomWrong));
 	}
 
 }
