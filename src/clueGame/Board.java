@@ -469,4 +469,12 @@ public class Board {
 		return solution;
 	}
 	
+	public boolean checkAccusation(Card person, Card weapon, Card room) {
+		/*if(person.equals(solution.getPerson())&&weapon.equals(solution.getWeapon())&&room.equals(solution.getRoom()))
+			return true;
+		else
+			return false;
+		*/
+		return false;
+	}
 }
