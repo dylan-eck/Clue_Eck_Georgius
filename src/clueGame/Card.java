@@ -20,8 +20,7 @@ public class Card {
 	}
 
 	public boolean equals(Card target) {
-		
-		return this.name == target.getName();
+		return this.name.equals(target.getName());
 		
 	}
 	

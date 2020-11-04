@@ -16,6 +16,14 @@ class AccusationSuggestionTest {
 
 	private static Board board;
 	
+	private static Card personGus;
+	private static Card weaponGus;
+	private static Card roomGus;
+	
+	private static Card personWrong;
+	private static Card weaponWrong;
+	private static Card roomWrong;
+	
 	@BeforeAll
 	static void makeBoard() {
 		//The same as the setup for the previous tests but with our setUp files
@@ -25,24 +33,32 @@ class AccusationSuggestionTest {
 		board.setConfigFiles("ClueLayout.csv","ClueSetup.txt");
 		// Initialize will load BOTH config files
 		board.initialize();
+		 
+		 personGus = new Card("Mrs. White","Person");
+		 weaponGus = new Card("Knife","Weapon");
+		 roomGus = new Card("Office","Room");
+		 
+		 personWrong = new Card("Miss Scarlett","Person");
+		 weaponWrong = new Card("Hand Gun","Weapon");
+		 roomWrong = new Card("Bathroom","Room");
 	}
 	
 	@Test
-	void AcusationTest() {
+	void AcusationTest() {		
 		 board.getSolution().setPerson(board.getCard("Mrs. White"));
 		 board.getSolution().setWeapon(board.getCard("Knife"));
 		 board.getSolution().setRoom(board.getCard("Office"));
-		 
-		 Card personGus = board.getCard("Mrs. White");
-		 Card weaponGus = board.getCard("Knife");
-		 Card roomGus = board.getCard("Office");
-		 
-		 Card personWrong = board.getCard("Miss Scarlett");
-		 Card weaponWrong = board.getCard("Hand Gun");
-		 Card roomWrong = board.getCard("Bathroom");
-		 
+		
 		 assertTrue(board.checkAccusation(personGus,weaponGus,roomGus));
 		 assertFalse(board.checkAccusation(personWrong,weaponWrong,roomWrong));
+		 assertFalse(board.checkAccusation(personWrong,weaponGus,roomGus));
+		 assertFalse(board.checkAccusation(personGus,weaponWrong,roomGus));
+		 assertFalse(board.checkAccusation(personWrong,weaponGus,roomWrong));
+	}
+	
+	//@Test
+	void SuggestionTest() {
+		
 	}
 
 }
