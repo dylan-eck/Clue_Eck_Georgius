@@ -349,7 +349,7 @@ public class Board {
 			//stops when all the cards have been delt out
 			if(removableDeck.size()==0)
 				break;
-			Card temp = getCard();
+			Card temp = getRandomCard();
 			removableDeck.remove(temp);
 			p.addCard(temp);
 		}
@@ -358,6 +358,16 @@ public class Board {
 		if(removableDeck.size()!=0) {
 			deal();
 		}
+	}
+	
+	//This function is mostly used for resetting without having to call initialize 
+	public void redeal() {
+		removableDeck = new HashSet<Card>(deck);
+		removableDeck.remove(solution.getPerson());
+		removableDeck.remove(solution.getRoom());
+		removableDeck.remove(solution.getWeapon());
+		
+		deal();
 	}
 	
 	public int getNumRows() {
@@ -431,7 +441,7 @@ public class Board {
 		return null;
 	}
 	
-	public Card getCard() {
+	public Card getRandomCard() {
 		Random r = new Random();
 		int iter = r.nextInt(removableDeck.size());
 		int i = 0;
@@ -445,21 +455,21 @@ public class Board {
 	}
 	
 	public void setSolution(){
-		Card temp = getCard();
+		Card temp = getRandomCard();
 		//Not the most efficient way since it's chosing randomly until it finds the type it wants 
 		//but it should work on such a small set with reativly even numbers of each type
 		while(temp.getType()!=CardType.PERSON) {
-			temp = getCard();
+			temp = getRandomCard();
 		}
 		solution.setPerson(temp);
 		removableDeck.remove(temp);
 		while(temp.getType()!=CardType.WEAPON) {
-			temp = getCard();
+			temp = getRandomCard();
 		}
 		solution.setWeapon(temp);
 		removableDeck.remove(temp);
 		while(temp.getType()!=CardType.ROOM) {
-			temp = getCard();
+			temp = getRandomCard();
 		}
 		solution.setRoom(temp);
 		removableDeck.remove(temp);
@@ -474,5 +484,10 @@ public class Board {
 			return true;
 		else
 			return false;
+	}
+
+	public Object handleSuggestion(Card person, Card weapon, Card room) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

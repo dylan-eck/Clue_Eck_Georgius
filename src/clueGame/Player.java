@@ -45,6 +45,11 @@ public abstract class Player {
 		return hand;
 	}
 	
+	//This is a function that probably won't be used latter but it helps a lot for testing suggestions
+	public void clearHand() {
+		hand = new HashSet<Card>();
+	}
+	
 	public String toString() {
 		return name + ": " + color + ", @ " + "("+location[0]+","+location[1]+")";
 	}
