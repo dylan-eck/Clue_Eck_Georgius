@@ -72,7 +72,7 @@ class AccusationSuggestionTest {
 	}
 	
 	@Test
-	void SuggestionTest() {
+	void SuggestionTestPlayers() {
 		Set<Player> players = board.getPlayers();
 		for(Player p:players) {
 			p.clearHand();
@@ -86,13 +86,16 @@ class AccusationSuggestionTest {
 		
 		//I want to return both the card and the person returning but I'm not sure how to do it yet
 		//+ the thing that I wanted to use it for is hella complicated so probably won't do it
-		assertEquals(board.handleSuggestion(missScarlett,knife,office),missScarlett);
-		assertEquals(board.handleSuggestion(mrsWhite,handGun,bathroom),handGun);
-		assertEquals(board.handleSuggestion(mrsWhite,knife,bathroom),bathroom);
-		assertTrue(board.handleSuggestion(mrsWhite,handGun,movieTheater).equals(handGun)||board.handleSuggestion(mrsWhite,handGun,movieTheater).equals(movieTheater));
-		assertEquals(board.handleSuggestion(mrsWhite,knife,office),null);
+		assertEquals(board.getPlayer(Color.BLUE).disproveSuggestion(missScarlett,knife,office),missScarlett);
+		assertEquals(board.getPlayer(Color.YELLOW).disproveSuggestion(mrsWhite,handGun,bathroom),handGun);
+		assertEquals(board.getPlayer(Color.RED).disproveSuggestion(mrsWhite,knife,bathroom),bathroom);
+		assertTrue(board.getPlayer(Color.YELLOW).disproveSuggestion(mrsWhite,handGun,movieTheater).equals(handGun)||board.getPlayer(Color.YELLOW).disproveSuggestion(mrsWhite,handGun,movieTheater).equals(movieTheater));
+		assertEquals(board.getPlayer(Color.YELLOW).disproveSuggestion(mrsWhite,knife,office),null);
+		assertEquals(board.getPlayer(Color.RED).disproveSuggestion(mrsWhite,knife,office),null);
 	}
 	
-	//@Test
-	//void 
+	@Test
+	void SuggestionTestBoard() {
+		
+	}
 }
