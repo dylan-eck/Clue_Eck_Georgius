@@ -487,7 +487,30 @@ public class Board {
 	}
 
 	public Object handleSuggestion(Card person, Card weapon, Card room) {
-		// TODO Auto-generated method stub
+		//We don't return imediatly in case we have to randomly return a card from someones hand
+		Set<Card> potentialReturns = new HashSet<Card>();
+		for(Player p:players) {
+			Set<Card> hand = p.getHand();
+			if(hand.contains(person)) {
+				potentialReturns.add(person);
+			}else if(hand.contains(weapon)) {
+				potentialReturns.add(weapon);
+			}else if(hand.contains(room)) {
+				potentialReturns.add(room);
+			}
+	
+			if(potentialReturns.size()>0) {
+				Random random = new Random();
+				int iter = random.nextInt(potentialReturns.size());
+				int i = 0;
+				for(Card c:potentialReturns) {
+					if(i==iter) {
+						return c;
+					}
+				i++;
+				}
+			}
+		}
 		return null;
 	}
 }
