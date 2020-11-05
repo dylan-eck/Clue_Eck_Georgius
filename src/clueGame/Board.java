@@ -22,8 +22,7 @@ public class Board {
 	public final char UNREACHABLE = 'X';
 	
 	private Set<Player> players;
-	private Set<String> weapons;
-	private Set<Card> deck, removableDeck;
+	private Set<Card> deck, removableDeck,weapons;
 	private Solution solution;
 	
 	private static Board theInstance = new Board();
@@ -43,7 +42,7 @@ public class Board {
 		
 		this.rooms = new HashSet<Room>();
 		this.players = new HashSet<Player>();
-		this.weapons = new HashSet<String>();
+		this.weapons = new HashSet<Card>();
 		this.deck = new HashSet<Card>();
 		
 		try {
@@ -118,7 +117,7 @@ public class Board {
 					}
 				}else if(lineInSplit[0].equals("Weapon")){
 					makeCard(lineInSplit[1],"Weapon");
-					weapons.add(lineInSplit[1]);
+					weapons.add(new Card(lineInSplit[1],"Weapon"));
 				}else {
 					//we start at index one because the format files have a space before each word or letter
 					makeCard(lineInSplit[1].substring(1),"Room");
@@ -424,7 +423,7 @@ public class Board {
 		return null;
 	}
 	
-	public Set<String> getWeapons(){
+	public Set<Card> getWeapons(){
 		return weapons;
 	}
 	

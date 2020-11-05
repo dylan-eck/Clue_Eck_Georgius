@@ -18,10 +18,15 @@ public class Card {
 			System.out.println("I don't know how you got here. Undo whatever you just did or your computer is liable to self destruct in 5 seconds.");
 		}
 	}
-
-	public boolean equals(Card target) {
-		return this.name.equals(target.getName());
-		
+	
+	@Override
+	public boolean equals(Object target) {
+		if (target == null) return false;
+	    if (target == this) return true;
+		if (!(target instanceof Card)) return false;
+		Card cardTarget = (Card) target;
+		if(cardTarget.getName().equals(this.name)) return true;
+		return false;
 	}
 	
 	public String getName() {
