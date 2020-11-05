@@ -490,9 +490,11 @@ public class Board {
 		//We don't return imediatly in case we have to randomly return a card from someones hand
 		
 		for(Player p:players) {
-			Card disproved = p.disproveSuggestion(person, weapon, room);
-			if(disproved!=null) {
-				return disproved;
+			if(!(p.equals(guesser))) {
+				Card disproved = p.disproveSuggestion(person, weapon, room);
+				if(disproved!=null) {
+					return disproved;
+				}
 			}
 		}
 		return null;
