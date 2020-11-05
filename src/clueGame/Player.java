@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public abstract class Player {
@@ -52,5 +53,31 @@ public abstract class Player {
 	
 	public String toString() {
 		return name + ": " + color + ", @ " + "("+location[0]+","+location[1]+")";
+	}
+	
+	public Card disproveSuggestion(Card person, Card weapon, Card room) {
+		Set<Card> potentialReturns = new HashSet<Card>();
+
+		if(hand.contains(person)) {
+			potentialReturns.add(person);
+		}else if(hand.contains(weapon)) {
+			potentialReturns.add(weapon);
+		}else if(hand.contains(room)) {
+			potentialReturns.add(room);
+		}
+
+		if(potentialReturns.size()>0) {
+			Random random = new Random();
+			int iter = random.nextInt(potentialReturns.size());
+			int i = 0;
+			for(Card c:potentialReturns) {
+				if(i==iter) {
+					return c;
+				}
+			i++;
+			}
+		}
+		
+		return null;
 	}
 }

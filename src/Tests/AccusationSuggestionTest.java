@@ -78,7 +78,7 @@ class AccusationSuggestionTest {
 			p.clearHand();
 		}
 		
-		//Order checked is Peacock, Mustard, Scarlet
+		//Order checked is White, Plum, Peacock, Mustard, Green, Scarlet
 		board.getPlayer(Color.YELLOW).addCard(handGun);
 		board.getPlayer(Color.YELLOW).addCard(movieTheater);
 		board.getPlayer(Color.RED).addCard(bathroom);
@@ -92,4 +92,7 @@ class AccusationSuggestionTest {
 		assertTrue(board.handleSuggestion(mrsWhite,handGun,movieTheater).equals(handGun)||board.handleSuggestion(mrsWhite,handGun,movieTheater).equals(movieTheater));
 		assertEquals(board.handleSuggestion(mrsWhite,knife,office),null);
 	}
+	
+	//@Test
+	//void 
 }
