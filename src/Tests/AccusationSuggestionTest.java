@@ -96,6 +96,21 @@ class AccusationSuggestionTest {
 	
 	@Test
 	void SuggestionTestBoard() {
+		Set<Player> players = board.getPlayers();
+		for(Player p:players) {
+			p.clearHand();
+		}
 		
+		//Order checked is White, Plum, Peacock, Mustard, Green, Scarlet
+		board.getPlayer(Color.YELLOW).addCard(handGun);
+		board.getPlayer(Color.YELLOW).addCard(movieTheater);
+		board.getPlayer(Color.RED).addCard(bathroom);
+		board.getPlayer(Color.BLUE).addCard(missScarlett);
+		
+		assertEquals(board.handleSuggestion(mrsWhite, handGun, bathroom ,board.getPlayer(Color.YELLOW)),bathroom);
+		assertEquals(board.handleSuggestion(mrsWhite, handGun, office ,board.getPlayer(Color.YELLOW)),null);
+		assertEquals(board.handleSuggestion(missScarlett, handGun, office ,board.getPlayer(Color.YELLOW)),missScarlett);
+		assertEquals(board.handleSuggestion(missScarlett, handGun, bathroom,board.getPlayer(Color.BLUE)),handGun);
+		assertEquals(board.handleSuggestion(missScarlett, handGun, bathroom,board.getPlayer(Color.RED)),handGun);
 	}
 }

@@ -486,7 +486,7 @@ public class Board {
 			return false;
 	}
 
-	public Object handleSuggestion(Card person, Card weapon, Card room) {
+	public Object handleSuggestion(Card person, Card weapon, Card room, Player guesser) {
 		//We don't return imediatly in case we have to randomly return a card from someones hand
 		
 		for(Player p:players) {
