@@ -1,6 +1,6 @@
 package clueGame;
 
-public class Card {
+public class Card implements Comparable{
 
 	private String name;
 	private CardType type;
@@ -40,5 +40,13 @@ public class Card {
 	@Override
 	public String toString() {
 		return "Card [" + name + "]";
+	}
+
+	@Override
+	public int compareTo(Object target) {
+		if(this.equals(target)) {
+			return 0;
+		}
+		return 1;
 	}
 }

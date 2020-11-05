@@ -19,6 +19,10 @@ import clueGame.Player;
 class gameSetupTests {
 
 	private static Board board;
+	private static Set<Card> weapons;
+	private static Card handGun;
+	private static Card knife;
+	private static Card leadPipe;
 	
 	@BeforeAll
 	static void makeBoard() {
@@ -29,6 +33,14 @@ class gameSetupTests {
 		board.setConfigFiles("ClueLayout.csv","ClueSetup.txt");
 		// Initialize will load BOTH config files
 		board.initialize();
+		
+		weapons = board.getWeapons();
+		
+		for(Card c:weapons){
+			if(c.getName().equals("Hand Gun")) handGun = c;
+			if(c.getName().equals("Knife")) knife = c;
+			if(c.getName().equals("Lead Pipe")) leadPipe = c;
+		}
 	}
 	
 	//Tests that the players are properly loaded
@@ -49,25 +61,14 @@ class gameSetupTests {
 	//Tests that the weapons are properly loaded
 	@Test
 	public void testWeapons() {
-		Set<Card> weapons = board.getWeapons();
-		
-
-		Card handGun = new Card("Hand Gun","Weapon");
-		Card knife = new Card("Knife","Weapon");
-		Card leadPipe = new Card("Lead Pipe","Weapon");
 
 		assertEquals(weapons.size(),6);
-		for(Card c:weapons){
-			if(c.equals(handGun)) System.out.println("Here's the fucking hand gun");
-			if(c.equals(knife)) System.out.println("Here's the fucking knife");
-			if(c.equals(leadPipe)) System.out.println("Here's the fucking leadpipe");
-		}//contains doesn't work. tried rewritting the overiding equals.
+		//contains doesn't work. tried rewritting the overiding equals.
 		//nothing worked. Above is profe that that handgun is in the set but contains refuses t acknowledge that.
 		
-		/*assertTrue(weapons.contains(handGun));
+		assertTrue(weapons.contains(handGun));
 		assertTrue(weapons.contains(knife));
 		assertTrue(weapons.contains(leadPipe));
-		*/
 	}
 	
 	//Tests that the deck is created

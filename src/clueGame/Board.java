@@ -22,7 +22,7 @@ public class Board {
 	public final char UNREACHABLE = 'X';
 	
 	private Set<Player> players;
-	private Set<Card> deck, removableDeck,weapons;
+	private Set<Card> deck, removableDeck,weapons,players2,rooms2;
 	private Solution solution;
 	
 	private static Board theInstance = new Board();
