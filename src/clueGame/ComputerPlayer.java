@@ -1,6 +1,11 @@
 package clueGame;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ComputerPlayer extends Player{
+	
+	private Set<Card> seen;
 
 	public ComputerPlayer(String name, String color, int x, int y) throws BadConfigFormatException {
 		super(name, color, x, y);
@@ -13,5 +18,10 @@ public class ComputerPlayer extends Player{
 	public BoardCell selectTargets() {
 		return null;
 	}
+	
+	public Set<Card> getSeen() {
+		return new HashSet<Card>();
+	}
+	
 	
 }
