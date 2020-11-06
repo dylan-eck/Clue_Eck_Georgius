@@ -6,4 +6,12 @@ public class ComputerPlayer extends Player{
 		super(name, color, x, y);
 	}
 
+	public Solution createSuggestion() {
+		return null;
+	}
+	
+	public BoardCell selectTargets() {
+		return null;
+	}
+	
 }

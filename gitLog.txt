@@ -1,3 +1,87 @@
+commit 0b7a262d649451d598ce1634226ee4c07ba11cd5
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 2 23:15:56 2020 -0700
+
+    general cleanup, renaming, adding comments
+
+commit ee01b22e9610346e1a70d62487b8b99aefc2dca7
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 2 23:03:23 2020 -0700
+
+    got testPlayerHands to pass
+
+commit 0377754c8cc65c5c2901a0c7ab5654f82ce54bfc
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 2 21:27:25 2020 -0700
+
+    Passed the test for the hand size and solution. (The test was pushed in the last commit but it was mislabeld
+
+commit a620405922e821a6fe3a9a24d8fc0481b457afb5
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 2 20:54:31 2020 -0700
+
+    Passed all CardType tests
+
+commit 0f4d5d5f688d9252f44340fc4a2ab40962df37b9
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 2 20:06:50 2020 -0700
+
+    Passed all CardType tests
+
+commit 6113f41f710e60aa1b7f55177b995c88fb85866f
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 2 20:03:17 2020 -0700
+
+    Created test for testing CardType
+
+commit dfe16ea8ce1ac5ac21ceb17301a17221f090ba85
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 2 19:56:49 2020 -0700
+
+    Passed the initial card test
+
+commit 8cb4315181f220e3fa7f2db505858fcce991fab2
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 2 19:44:06 2020 -0700
+
+    Outlined the Card, CardType and Solution classes. Wrote the test for the cards.
+
+commit aa5867077c6c8dcb904abc976fb7c43dd4f28ceb
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 2 19:15:33 2020 -0700
+
+    Made testWeapons pass
+
+commit ab14acb03bc97fab409cbb981554bdb30a5ead9e
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 2 19:13:43 2020 -0700
+
+    Added test for weapons
+
+commit f2226864301704b17304e56c56ca7a6e10ded7b6
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 2 19:03:31 2020 -0700
+
+    testing players initiation passed
+
+commit e1674a48cd48d4a27aba162a5eeaaa237419a88c
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 2 17:48:08 2020 -0700
+
+    Failed test that checkes players were initialized
+
+commit 640c9091258c8c14aac4dee65a970f7ad38b1837
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Sun Nov 1 09:59:25 2020 -0700
+
+    added Player, HumanPlayer, and ComputerPlayer class skeletons
+
+commit 6375ede148f3139e47725351d3373d16dd8c75b8
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Sun Nov 1 09:52:49 2020 -0700
+
+    added gameSetupTests skeleton
+
 commit b7e9c1cc95215494d5ce18b00fbd8e07278e8ad1
 Author: rlord222 <63765345+rlord222@users.noreply.github.com>
 Date:   Fri Oct 30 18:33:30 2020 -0600

@@ -182,7 +182,7 @@ class BoardTestExp {
 	}
 	
 	// Make sure the player cannot move onto occupied squares
-	//@Test
+	@Test
 	void testCalcTargetsOccupied() {
 		TestBoardCell testUnit = testing.getCell(0, 0);
 		testing.getCell(2, 1).setOccupied(true);
