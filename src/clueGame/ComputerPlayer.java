@@ -19,6 +19,10 @@ public class ComputerPlayer extends Player{
 		return null;
 	}
 	
+	public void addToSeen(Card card) {
+		seen.add(card);
+	}
+	
 	public Set<Card> getSeen() {
 		return new HashSet<Card>();
 	}
