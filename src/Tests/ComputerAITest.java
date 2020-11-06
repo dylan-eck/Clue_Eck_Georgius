@@ -10,9 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
+import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.ComputerPlayer;
 import clueGame.Player;
+import clueGame.Room;
 import clueGame.Solution;
 
 class ComputerAITest {
@@ -23,11 +25,7 @@ class ComputerAITest {
 	private static Card knife;
 	private static Card office;
 	
-	private static Card missScarlett;
-	private static Card handGun;
-	private static Card bathroom;
-	
-	private static Card movieTheater;
+	private static int[][] testLocations = {{3,1},{3,12},{12,12},{21,22}};
 	
 	@BeforeAll
 	static void setup() {
@@ -35,16 +33,30 @@ class ComputerAITest {
 		board.setConfigFiles("ClueLayout.csv","ClueSetup.txt");
 		board.initialize();	
 		
+		// test cards
 		mrsWhite = board.getCard("Mrs. White");
 		knife = board.getCard("Knife");
 		office = board.getCard("Office");
+		
 		 
 	}
 
 	@Test
+	// make sure that the room given in the suggestion matches the room that the computer is currently in
 	void testRoomMatchesCurrentLocation() {
-		fail("Not yet implemented");
-		
+		ComputerPlayer[] testPlayers = new ComputerPlayer[testLocations.length];
+		try {
+			for(int iterator = 0; iterator < testLocations.length; iterator++) {
+				testPlayers[iterator] = new ComputerPlayer("Miss Scarlet", "Red", testLocations[iterator][0], testLocations[iterator][1]);
+				
+				Solution computerSuggestion = testPlayers[iterator].createSuggestion();
+				BoardCell currentLocation = board.getCell(testPlayers[iterator].getLocation()[0], testPlayers[iterator].getLocation()[1]);
+				Room currentRoom = board.getRoom(currentLocation);
+				assertTrue(computerSuggestion.getRoom().getName() == currentRoom.getName());
+			}
+		} catch (BadConfigFormatException e) {
+			fail("test failed due to BadConfigFormatException");
+		}
 	}
 	
 	@Test

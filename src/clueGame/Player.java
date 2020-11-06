@@ -34,6 +34,10 @@ public abstract class Player {
 		}
 	}
 	
+	public int[] getLocation() {
+		return location;
+	}
+	
 	public Color getColor() {
 		return this.color;
 	}
