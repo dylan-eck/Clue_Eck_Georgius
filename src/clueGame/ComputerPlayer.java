@@ -6,6 +6,7 @@ import java.util.Set;
 public class ComputerPlayer extends Player{
 	
 	private Set<Card> seen;
+	private BoardCell targets;
 
 	public ComputerPlayer(String name, String color, int x, int y) throws BadConfigFormatException {
 		super(name, color, x, y);
