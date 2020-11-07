@@ -30,7 +30,7 @@ public class ComputerPlayer extends Player{
 		allCards = board.getCards();
 		for(Card card : allCards) {
 			if(!this.getHand().contains(card) && !this.seen.contains(card)) {
-				if(card.getType() == CardType.PERSON) {
+				if(card.getType() == CardType.PERSON && card != board.getCard(currentRoom.getName())) {
 					possiblePeople.add(card);
 					
 				} else if(card.getType() == CardType.WEAPON) {
@@ -40,6 +40,7 @@ public class ComputerPlayer extends Player{
 		}
 		
 		// pick a person that isn't the computer's hand and hasn't been seen by the computer
+		//TODO change this (iterating through a HashSet seams like a bad idea)
 		// this code is awful, I know
 		// thats what I get for procrastinating
 		Card personGuess = null;
@@ -85,6 +86,7 @@ public class ComputerPlayer extends Player{
 		
 		int selection = 0;
 		if(!unseenRooms.isEmpty()) {
+			//TODO change this (iterating through a HashSet seams like a bad idea)
 			selection = rand.nextInt(unseenRooms.size());
 			int iterator = 0;
 			for(BoardCell cell : unseenRooms) {
