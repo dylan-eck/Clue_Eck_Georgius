@@ -19,6 +19,13 @@ public class ComputerPlayer extends Player{
 		possibleWeapons = new HashSet<Card>();
 	}
 
+	/**
+	 * This function generates a suggestion for the computer player based what it knows from what 
+	 * has already happened in the current game.
+	 * 
+	 * @param board		-> 	the game board
+	 * @return			-> 	a suggestion as to what the solution might be
+	 */
 	public Solution createSuggestion(Board board) {
 		
 		// use the room that the computer is currently in
@@ -30,7 +37,7 @@ public class ComputerPlayer extends Player{
 		allCards = board.getCards();
 		for(Card card : allCards) {
 			if(!this.getHand().contains(card) && !this.seen.contains(card)) {
-				if(card.getType() == CardType.PERSON && card != board.getCard(currentRoom.getName())) {
+				if(card.getType() == CardType.PERSON) {
 					possiblePeople.add(card);
 					
 				} else if(card.getType() == CardType.WEAPON) {
@@ -68,6 +75,13 @@ public class ComputerPlayer extends Player{
 		return new Solution(roomCard, personGuess, weaponGuess);
 	}
 	
+	/**
+	 * This function picks the cell that the computer will move to next.
+	 * 
+	 * @param board				-> 	the game board
+	 * @param pathLength		->	the distance that the computer player can move
+	 * @return					-> 	a single BoardCell that the computer player would like to move to
+	 */
 	public BoardCell selectTargets(Board board, int pathLength) {
 		
 		BoardCell currentLocation = board.getCell(this.getLocation()[1], this.getLocation()[0]);

@@ -2,7 +2,6 @@ package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +13,6 @@ import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.ComputerPlayer;
-import clueGame.Player;
 import clueGame.Room;
 import clueGame.Solution;
 
