@@ -37,14 +37,12 @@ public class ComputerPlayer extends Player{
 			}
 		}
 		
-		
-		
 		// pick a person that isn't the computer's hand and hasn't been seen by the computer
 		// this code is awful, I know
 		// thats what I get for procrastinating
 		Card personGuess = null;
 		Random rand = new Random();
-		int pos = rand.nextInt(allCards.size());
+		int pos = rand.nextInt(possiblePeople.size());
 		int iterator = 0;
 		for(Card card : possiblePeople) {
 			if(iterator == pos) {
@@ -55,6 +53,7 @@ public class ComputerPlayer extends Player{
 		}
 		// pick a weapon that isn't the computer's hand and hasn't been seen by the computer
 		Card weaponGuess = null;
+		pos = rand.nextInt(possibleWeapons.size());
 		iterator = 0;
 		for(Card card : possibleWeapons) {
 			if(iterator == pos) {
