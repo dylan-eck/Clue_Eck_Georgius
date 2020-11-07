@@ -190,8 +190,6 @@ class ComputerAITest {
 				targets.add(testPlayer.selectTargets(board, 2));
 			}
 			
-			System.out.println(targets);
-			
 			// make sure a room was selected
 			assertTrue(targets.contains(board.getCell(12, 12)) || targets.contains(board.getCell(12, 3)));
 			
