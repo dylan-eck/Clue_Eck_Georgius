@@ -166,12 +166,18 @@ class ComputerAITest {
 		try {
 			
 			testPlayer = new ComputerPlayer("Miss Scarlet", "Red", 17, 16);
-			BoardCell target = testPlayer.selectTargets(board, 3);
-			assertTrue(target.equals(board.getCell(23, 21)));
+			BoardCell target = testPlayer.selectTargets(board, 4);
+			
+			System.out.println(target);
+			
+			assertTrue(target.equals(board.getCell(21, 21)));
 			
 			testPlayer = new ComputerPlayer("Colonel Mustard", "Yellow", 7, 12);
 			testPlayer.addToSeen(board.getCard("Movie Theater"));
 			target = testPlayer.selectTargets(board, 2);
+			
+			System.out.println(target);
+			
 			assertTrue(target.equals(board.getCell(12, 12)));
 			
 		} catch (BadConfigFormatException e) {

@@ -6,6 +6,8 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player{
 	
+	private Random rand = new Random();
+	
 	private Card roomCard;
 	private Set<Card> allCards, seen, possibleWeapons, possiblePeople;
 	
@@ -41,7 +43,6 @@ public class ComputerPlayer extends Player{
 		// this code is awful, I know
 		// thats what I get for procrastinating
 		Card personGuess = null;
-		Random rand = new Random();
 		int pos = rand.nextInt(possiblePeople.size());
 		int iterator = 0;
 		for(Card card : possiblePeople) {
@@ -67,7 +68,44 @@ public class ComputerPlayer extends Player{
 	}
 	
 	public BoardCell selectTargets(Board board, int pathLength) {
-		return new BoardCell(0, 0, 'T', false);
+		
+		BoardCell currentLocation = board.getCell(this.getLocation()[1], this.getLocation()[0]);
+		board.calcTargets(currentLocation, pathLength);
+		Set<BoardCell> targets = board.getTargets();
+		
+		Set<BoardCell> unseenRooms = new HashSet<BoardCell>();
+		for(BoardCell cell : targets) {
+			if(cell.getChar() != 'H' && !seen.contains(board.getCard(board.getRoom(cell).getName()))) {
+				unseenRooms.add(cell);
+			}
+		}
+		
+		BoardCell targetCell = null;
+		
+		int selection = 0;
+		if(!unseenRooms.isEmpty()) {
+			selection = rand.nextInt(unseenRooms.size());
+			int iterator = 0;
+			for(BoardCell cell : unseenRooms) {
+				if(iterator == selection) {
+					targetCell = cell;
+					break;
+				}
+				iterator++;
+			}
+		} else {
+			selection = rand.nextInt(targets.size());
+			int iterator = 0;
+			for(BoardCell cell : targets) {
+				if(iterator == selection) {
+					targetCell = cell;
+					break;
+				}
+				iterator++;
+			}
+		}
+		
+		return targetCell;
 	}
 	
 	public void addToSeen(Card card) {
