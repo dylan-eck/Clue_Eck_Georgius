@@ -12,6 +12,9 @@ import javax.swing.JTextField;
 
 public class GameControlPanel extends JPanel{
 	
+	private static int CONTROL_PANEL_WIDTH = 750;
+	private static int CONTROL_PANEL_HEIGHT = 180;
+	
 	private static final String ACCUSE_BUTTON_TEXT = "Make Accusation";
 	private static final String NEXT_TURN_BUTTON_TEXT = "NEXT!";
 
@@ -35,6 +38,7 @@ public class GameControlPanel extends JPanel{
 		rollPanel.add(rollLabel);
 		rollPanel.add(rollText);
 		
+		// buttons to make accusation and move to the next turn
 		JButton accuseButton = new JButton(ACCUSE_BUTTON_TEXT);
 		JButton nextTurnButton = new JButton(NEXT_TURN_BUTTON_TEXT);
 		
@@ -52,7 +56,7 @@ public class GameControlPanel extends JPanel{
 		GameControlPanel controlPanel = new GameControlPanel();
 		JFrame frame = new JFrame();
 		frame.setContentPane(controlPanel);
-		frame.setSize(750, 180);
+		frame.setSize(CONTROL_PANEL_WIDTH, CONTROL_PANEL_HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		frame.setVisible(true);
 	}
