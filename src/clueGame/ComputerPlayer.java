@@ -66,7 +66,7 @@ public class ComputerPlayer extends Player{
 		return new Solution(roomCard, personGuess, weaponGuess);
 	}
 	
-	public BoardCell selectTargets() {
+	public BoardCell selectTargets(Board board, int pathLength) {
 		return null;
 	}
 	

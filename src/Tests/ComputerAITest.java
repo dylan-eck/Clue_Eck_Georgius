@@ -47,7 +47,7 @@ class ComputerAITest {
 		ComputerPlayer testPlayer;
 		try {
 			
-			testPlayer = new ComputerPlayer("Miss Scarlet", "Red", testLocations[0][1], testLocations[0][0]);
+			testPlayer = new ComputerPlayer("Miss Scarlet", "Red", testLocations[0][0], testLocations[0][1]);
 			
 			Solution computerSuggestion = testPlayer.createSuggestion(board);
 			BoardCell currentLocation = board.getCell(testPlayer.getLocation()[0], testPlayer.getLocation()[1]);
@@ -65,7 +65,7 @@ class ComputerAITest {
 	void testSelectionOneOption() {
 		ComputerPlayer testPlayer;
 		try {
-			testPlayer = new ComputerPlayer("Colonel Mustard", "Yellow", 2, 4);
+			testPlayer = new ComputerPlayer("Colonel Mustard", "Yellow", testLocations[1][0], testLocations[1][1]);
 			
 			// add all cards to seen except mrsWhite and office
 			for(Card card : board.getCards() ) {
@@ -95,7 +95,7 @@ class ComputerAITest {
 	void testSelectionMultipleOptions() {
 		ComputerPlayer testPlayer;
 		try {
-			testPlayer = new ComputerPlayer("Colonel Mustard", "Yellow", 2, 4);
+			testPlayer = new ComputerPlayer("Mrs. White", "White", testLocations[2][0], testLocations[2][1]);
 			
 			testPlayer.addToSeen(mrsWhite);
 			testPlayer.addToSeen(knife);
@@ -117,4 +117,36 @@ class ComputerAITest {
 			fail("test failed due to BadConfigFormatException");
 		}
 	}
+	
+	@Test
+	// test when now targets are unseen rooms
+	void testTargetNoUnseenRooms() {
+		fail();
+	}
+	
+	@Test
+	// test when only one possible target is an unseen room
+	void testTargetSingleUnseenRoom() {
+		ComputerPlayer testPlayer;
+		try {
+			
+			testPlayer = new ComputerPlayer("Miss Scarlet", "Red", 17, 16);
+			BoardCell target = testPlayer.selectTargets(board, 3);
+			assertTrue(target.equals(board.getCell(23, 21)));
+			
+			testPlayer = new ComputerPlayer("Colonel Mustard", "Yellow", 7, 12);
+			testPlayer.addToSeen(board.getCard("Movie Theater"));
+			target = testPlayer.selectTargets(board, 2);
+			
+		} catch (BadConfigFormatException e) {
+			fail("test failed due to BadConfigFormatException");
+		}
+	}
+	
+	@Test 
+	// test when multiple targets are unseen rooms
+	void testTargetMultipleUnseenRooms() {
+		fail();
+	}
+	
 }
