@@ -67,7 +67,7 @@ public class ComputerPlayer extends Player{
 	}
 	
 	public BoardCell selectTargets(Board board, int pathLength) {
-		return null;
+		return new BoardCell(0, 0, 'T', false);
 	}
 	
 	public void addToSeen(Card card) {

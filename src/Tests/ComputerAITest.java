@@ -3,6 +3,7 @@ package Tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -121,7 +122,41 @@ class ComputerAITest {
 	@Test
 	// test when now targets are unseen rooms
 	void testTargetNoUnseenRooms() {
-		fail();
+		ComputerPlayer testPlayer;
+		try {
+			testPlayer = new ComputerPlayer("Mrs. White", "White", 16, 18);
+			Set<BoardCell> targets = new HashSet<BoardCell>();
+			
+			for(int i = 0; i < 200; i++) {
+				targets.add(testPlayer.selectTargets(board, 3));
+			}
+
+			assertTrue(targets.contains(board.getCell(13, 16)));
+			assertTrue(targets.contains(board.getCell(16, 17)));
+			assertTrue(targets.contains(board.getCell(17, 14)));
+			assertTrue(targets.contains(board.getCell(15, 16)));
+			assertTrue(targets.contains(board.getCell(17, 16)));
+			assertTrue(targets.contains(board.getCell(18, 17)));
+			
+			testPlayer = new ComputerPlayer("Mrs. White", "White", 7, 12);
+			targets = new HashSet<BoardCell>();
+			testPlayer.addToSeen(board.getCard("Movie Theater"));
+			testPlayer.addToSeen(board.getCard("Court Yard"));
+			
+			for(int i = 0; i < 200; i++) {
+				targets.add(testPlayer.selectTargets(board, 2));
+			}
+			
+			assertTrue(targets.contains(board.getCell(12, 12)));
+			assertTrue(targets.contains(board.getCell(12, 3)));
+			assertTrue(targets.contains(board.getCell(10, 7)));
+			assertTrue(targets.contains(board.getCell(11, 8)));
+			assertTrue(targets.contains(board.getCell(13, 8)));
+			assertTrue(targets.contains(board.getCell(14, 7)));
+			
+		} catch (BadConfigFormatException e) {
+			fail("test failed due to BadConfigFormatException");
+		}
 	}
 	
 	@Test
@@ -137,6 +172,7 @@ class ComputerAITest {
 			testPlayer = new ComputerPlayer("Colonel Mustard", "Yellow", 7, 12);
 			testPlayer.addToSeen(board.getCard("Movie Theater"));
 			target = testPlayer.selectTargets(board, 2);
+			assertTrue(target.equals(board.getCell(12, 12)));
 			
 		} catch (BadConfigFormatException e) {
 			fail("test failed due to BadConfigFormatException");
