@@ -182,7 +182,27 @@ class ComputerAITest {
 	@Test 
 	// test when multiple targets are unseen rooms
 	void testTargetMultipleUnseenRooms() {
-		fail();
+		ComputerPlayer testPlayer;
+		try {
+			testPlayer = new ComputerPlayer("Mrs. White", "White", 7, 12);
+			Set<BoardCell> targets = new HashSet<BoardCell>();
+			
+			for(int i = 0; i < 200; i++) {
+				targets.add(testPlayer.selectTargets(board, 2));
+			}
+			
+			assertTrue(targets.contains(board.getCell(12, 12)));
+			assertTrue(targets.contains(board.getCell(12, 3)));
+			
+			// make sure a room was selected
+			assertTrue(!targets.contains(board.getCell(10, 7)));
+			assertTrue(!targets.contains(board.getCell(11, 8)));
+			assertTrue(!targets.contains(board.getCell(13, 8)));
+			assertTrue(!targets.contains(board.getCell(14, 7)));
+			
+		} catch (BadConfigFormatException e) {
+			fail("test failed due to BadConfigFormatException");
+		}
 	}
 	
 }
