@@ -29,6 +29,10 @@ class AccusationSuggestionTest {
 	
 	private static Card movieTheater;
 	
+	private static Player mustard;
+	private static Player scarlett;
+	private static Player peacock;
+	
 	@BeforeAll
 	static void makeBoard() {
 		//The same as the setup for the previous tests but with our setUp files
@@ -39,6 +43,16 @@ class AccusationSuggestionTest {
 		// Initialize will load BOTH config files
 		board.initialize();
 		 
+		for(Player p:board.getPlayers()) {
+			p.clearHand();
+		}
+		
+		for(Player p:board.getPlayers()) {
+			if(p.getColor().equals(Color.YELLOW)) mustard = p; 
+			if(p.getColor().equals(Color.RED)) scarlett = p; 
+			if(p.getColor().equals(Color.BLUE)) peacock = p; 
+		}
+		
 		 board.getSolution().setPerson(board.getCard("Mrs. White"));
 		 board.getSolution().setWeapon(board.getCard("Knife"));
 		 board.getSolution().setRoom(board.getCard("Office"));
@@ -52,13 +66,15 @@ class AccusationSuggestionTest {
 		 bathroom = new Card("Bathroom","Room");
 		 
 		 movieTheater = new Card("Movie Theater","Room");
-	}
-	
-	//We mess with peoples hands in a lot of the tests so it's worth just resetting hands every time
-	///Note this does not affect the solution
-	@BeforeEach
-	void redeal() {
-		board.redeal();
+		 
+			
+		//Order checked is White, Plum, Peacock, Mustard, Green, Scarlet
+		mustard.addCard(handGun);
+		mustard.addCard(movieTheater);
+		scarlett.addCard(bathroom);
+		peacock.addCard(missScarlett);
+		 
+		 
 	}
 	
 	@Test
@@ -73,44 +89,24 @@ class AccusationSuggestionTest {
 	
 	@Test
 	void SuggestionTestPlayers() {
-		Set<Player> players = board.getPlayers();
-		for(Player p:players) {
-			p.clearHand();
-		}
-		
-		//Order checked is White, Plum, Peacock, Mustard, Green, Scarlet
-		board.getPlayer(Color.YELLOW).addCard(handGun);
-		board.getPlayer(Color.YELLOW).addCard(movieTheater);
-		board.getPlayer(Color.RED).addCard(bathroom);
-		board.getPlayer(Color.BLUE).addCard(missScarlett);
 		
 		//I want to return both the card and the person returning but I'm not sure how to do it yet
 		//+ the thing that I wanted to use it for is hella complicated so probably won't do it
-		assertEquals(board.getPlayer(Color.BLUE).disproveSuggestion(missScarlett,knife,office),missScarlett);
-		assertEquals(board.getPlayer(Color.YELLOW).disproveSuggestion(mrsWhite,handGun,bathroom),handGun);
-		assertEquals(board.getPlayer(Color.RED).disproveSuggestion(mrsWhite,knife,bathroom),bathroom);
-		assertTrue(board.getPlayer(Color.YELLOW).disproveSuggestion(mrsWhite,handGun,movieTheater).equals(handGun)||board.getPlayer(Color.YELLOW).disproveSuggestion(mrsWhite,handGun,movieTheater).equals(movieTheater));
-		assertEquals(board.getPlayer(Color.YELLOW).disproveSuggestion(mrsWhite,knife,office),null);
-		assertEquals(board.getPlayer(Color.RED).disproveSuggestion(mrsWhite,knife,office),null);
+		assertEquals(peacock.disproveSuggestion(missScarlett,knife,office),missScarlett);
+		assertEquals(mustard.disproveSuggestion(mrsWhite,handGun,bathroom),handGun);
+		assertEquals(scarlett.disproveSuggestion(mrsWhite,knife,bathroom),bathroom);
+		assertTrue(mustard.disproveSuggestion(mrsWhite,handGun,movieTheater).equals(handGun)||mustard.disproveSuggestion(mrsWhite,handGun,movieTheater).equals(movieTheater));
+		assertEquals(mustard.disproveSuggestion(mrsWhite,knife,office),null);
+		assertEquals(scarlett.disproveSuggestion(mrsWhite,knife,office),null);
 	}
 	
 	@Test
 	void SuggestionTestBoard() {
-		Set<Player> players = board.getPlayers();
-		for(Player p:players) {
-			p.clearHand();
-		}
 		
-		//Order checked is White, Plum, Peacock, Mustard, Green, Scarlet
-		board.getPlayer(Color.YELLOW).addCard(handGun);
-		board.getPlayer(Color.YELLOW).addCard(movieTheater);
-		board.getPlayer(Color.RED).addCard(bathroom);
-		board.getPlayer(Color.BLUE).addCard(missScarlett);
-		
-		assertEquals(board.handleSuggestion(mrsWhite, handGun, bathroom ,board.getPlayer(Color.YELLOW)),bathroom);
-		assertEquals(board.handleSuggestion(mrsWhite, handGun, office ,board.getPlayer(Color.YELLOW)),null);
-		assertEquals(board.handleSuggestion(missScarlett, handGun, office ,board.getPlayer(Color.YELLOW)),missScarlett);
-		assertEquals(board.handleSuggestion(missScarlett, handGun, bathroom,board.getPlayer(Color.BLUE)),handGun);
-		assertEquals(board.handleSuggestion(missScarlett, handGun, bathroom,board.getPlayer(Color.RED)),handGun);
+		assertEquals(board.handleSuggestion(mrsWhite, handGun, bathroom ,mustard),bathroom);
+		assertEquals(board.handleSuggestion(mrsWhite, handGun, office ,mustard),null);
+		assertEquals(board.handleSuggestion(missScarlett, handGun, office ,mustard),missScarlett);
+		assertEquals(board.handleSuggestion(missScarlett, knife, bathroom,peacock),bathroom);
+		assertEquals(board.handleSuggestion(missScarlett, handGun, bathroom,scarlett),handGun);
 	}
 }
