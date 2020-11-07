@@ -75,6 +75,7 @@ public class ComputerPlayer extends Player{
 		
 		Set<BoardCell> unseenRooms = new HashSet<BoardCell>();
 		for(BoardCell cell : targets) {
+			//TODO this should use isRoom(), not getChar();
 			if(cell.getChar() != 'H' && !seen.contains(board.getCard(board.getRoom(cell).getName()))) {
 				unseenRooms.add(cell);
 			}
