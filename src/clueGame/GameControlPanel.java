@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -62,11 +63,13 @@ public class GameControlPanel extends JPanel{
 		
 		// upper half of the control panel
 		JPanel upperSubPanel = new JPanel();
+		GridLayout upperLayout = new GridLayout(1,4);
+		upperSubPanel.setLayout(upperLayout);
 		upperSubPanel.add(turnPanel);
 		upperSubPanel.add(rollPanel);
 		upperSubPanel.add(accuseButton);
 		upperSubPanel.add(nextTurnButton);
-		add(upperSubPanel, BorderLayout.NORTH);
+		this.add(upperSubPanel, BorderLayout.NORTH);
 		
 		//Guess panel. It's going to be blank for now
 		JPanel guessPanel = new JPanel();
@@ -84,7 +87,7 @@ public class GameControlPanel extends JPanel{
 		JPanel lowerSubPanel = new JPanel();
 		lowerSubPanel.add(guessPanel);
 		lowerSubPanel.add(guessResultPanel);
-		add(lowerSubPanel,BorderLayout.SOUTH);
+		add(lowerSubPanel,BorderLayout.CENTER);
 	}
 	
 	private class nextTurnListener implements ActionListener{
