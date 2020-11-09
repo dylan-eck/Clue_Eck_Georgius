@@ -20,11 +20,12 @@ public class GameControlPanel extends JPanel{
 	
 	private static Board board;
 	
-	private JLabel turnText;
-	private JLabel rollText;
+	private static JLabel turnText;
+	private static JLabel rollText;
+	private static JPanel turnPanel;
 	
 	private static String diceRoll;
-	private static String nextPlayerName;
+	private static Player nextPlayer;
 
 	public GameControlPanel() {	
 		//This will be removed when we integrate this.
@@ -34,7 +35,7 @@ public class GameControlPanel extends JPanel{
 		board.initialize();
 		
 		diceRoll = Integer.toString(board.rollDie());
-		nextPlayerName = (board.getNextPlayer()).getName();
+		nextPlayer = board.getNextPlayer();
 		CreateLayout();
 	}
 	
@@ -42,8 +43,9 @@ public class GameControlPanel extends JPanel{
 		
 		// turn information section
 		JLabel turnLabel = new JLabel("Whose turn?");
-		turnText = new JLabel(nextPlayerName);
-		JPanel turnPanel = new JPanel();
+		turnText = new JLabel(nextPlayer.getName());
+		turnPanel = new JPanel();
+		turnPanel.setBackground(nextPlayer.getColor());
 		turnPanel.add(turnLabel);
 		turnPanel.add(turnText);
 		
@@ -74,9 +76,10 @@ public class GameControlPanel extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			//Doesn't actualy do anything but the diceRoll is stored for now incase we need it.
 			diceRoll = Integer.toString(board.rollDie());
-			nextPlayerName = (board.getNextPlayer()).getName();
+			nextPlayer = board.getNextPlayer();
 			rollText.setText(diceRoll);
-			turnText.setText(nextPlayerName);
+			turnText.setText(nextPlayer.getName());
+			turnPanel.setBackground(nextPlayer.getColor());
 		}
 		
 	}
