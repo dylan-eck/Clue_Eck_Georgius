@@ -20,14 +20,21 @@ public class GameControlPanel extends JPanel{
 	
 	private static Board board;
 	
+	private JLabel turnText;
+	private JLabel rollText;
+	
 	private static String diceRoll;
 	private static String nextPlayerName;
 
 	public GameControlPanel() {	
+		//This will be removed when we integrate this.
+		//probably by just calling get instance though if this is in the board class we won't have to waste the memory.
+		board = Board.getInstance();
+		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");		 
+		board.initialize();
+		
 		diceRoll = Integer.toString(board.rollDie());
 		nextPlayerName = (board.getNextPlayer()).getName();
-		diceRoll = "0";
-		nextPlayerName = "No one yet";
 		CreateLayout();
 	}
 	
@@ -35,14 +42,14 @@ public class GameControlPanel extends JPanel{
 		
 		// turn information section
 		JLabel turnLabel = new JLabel("Whose turn?");
-		JTextField turnText = new JTextField(nextPlayerName);
+		turnText = new JLabel(nextPlayerName);
 		JPanel turnPanel = new JPanel();
 		turnPanel.add(turnLabel);
 		turnPanel.add(turnText);
 		
 		// roll information section
 		JLabel rollLabel = new JLabel("Roll: ");
-		JTextField rollText = new JTextField(diceRoll);
+		rollText = new JLabel(diceRoll);
 		JPanel rollPanel = new JPanel();
 		rollPanel.add(rollLabel);
 		rollPanel.add(rollText);
@@ -65,20 +72,16 @@ public class GameControlPanel extends JPanel{
 	private class nextTurnListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			//Doesn't actualy do anything but the diceRoll is stored for now incase we need it.
 			diceRoll = Integer.toString(board.rollDie());
 			nextPlayerName = (board.getNextPlayer()).getName();
+			rollText.setText(diceRoll);
+			turnText.setText(nextPlayerName);
 		}
 		
 	}
 	
 	public static void main(String[] args) {
-		
-		//This will be removed when we integrate this.
-		//probably by just calling get instance though if this is in the board class we won't have to waste the memory.
-		Board board = Board.getInstance();
-		board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");		 
-		board.initialize();
-		
 		
 		GameControlPanel controlPanel = new GameControlPanel();
 		JFrame frame = new JFrame();
