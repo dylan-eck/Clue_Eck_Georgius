@@ -4,11 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+
+import javafx.scene.layout.Border;
 
 public class GameControlPanel extends JPanel{
 	
@@ -42,9 +46,9 @@ public class GameControlPanel extends JPanel{
 	private void CreateLayout() {
 		
 		// turn information section
+		turnPanel = new JPanel();
 		JLabel turnLabel = new JLabel("Whose turn?");
 		turnText = new JLabel(nextPlayer.getName());
-		turnPanel = new JPanel();
 		turnPanel.setBackground(nextPlayer.getColor());
 		turnPanel.add(turnLabel);
 		turnPanel.add(turnText);
@@ -69,6 +73,22 @@ public class GameControlPanel extends JPanel{
 		upperSubPanel.add(nextTurnButton);
 		add(upperSubPanel, BorderLayout.CENTER);
 		
+		//Guess panel. It's going to be blank for now
+		JPanel guessPanel = new JPanel();
+		guessPanel.setSize(CONTROL_PANEL_WIDTH/2,CONTROL_PANEL_HEIGHT/2);
+		guessPanel.add(new JLabel("Guess                "));
+		guessPanel.add(new JLabel("When we actualy do something something might go here"));
+		
+		//Guess Result panel. Nothing much is happening here either.
+		JPanel guessResultPanel = new JPanel();
+		guessResultPanel.setSize(CONTROL_PANEL_WIDTH/2,CONTROL_PANEL_HEIGHT/2);
+		guessResultPanel.add(new JLabel("Guess Result           \n"));
+		guessResultPanel.add(new JLabel("When we actualy do something something might go here"));
+		
+		JPanel lowerSubPanel = new JPanel();
+		lowerSubPanel.add(guessPanel);
+		lowerSubPanel.add(guessResultPanel);
+		add(lowerSubPanel,BorderLayout.SOUTH);
 	}
 	
 	private class nextTurnListener implements ActionListener{
