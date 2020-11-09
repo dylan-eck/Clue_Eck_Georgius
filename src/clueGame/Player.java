@@ -42,6 +42,10 @@ public abstract class Player {
 		return this.color;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+	
 	public void addCard(Card c) {
 		hand.add(c);
 	}

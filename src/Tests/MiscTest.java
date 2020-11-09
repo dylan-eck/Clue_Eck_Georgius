@@ -80,9 +80,10 @@ class MiscTest {
 		//Checks to see that the iterator keeps the order
 		assertEquals(nextPlayer,firstPlayer);
 		
+		/*
 		for(int i = 0;i<12;i++) {
 			System.out.println(nextPlayer);
 			nextPlayer = board.getNextPlayer();
-		}
+		}*/
 	}
 }

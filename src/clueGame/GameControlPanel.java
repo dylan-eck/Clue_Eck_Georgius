@@ -17,8 +17,17 @@ public class GameControlPanel extends JPanel{
 	
 	private static final String ACCUSE_BUTTON_TEXT = "Make Accusation";
 	private static final String NEXT_TURN_BUTTON_TEXT = "NEXT!";
+	
+	private static Board board;
+	
+	private static String diceRoll;
+	private static String nextPlayerName;
 
-	public GameControlPanel() {
+	public GameControlPanel() {	
+		diceRoll = Integer.toString(board.rollDie());
+		nextPlayerName = (board.getNextPlayer()).getName();
+		diceRoll = "0";
+		nextPlayerName = "No one yet";
 		CreateLayout();
 	}
 	
@@ -26,14 +35,14 @@ public class GameControlPanel extends JPanel{
 		
 		// turn information section
 		JLabel turnLabel = new JLabel("Whose turn?");
-		JTextField turnText = new JTextField();
+		JTextField turnText = new JTextField(nextPlayerName);
 		JPanel turnPanel = new JPanel();
 		turnPanel.add(turnLabel);
 		turnPanel.add(turnText);
 		
 		// roll information section
 		JLabel rollLabel = new JLabel("Roll: ");
-		JTextField rollText = new JTextField();
+		JTextField rollText = new JTextField(diceRoll);
 		JPanel rollPanel = new JPanel();
 		rollPanel.add(rollLabel);
 		rollPanel.add(rollText);
@@ -56,13 +65,21 @@ public class GameControlPanel extends JPanel{
 	private class nextTurnListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
+			diceRoll = Integer.toString(board.rollDie());
+			nextPlayerName = (board.getNextPlayer()).getName();
 		}
 		
 	}
 	
 	public static void main(String[] args) {
+		
+		//This will be removed when we integrate this.
+		//probably by just calling get instance though if this is in the board class we won't have to waste the memory.
+		Board board = Board.getInstance();
+		board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");		 
+		board.initialize();
+		
+		
 		GameControlPanel controlPanel = new GameControlPanel();
 		JFrame frame = new JFrame();
 		frame.setContentPane(controlPanel);
