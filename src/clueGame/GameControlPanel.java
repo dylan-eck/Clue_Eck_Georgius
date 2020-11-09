@@ -41,6 +41,7 @@ public class GameControlPanel extends JPanel{
 		// buttons to make accusation and move to the next turn
 		JButton accuseButton = new JButton(ACCUSE_BUTTON_TEXT);
 		JButton nextTurnButton = new JButton(NEXT_TURN_BUTTON_TEXT);
+		nextTurnButton.addActionListener(new nextTurnListener());
 		
 		// upper half of the control panel
 		JPanel upperSubPanel = new JPanel();
@@ -49,6 +50,15 @@ public class GameControlPanel extends JPanel{
 		upperSubPanel.add(accuseButton);
 		upperSubPanel.add(nextTurnButton);
 		add(upperSubPanel, BorderLayout.CENTER);
+		
+	}
+	
+	private class nextTurnListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 	}
 	

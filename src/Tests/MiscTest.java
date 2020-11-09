@@ -2,10 +2,14 @@ package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
+import clueGame.Player;
 
 class MiscTest {
 
@@ -58,4 +62,22 @@ class MiscTest {
 		}
 	}
 
+	@Test
+	void nextPlayerTest() {
+		
+		Player nextPlayer;
+		Player firstPlayer = board.getNextPlayer();
+		Set playersSeen = new HashSet<Player>();
+		playersSeen.add(firstPlayer);
+		
+		for(int i = (board.getPlayers()).size();i>=1;i--) {
+			nextPlayer = board.getNextPlayer();
+			//makes sure there aren't any repeats until you've gone through all players.
+			assertFalse(playersSeen.contains(nextPlayer));
+			playersSeen.add(nextPlayer);
+		}
+		nextPlayer = board.getNextPlayer();
+		//Checks to see that the iterator keeps the order
+		assertEquals(nextPlayer,firstPlayer);
+	}
 }

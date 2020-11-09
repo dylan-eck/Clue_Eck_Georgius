@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
@@ -13,6 +14,7 @@ public class Board {
 	private BoardCell[][] boardCellArray;
 	private int numRows, numCols;
 	private Random r;
+	private Iterator nextPlayer;
 	
 	private Scanner layoutFile, setupFile;
 	private String layoutFileName, setupFileName;
@@ -507,5 +509,9 @@ public class Board {
 	//This could be a private function since I think only board will call it but it still needs to be tested
 	public int rollDie() {
 		return (r.nextInt(6)+1);
+	}
+	
+	public Player getNextPlayer() {
+		return null;
 	}
 }
