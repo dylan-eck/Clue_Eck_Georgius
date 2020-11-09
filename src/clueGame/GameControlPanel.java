@@ -23,7 +23,7 @@ public class GameControlPanel extends JPanel{
 	
 	private static Board board;
 	
-	private static JTextField turnText, rollText;
+	private static JTextField turnText, rollText, guessText, resultText;
 	private static JPanel turnPanel;
 	
 	private static String diceRoll;
@@ -42,7 +42,6 @@ public class GameControlPanel extends JPanel{
 	}
 	
 	private void CreateLayout() {
-		
 		GridLayout controlPanelLayout = new GridLayout(2,1);
 		this.setLayout(controlPanelLayout);
 		
@@ -126,5 +125,21 @@ public class GameControlPanel extends JPanel{
 		frame.setSize(CONTROL_PANEL_WIDTH, CONTROL_PANEL_HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		frame.setVisible(true);
+	}
+
+	public static void setTurnText(String text) {
+		turnText.setText(text);
+	}
+
+	public static void setRollText(String text) {
+		rollText.setText(text);
+	}
+
+	public static void setGuessText(String text) {
+		guessText.setText(text);
+	}
+
+	public static void setResultText(String text) {
+		resultText.setText(text);
 	}
 }
