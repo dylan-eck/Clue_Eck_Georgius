@@ -71,6 +71,7 @@ public class Board {
 		solution = new Solution();
 		setSolution();
 		deal();
+		nextPlayer = players.iterator();
 	}
 	
 	/**
@@ -512,6 +513,11 @@ public class Board {
 	}
 	
 	public Player getNextPlayer() {
-		return null;
+		if(nextPlayer.hasNext()) {
+			return (Player) nextPlayer.next();
+		}else {
+			nextPlayer = players.iterator();
+			return (Player) nextPlayer.next();
+		}
 	}
 }

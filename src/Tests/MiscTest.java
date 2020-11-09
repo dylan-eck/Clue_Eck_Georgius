@@ -70,7 +70,7 @@ class MiscTest {
 		Set playersSeen = new HashSet<Player>();
 		playersSeen.add(firstPlayer);
 		
-		for(int i = (board.getPlayers()).size();i>=1;i--) {
+		for(int i = (board.getPlayers()).size();i>1;i--) {
 			nextPlayer = board.getNextPlayer();
 			//makes sure there aren't any repeats until you've gone through all players.
 			assertFalse(playersSeen.contains(nextPlayer));
@@ -79,5 +79,10 @@ class MiscTest {
 		nextPlayer = board.getNextPlayer();
 		//Checks to see that the iterator keeps the order
 		assertEquals(nextPlayer,firstPlayer);
+		
+		for(int i = 0;i<12;i++) {
+			System.out.println(nextPlayer);
+			nextPlayer = board.getNextPlayer();
+		}
 	}
 }
