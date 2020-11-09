@@ -4,15 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-
-import javafx.scene.layout.Border;
 
 public class GameControlPanel extends JPanel{
 	
@@ -71,7 +66,7 @@ public class GameControlPanel extends JPanel{
 		upperSubPanel.add(rollPanel);
 		upperSubPanel.add(accuseButton);
 		upperSubPanel.add(nextTurnButton);
-		add(upperSubPanel, BorderLayout.CENTER);
+		add(upperSubPanel, BorderLayout.NORTH);
 		
 		//Guess panel. It's going to be blank for now
 		JPanel guessPanel = new JPanel();
@@ -85,6 +80,7 @@ public class GameControlPanel extends JPanel{
 		guessResultPanel.add(new JLabel("Guess Result           \n"));
 		guessResultPanel.add(new JLabel("When we actualy do something something might go here"));
 		
+		// lower half of the control panel
 		JPanel lowerSubPanel = new JPanel();
 		lowerSubPanel.add(guessPanel);
 		lowerSubPanel.add(guessResultPanel);
