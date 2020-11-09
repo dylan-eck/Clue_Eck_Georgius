@@ -12,6 +12,7 @@ public class Board {
 	
 	private BoardCell[][] boardCellArray;
 	private int numRows, numCols;
+	private Random r;
 	
 	private Scanner layoutFile, setupFile;
 	private String layoutFileName, setupFileName;
@@ -44,6 +45,8 @@ public class Board {
 		this.players = new HashSet<Player>();
 		this.weapons = new HashSet<Card>();
 		this.deck = new HashSet<Card>();
+		
+		r = new Random();
 		
 		try {
 			loadSetupConfig();
@@ -441,7 +444,6 @@ public class Board {
 	}
 	
 	public Card getRandomCard() {
-		Random r = new Random();
 		int iter = r.nextInt(removableDeck.size());
 		int i = 0;
 		for(Card temp:removableDeck) {
@@ -497,5 +499,13 @@ public class Board {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * This function rolls the die when it's needed for player movement
+	 */
+	//This could be a private function since I think only board will call it but it still needs to be tested
+	public int rollDie() {
+		return (r.nextInt(6)+1);
 	}
 }

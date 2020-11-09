@@ -1,3 +1,178 @@
+commit 7d98d69a3bdb578428717e80c7372e62936e3f70 (HEAD -> main, origin/main, origin/HEAD)
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Fri Nov 6 21:44:09 2020 -0700
+
+    Fixed ambiguity in some tests and cleaned them up.
+
+commit 59b31e70d4c0abebb7c82141849f5ea2b3c504fa
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 20:07:01 2020 -0700
+
+    added comments, undid changes from last commit (made in error)
+
+commit 1fcd1be7b03d302514bd3fca6b5ebba9f8adfcf1
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 19:47:39 2020 -0700
+
+    fixed bug where computerPlayer would suggest itself as the person who commited the crime
+
+commit f46a6550471fe6243f287052e468a44b523fc012
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 19:31:36 2020 -0700
+
+    testTargetMultipleUnseenRooms passes
+
+commit 4cd908c6b56e5c859ecc0ce63fbb9240f609b049
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 19:28:51 2020 -0700
+
+    testTargetNoUnseenRomms passes
+
+commit d1447ca11a302525e9de1f9adda3b34e40e6e816
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 19:19:55 2020 -0700
+
+    testTargetSingleUnseenRoom passes
+
+commit ebd213aa4439a9f53218891e2662e2bcb55bbd6d
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 18:41:22 2020 -0700
+
+    wrote a failing target test for multiple unseen rooms
+
+commit d1542415f9944d5a1eb0dfb6a3fa6b768884f336
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 18:37:07 2020 -0700
+
+    wrote failing target test for no unseen rooms
+
+commit 046e81dc6682da119a4239742cbe8681e84659fd
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 18:18:24 2020 -0700
+
+    added failing target test for a single room
+
+commit e70c2850d7f2ef9434afbd6509470258c0c58dfa
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 17:56:38 2020 -0700
+
+    computer suggestion tests pass
+
+commit a9118842f9649d4c44023dac4d537adeae22a9b6
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 17:46:35 2020 -0700
+
+    testRoomMatchesCurrentLocation passes
+
+commit efb673cb815e835d2592a4236b8f6b47db126620
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 16:04:02 2020 -0700
+
+    wrote test to make sure the suggested room is the room that the computer player is currently in
+
+commit ae3b1974677ebe670045196fedcb615bc238781e
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 15:33:41 2020 -0700
+
+    added failing test for when only one card of each type has not been seen
+
+commit 6f5c854f01e81ba834ac49ccf3ba8cf18016c3d5
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 15:24:31 2020 -0700
+
+    wrote failing test for computer suggestion selection
+
+commit 642681fdc8674db7ff0020e803120020784823ee
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 14:48:41 2020 -0700
+
+    added setup method to ComputerAITest.java
+
+commit 242e94e0fd13703273bc7457a9849f624b1f35a1
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 12:51:04 2020 -0700
+
+    added selection test skeletons
+
+commit e8b37bef76c4c847e67d6b73a63c373fa7b6f7d2
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 6 12:36:34 2020 -0700
+
+    added computerAITests skeleton, added method stubs to ComputerPlayer
+
+commit f81fd4dd43a73f01e82252bc375548ac82ba7c4c
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Thu Nov 5 11:54:08 2020 -0700
+
+    Fixed the set of weapons
+
+commit 7c07678b631ba6e453b2bbad072e404e88660320
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 22:02:42 2020 -0700
+
+    Refactored to make weapons a set of cards instead of strings. This broke the contains function which appers to not accept the overriden equals function. The tests relating to this have been commented out because I cannot figure out how .equals works but .contains is a compleat failure.
+
+commit fe2db87c9fe9859349706aa9833b9a8b926efcdf
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 18:33:01 2020 -0700
+
+    Passed all the boards suggestion tests
+
+commit 7f8e421863c58a0854d4ebaa6f412eb54f396326
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 18:30:12 2020 -0700
+
+    Finished test for the board handeling suggestions
+
+commit d9ed5848ef2e97c087a52d25115dc6eb9c35e960
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 17:50:46 2020 -0700
+
+    Refactored again to split the suggestion test into test for the player class and the board class. only the plyer class passes for now.
+
+commit a79b3e51c6f37c6489536523c2c322f78d565c78
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 17:44:22 2020 -0700
+
+    Refactored so that disprovingSuggestion is handled by the Player class
+
+commit e7e3d5b1f68795309ce7249c0a39e53d573e2b4e
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 17:34:54 2020 -0700
+
+    Passed the suggestion test
+
+commit 2fec1440083e3a9551b80ed7420d8fafef2d53e1
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 16:36:49 2020 -0700
+
+    Made test for suggestions and it failed
+
+commit 5c3e70663f3578859ce26b185f8688c800f383a8
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 12:53:36 2020 -0700
+
+    Refactored test
+
+commit 0346d629029889dfd998fa6407f7692cc17aea5d
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 12:05:09 2020 -0700
+
+    Passed the Accusation test
+
+commit b821b56870cd35c7d167350ac3230001870d7db5
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 12:04:15 2020 -0700
+
+    Created test for the test accusation function
+
+commit 77b520bf577a10f455b842a226192c792c52dc25
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 4 11:26:06 2020 -0700
+
+    Created test for an accurate guess of solution
+
+
 commit 0b7a262d649451d598ce1634226ee4c07ba11cd5
 Author: Dylan Eck <dylaneck@mymail.mines.edu>
 Date:   Mon Nov 2 23:15:56 2020 -0700
