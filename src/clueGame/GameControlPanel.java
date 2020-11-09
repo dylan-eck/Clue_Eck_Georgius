@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class GameControlPanel extends JPanel{
 	
@@ -20,8 +21,7 @@ public class GameControlPanel extends JPanel{
 	
 	private static Board board;
 	
-	private static JLabel turnText;
-	private static JLabel rollText;
+	private static JTextField turnText, rollText;
 	private static JPanel turnPanel;
 	
 	private static String diceRoll;
@@ -41,17 +41,24 @@ public class GameControlPanel extends JPanel{
 	
 	private void CreateLayout() {
 		
+		GridLayout controlPanelLayout = new GridLayout(2,1);
+		this.setLayout(controlPanelLayout);
+		
 		// turn information section
 		turnPanel = new JPanel();
 		JLabel turnLabel = new JLabel("Whose turn?");
-		turnText = new JLabel(nextPlayer.getName());
-		turnPanel.setBackground(nextPlayer.getColor());
+		turnLabel.setHorizontalAlignment(JLabel.CENTER);
+		turnText = new JTextField(nextPlayer.getName());
+		turnText.setBackground(nextPlayer.getColor());
+		
+		GridLayout turnPanelLayout = new GridLayout(2,1);
+		turnPanel.setLayout(turnPanelLayout);
 		turnPanel.add(turnLabel);
 		turnPanel.add(turnText);
 		
 		// roll information section
-		JLabel rollLabel = new JLabel("Roll: ");
-		rollText = new JLabel(diceRoll);
+		JLabel rollLabel = new JLabel("Roll:");
+		rollText = new JTextField(diceRoll, 6);
 		JPanel rollPanel = new JPanel();
 		rollPanel.add(rollLabel);
 		rollPanel.add(rollText);
@@ -71,23 +78,23 @@ public class GameControlPanel extends JPanel{
 		upperSubPanel.add(nextTurnButton);
 		this.add(upperSubPanel, BorderLayout.NORTH);
 		
-		//Guess panel. It's going to be blank for now
-		JPanel guessPanel = new JPanel();
-		guessPanel.setSize(CONTROL_PANEL_WIDTH/2,CONTROL_PANEL_HEIGHT/2);
-		guessPanel.add(new JLabel("Guess                "));
-		guessPanel.add(new JLabel("When we actualy do something something might go here"));
-		
-		//Guess Result panel. Nothing much is happening here either.
-		JPanel guessResultPanel = new JPanel();
-		guessResultPanel.setSize(CONTROL_PANEL_WIDTH/2,CONTROL_PANEL_HEIGHT/2);
-		guessResultPanel.add(new JLabel("Guess Result           \n"));
-		guessResultPanel.add(new JLabel("When we actualy do something something might go here"));
-		
-		// lower half of the control panel
-		JPanel lowerSubPanel = new JPanel();
-		lowerSubPanel.add(guessPanel);
-		lowerSubPanel.add(guessResultPanel);
-		add(lowerSubPanel,BorderLayout.CENTER);
+//		//Guess panel. It's going to be blank for now
+//		JPanel guessPanel = new JPanel();
+//		guessPanel.setSize(CONTROL_PANEL_WIDTH/2,CONTROL_PANEL_HEIGHT/2);
+//		guessPanel.add(new JLabel("Guess                "));
+//		guessPanel.add(new JLabel("When we actualy do something something might go here"));
+//		
+//		//Guess Result panel. Nothing much is happening here either.
+//		JPanel guessResultPanel = new JPanel();
+//		guessResultPanel.setSize(CONTROL_PANEL_WIDTH/2,CONTROL_PANEL_HEIGHT/2);
+//		guessResultPanel.add(new JLabel("Guess Result           \n"));
+//		guessResultPanel.add(new JLabel("When we actualy do something something might go here"));
+//		
+//		// lower half of the control panel
+//		JPanel lowerSubPanel = new JPanel();
+//		lowerSubPanel.add(guessPanel);
+//		lowerSubPanel.add(guessResultPanel);
+//		add(lowerSubPanel,BorderLayout.CENTER);
 	}
 	
 	private class nextTurnListener implements ActionListener{
