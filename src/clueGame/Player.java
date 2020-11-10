@@ -10,12 +10,13 @@ public abstract class Player {
 	private String name;
 	private Color color;
 	private int[] location;
-	private Set<Card> hand;
+	private Set<Card> hand,seen;
 	
 	public Player(String name,String color,int x,int y) throws BadConfigFormatException {
 		this.name = name;
 		this.location = new int[] {x,y};
 		hand = new HashSet<Card>();
+		seen = new HashSet<Card>();
 		
 		if(color.equals("White")) {
 			this.color=Color.WHITE; 
@@ -87,5 +88,13 @@ public abstract class Player {
 		}
 		
 		return null;
+	}
+	
+	public void addToSeen(Card card) {
+		seen.add(card);
+	}
+	
+	public Set<Card> getSeen() {
+		return seen;
 	}
 }

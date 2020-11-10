@@ -1,3 +1,90 @@
+commit 45b6ec5462cb9ce7d1bb030155d90632d44ce284 (HEAD -> main, origin/main, origin/HEAD)
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 9 17:11:59 2020 -0700
+
+    Fixed colors in Control GUI
+
+commit 5a704d5ddf2b69d4664c93549296c2005de6556b
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 17:05:53 2020 -0700
+
+    refactored code to use setters
+
+commit 26bcc5928d1305c3c94f5b19fbc9fe3dcda7d30b
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 17:04:15 2020 -0700
+
+    refactored code to use setters
+
+commit 2cbbe514f6d404a50daefbef60fe6603cdcc012a
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 16:56:00 2020 -0700
+
+    added setters for text fields
+
+commit f969d3ee1dd45dff702a47d7e7719e5ed2335ffc
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 15:43:44 2020 -0700
+
+    finished formating comtrol panel
+
+commit be2fed532af1efdaf5976392d59af4944255fdc9
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 15:29:53 2020 -0700
+
+    finished upper half of game control panel
+
+commit 57afc4b95b6451e7af349d4976d549e531bc311e
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 15:18:08 2020 -0700
+
+    modified upperSubPanel to use GridLayout
+
+commit 470f612b6929a890c1fdb9432b435721c48d546f
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 14:14:18 2020 -0700
+
+    minor code cleanup
+
+commit a084a1760182908a70ca07c8313a9570042157af
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 9 11:26:28 2020 -0700
+
+    Added a lower panel with guess and guess results but it's not properly formated yet
+
+commit 8d866c0d15579e4791608daf64f5a83209abcc3c
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 9 10:49:00 2020 -0700
+
+    Next now also changes the color of the next person panel
+
+commit 1a41fe5d6bdfcfe95e3ad4374b3d5c6866306bee
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 9 10:13:13 2020 -0700
+
+    Fixed initialization issue. Got the next button to work. changed the diceRoll and turnText variables into jPanels sice the player shouldn't be able to change the text in them unless they press the button.
+
+commit 8b85bfa4e78bb6d54dd27000fc819971ef3a5319
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+
+commit c489ac4e891f88fbc35dfb80b8cc0056079793a3
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Sat Nov 7 12:12:41 2020 -0700
+
+    made control panel dimensions variables
+
+commit ff8f280346fa7ff681732f65cede8e22136d99a4
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Sat Nov 7 11:35:53 2020 -0700
+
+    inital code for upper part of control panel gui
+
+commit 85e6e5d771a5abcaddb009370b7ca2b81d69009f
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Sat Nov 7 10:49:17 2020 -0700
+
+    added initial GameControlPanel code
+
 commit 7d98d69a3bdb578428717e80c7372e62936e3f70 (HEAD -> main, origin/main, origin/HEAD)
 Author: rlord222 <63765345+rlord222@users.noreply.github.com>
 Date:   Fri Nov 6 21:44:09 2020 -0700

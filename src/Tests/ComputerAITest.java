@@ -76,8 +76,8 @@ class ComputerAITest {
 			Solution computerSuggestion = testPlayer.createSuggestion(board);
 			
 			// make sure suggestion contains mrsWhite and office
-			assertTrue(computerSuggestion.getPerson() == mrsWhite);
-			assertTrue(computerSuggestion.getWeapon() == knife);
+			assertEquals(computerSuggestion.getPerson(),mrsWhite);
+			assertEquals(computerSuggestion.getWeapon(),knife);
 			
 			// make sure the suggestion does not contain invalid cards
 			assertTrue(board.getCards().contains(computerSuggestion.getPerson()));

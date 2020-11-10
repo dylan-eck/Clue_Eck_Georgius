@@ -9,12 +9,11 @@ public class ComputerPlayer extends Player{
 	private Random rand = new Random();
 	
 	private Card roomCard;
-	private Set<Card> allCards, seen, possibleWeapons, possiblePeople;
+	private Set<Card> allCards, possibleWeapons, possiblePeople;
 	
 	public ComputerPlayer(String name, String color, int x, int y) throws BadConfigFormatException {
 		super(name, color, x, y);
 		
-		seen = new HashSet<Card>();
 		possiblePeople = new HashSet<Card>();
 		possibleWeapons = new HashSet<Card>();
 	}
@@ -36,7 +35,7 @@ public class ComputerPlayer extends Player{
 		// find possible people and weapons
 		allCards = board.getCards();
 		for(Card card : allCards) {
-			if(!this.getHand().contains(card) && !this.seen.contains(card)) {
+			if(!this.getHand().contains(card) && !getSeen().contains(card)) {
 				if(card.getType() == CardType.PERSON) {
 					possiblePeople.add(card);
 					
@@ -91,7 +90,7 @@ public class ComputerPlayer extends Player{
 		Set<BoardCell> unseenRooms = new HashSet<BoardCell>();
 		for(BoardCell cell : targets) {
 			//TODO this should use isRoom(), not getChar();
-			if(cell.getChar() != 'H' && !seen.contains(board.getCard(board.getRoom(cell).getName()))) {
+			if(cell.getChar() != 'H' && !getSeen().contains(board.getCard(board.getRoom(cell).getName()))) {
 				unseenRooms.add(cell);
 			}
 		}
@@ -124,14 +123,4 @@ public class ComputerPlayer extends Player{
 		
 		return targetCell;
 	}
-	
-	public void addToSeen(Card card) {
-		seen.add(card);
-	}
-	
-	public Set<Card> getSeen() {
-		return new HashSet<Card>();
-	}
-	
-	
 }
