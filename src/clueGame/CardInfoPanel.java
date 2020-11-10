@@ -51,6 +51,14 @@ public class CardInfoPanel extends JPanel {
 		this.add(weaponsPanel);
 	}
 	
+	public void setInHand(Set<Card> inHand) {
+		this.inHand = inHand;
+	}
+	
+	public void setSeen(Set<Card> seen) {
+		this.seen = seen;
+	}
+	
 	public void updateInHandAndSeen() {
 		
 		peoplePanel.add(new JLabel("In Hand:"));
