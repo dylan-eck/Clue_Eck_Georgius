@@ -147,6 +147,8 @@ public class GameControlPanel extends JPanel{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		frame.setVisible(true);
 		
+//		controlPanel.setTurnText("setter test");
+//		controlPanel.setRollText("setter test");
 		controlPanel.setGuessText("setter test");
 		controlPanel.setResultText("setter test");
 	}
