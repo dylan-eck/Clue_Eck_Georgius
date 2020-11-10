@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 public class CardInfoPanel extends JPanel { 
@@ -41,9 +42,18 @@ public class CardInfoPanel extends JPanel {
 		this.add(peoplePanel);
 		this.add(roomsPanel);
 		this.add(weaponsPanel);
-		
-		
-		
+	}
+	
+	public void addPerson(String person) {
+		// add a person to the peoplePanel layout (peoplePanel.add(new JTextField("person's name"))
+	}
+	
+	public void addRoom(String room) {
+		// same idea as addPerson
+	}
+	
+	public void addWeapon(String weapon) {
+		// same idea as adPerson
 	}
 	
 	public static void main(String[] args) {
