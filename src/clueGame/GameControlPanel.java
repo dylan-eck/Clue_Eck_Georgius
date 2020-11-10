@@ -23,11 +23,11 @@ public class GameControlPanel extends JPanel{
 	
 	private static Board board;
 	
-	private static JTextField turnText, rollText, guessText, resultText;
+	private JTextField turnText, rollText, guessText, resultText;
 	private static JPanel turnPanel;
 	
-	private static String diceRoll;
-	private static Player nextPlayer;
+	private String diceRoll;
+	private Player nextPlayer;
 
 	public GameControlPanel() {	
 		//This will be removed when we integrate this.
@@ -38,6 +38,11 @@ public class GameControlPanel extends JPanel{
 		
 		diceRoll = Integer.toString(board.rollDie());
 		nextPlayer = board.getNextPlayer();
+		
+		guessText = new JTextField();
+		resultText = new JTextField();
+		setGuessText("not implemented yet");
+		setResultText("not implemented yet");
 		CreateLayout();
 	}
 	
@@ -85,7 +90,7 @@ public class GameControlPanel extends JPanel{
 		guessPanel.setBorder(guessPanelBorder);
 		GridLayout guessPanelLayout = new GridLayout(1,0);
 		guessPanel.setLayout(guessPanelLayout);
-		guessPanel.add(new JTextField("not yet implemented"));
+		guessPanel.add(guessText);
 		
 		//Guess Result panel. Nothing much is happening here either.
 		JPanel resultPanel = new JPanel();
@@ -93,7 +98,7 @@ public class GameControlPanel extends JPanel{
 		resultPanel.setBorder(resultPanelBorder);
 		GridLayout resultPanelLayout = new GridLayout(1,0);
 		resultPanel.setLayout(resultPanelLayout);
-		resultPanel.add(new JTextField("not yet implemented"));
+		resultPanel.add(resultText);
 		
 		// lower half of the control panel
 		JPanel lowerSubPanel = new JPanel();
@@ -117,6 +122,22 @@ public class GameControlPanel extends JPanel{
 		
 	}
 	
+	public void setTurnText(String text) {
+		turnText.setText(text);
+	}
+
+	public void setRollText(String text) {
+		rollText.setText(text);
+	}
+
+	public void setGuessText(String text) {
+		guessText.setText(text);
+	}
+
+	public void setResultText(String text) {
+		resultText.setText(text);
+	}
+	
 	public static void main(String[] args) {
 		
 		GameControlPanel controlPanel = new GameControlPanel();
@@ -125,21 +146,8 @@ public class GameControlPanel extends JPanel{
 		frame.setSize(CONTROL_PANEL_WIDTH, CONTROL_PANEL_HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		frame.setVisible(true);
-	}
-
-	public static void setTurnText(String text) {
-		turnText.setText(text);
-	}
-
-	public static void setRollText(String text) {
-		rollText.setText(text);
-	}
-
-	public static void setGuessText(String text) {
-		guessText.setText(text);
-	}
-
-	public static void setResultText(String text) {
-		resultText.setText(text);
+		
+		controlPanel.setGuessText("setter test");
+		controlPanel.setResultText("setter test");
 	}
 }
