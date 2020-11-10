@@ -23,8 +23,9 @@ public class GameControlPanel extends JPanel{
 	
 	private static Board board;
 	
-	private JTextField turnText, rollText, guessText, resultText;
-	private static JPanel turnPanel;
+	private JTextField rollText, guessText, resultText;
+	private static JLabel turnText;
+	private static JPanel turnPanel,backgroundColor;
 	
 	private String diceRoll;
 	private Player nextPlayer;
@@ -54,13 +55,15 @@ public class GameControlPanel extends JPanel{
 		turnPanel = new JPanel();
 		JLabel turnLabel = new JLabel("Whose turn?");
 		turnLabel.setHorizontalAlignment(JLabel.CENTER);
-		turnText = new JTextField(nextPlayer.getName());
-		turnText.setBackground(nextPlayer.getColor());
+		turnText = new JLabel(nextPlayer.getName());
+		backgroundColor = new JPanel();
+		backgroundColor.setBackground(nextPlayer.getColor());
+		backgroundColor.add(turnText);
 		
 		GridLayout turnPanelLayout = new GridLayout(2,1);
 		turnPanel.setLayout(turnPanelLayout);
 		turnPanel.add(turnLabel);
-		turnPanel.add(turnText);
+		turnPanel.add(backgroundColor);
 		
 		// roll information section
 		JLabel rollLabel = new JLabel("Roll:");
@@ -117,7 +120,7 @@ public class GameControlPanel extends JPanel{
 			nextPlayer = board.getNextPlayer();
 			rollText.setText(diceRoll);
 			turnText.setText(nextPlayer.getName());
-			turnPanel.setBackground(nextPlayer.getColor());
+			backgroundColor.setBackground(nextPlayer.getColor());
 		}
 		
 	}
