@@ -13,13 +13,11 @@ import javax.swing.border.Border;
 
 public class CardInfoPanel extends JPanel { 
 	
+	private HumanPlayer thePlayer;
 	private JPanel peoplePanel, roomsPanel, weaponsPanel;
-	private Set<Card> inHand;
-	private Set<Card> seen;
 	
-	public CardInfoPanel() {
-		inHand = new HashSet<Card>();
-		seen = new HashSet<Card>();
+	public CardInfoPanel(HumanPlayer thePlayer) {
+		this.thePlayer = thePlayer;
 		CreateLayout();
 	}
 	
@@ -50,28 +48,25 @@ public class CardInfoPanel extends JPanel {
 		this.add(roomsPanel);
 		this.add(weaponsPanel);
 	}
-	
-	public void setInHand(Set<Card> inHand) {
-		this.inHand = inHand;
-	}
-	
-	public void setSeen(Set<Card> seen) {
-		this.seen = seen;
-	}
+
 	
 	public void updateInHandAndSeen() {
+		//clears the panels before re making them
+		peoplePanel.removeAll();
+		roomsPanel.removeAll();
+		weaponsPanel.removeAll();
 		
 		peoplePanel.add(new JLabel("In Hand:"));
 		roomsPanel.add(new JLabel("In Hand:"));
 		weaponsPanel.add(new JLabel("In Hand:"));
 		
-		addCards(inHand);
+		addCards(thePlayer.getHand());
 		
 		peoplePanel.add(new JLabel("seen:"));
 		roomsPanel.add(new JLabel("seen:"));
 		weaponsPanel.add(new JLabel("seen:"));
 		
-		addCards(seen);
+		addCards(thePlayer.getSeen());
 	}
 	
 	private void addCards(Set<Card> cards) {
@@ -96,22 +91,35 @@ public class CardInfoPanel extends JPanel {
 		}
 	}
 	
-	public static void main(String[] args) {
-		CardInfoPanel cardInfoPanel = new CardInfoPanel();
+	public static void main(String[] args) throws BadConfigFormatException {
 		
-		Set<Card> testInHand = new HashSet<Card>();
-		testInHand.add(new Card("testPersonInHand", "Person"));
-		testInHand.add(new Card("testRoomInHand", "Room"));
-		testInHand.add(new Card("testWeaponInHand", "Weapon"));
-		cardInfoPanel.setInHand(testInHand);
+		HumanPlayer thePlayer = new HumanPlayer("Mrs. White", "White", 12, 12);
 		
-		Set<Card> testSeen = new HashSet<Card>();
-		testSeen.add(new Card("testPersonSeen", "Person"));
-		testSeen.add(new Card("testRoomSeen", "Room"));
-		testSeen.add(new Card("testWeaponSeen", "Weapon"));
-		cardInfoPanel.setSeen(testSeen);
+		CardInfoPanel cardInfoPanel = new CardInfoPanel(thePlayer);
+		
+		thePlayer.addToHand(new Card("testPersonInHand", "Person"));
+		thePlayer.addToHand(new Card("testRoomInHand", "Room"));
+		thePlayer.addToHand(new Card("testWeaponInHand", "Weapon"));
+
+		thePlayer.addToSeen(new Card("testPersonSeen", "Person"));
+		thePlayer.addToSeen(new Card("testRoomSeen", "Room"));
+		thePlayer.addToSeen(new Card("testWeaponSeen", "Weapon"));
 		
 		cardInfoPanel.updateInHandAndSeen();
+		
+		//Uncomment for a more full panel
+		//Later this will be done by the next button from the GameControlPanel
+		//Since we use a HashSet to store seen and hand the cards don't show up in the order they were added but that doesn't realy matter.
+		/*thePlayer.addToSeen(new Card("testPersonSeen#2", "Person"));
+		thePlayer.addToSeen(new Card("testPersonSeen#3", "Person"));
+		thePlayer.addToSeen(new Card("testRoomSeen#2", "Room"));
+		thePlayer.addToSeen(new Card("testRoomSeen#3", "Room"));
+		thePlayer.addToSeen(new Card("testRoomSeen#4", "Room"));
+		thePlayer.addToSeen(new Card("testRoomSeen#5", "Room"));
+		thePlayer.addToSeen(new Card("testWeaponSeen#2", "Weapon"));
+		
+		cardInfoPanel.updateInHandAndSeen();
+		*/
 		
 		JFrame frame = new JFrame();
 		frame.setContentPane(cardInfoPanel);

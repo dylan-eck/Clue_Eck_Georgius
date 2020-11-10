@@ -69,10 +69,10 @@ class AccusationSuggestionTest {
 		 
 			
 		//Order checked is White, Plum, Peacock, Mustard, Green, Scarlet
-		mustard.addCard(handGun);
-		mustard.addCard(movieTheater);
-		scarlett.addCard(bathroom);
-		peacock.addCard(missScarlett);
+		mustard.addToHand(handGun);
+		mustard.addToHand(movieTheater);
+		scarlett.addToHand(bathroom);
+		peacock.addToHand(missScarlett);
 		 
 		 
 	}

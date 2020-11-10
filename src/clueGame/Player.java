@@ -47,7 +47,7 @@ public abstract class Player {
 		return this.name;
 	}
 	
-	public void addCard(Card c) {
+	public void addToHand(Card c) {
 		hand.add(c);
 	}
 	

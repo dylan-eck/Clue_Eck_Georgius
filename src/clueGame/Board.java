@@ -356,7 +356,7 @@ public class Board {
 				break;
 			Card temp = getRandomCard();
 			removableDeck.remove(temp);
-			p.addCard(temp);
+			p.addToHand(temp);
 		}
 		//I'm using a recursive call in case we have to add a mode with less that 6 players 
 		//this method should still deal one card to each player till the deck is empty.
