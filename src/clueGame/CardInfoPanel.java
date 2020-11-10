@@ -38,7 +38,7 @@ public class CardInfoPanel extends JPanel {
 		roomsPanel.setLayout(new GridLayout(0,1));
 		
 		weaponsPanel = new JPanel();
-		Border weaponsPanelBorder = BorderFactory.createTitledBorder("Rooms");
+		Border weaponsPanelBorder = BorderFactory.createTitledBorder("Weapons");
 		weaponsPanel.setBorder(weaponsPanelBorder);
 		// number of rows will change throughout the game
 		weaponsPanel.setLayout(new GridLayout(0,1));
@@ -78,6 +78,7 @@ public class CardInfoPanel extends JPanel {
 		
 		for(Card c : cards) {
 			JTextField text = new JTextField(c.getName());
+			text.setEditable(false);
 			switch(c.getType()) {
 			case PERSON:
 				peoplePanel.add(text);
@@ -87,6 +88,7 @@ public class CardInfoPanel extends JPanel {
 				break;
 			case WEAPON:
 				weaponsPanel.add(text);
+				break;
 			default:
 				break;
 				
@@ -96,8 +98,20 @@ public class CardInfoPanel extends JPanel {
 	
 	public static void main(String[] args) {
 		CardInfoPanel cardInfoPanel = new CardInfoPanel();
-		cardInfoPanel.updateInHandAndSeen();
 		
+		Set<Card> testInHand = new HashSet<Card>();
+		testInHand.add(new Card("testPersonInHand", "Person"));
+		testInHand.add(new Card("testRoomInHand", "Room"));
+		testInHand.add(new Card("testWeaponInHand", "Weapon"));
+		cardInfoPanel.setInHand(testInHand);
+		
+		Set<Card> testSeen = new HashSet<Card>();
+		testSeen.add(new Card("testPersonSeen", "Person"));
+		testSeen.add(new Card("testRoomSeen", "Room"));
+		testSeen.add(new Card("testWeaponSeen", "Weapon"));
+		cardInfoPanel.setSeen(testSeen);
+		
+		cardInfoPanel.updateInHandAndSeen();
 		
 		JFrame frame = new JFrame();
 		frame.setContentPane(cardInfoPanel);
