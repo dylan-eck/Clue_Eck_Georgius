@@ -1,9 +1,12 @@
 package clueGame;
 
 import java.awt.GridLayout;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -11,8 +14,12 @@ import javax.swing.border.Border;
 public class CardInfoPanel extends JPanel { 
 	
 	private JPanel peoplePanel, roomsPanel, weaponsPanel;
+	private Set<Card> inHand;
+	private Set<Card> seen;
 	
 	public CardInfoPanel() {
+		inHand = new HashSet<Card>();
+		seen = new HashSet<Card>();
 		CreateLayout();
 	}
 	
@@ -44,26 +51,50 @@ public class CardInfoPanel extends JPanel {
 		this.add(weaponsPanel);
 	}
 	
-	public void addPerson(String person) {
-		// add a person to the peoplePanel layout (peoplePanel.add(new JTextField("person's name"))
+	public void updateInHandAndSeen() {
+		
+		peoplePanel.add(new JLabel("In Hand:"));
+		roomsPanel.add(new JLabel("In Hand:"));
+		weaponsPanel.add(new JLabel("In Hand:"));
+		
+		addCards(inHand);
+		
+		peoplePanel.add(new JLabel("seen:"));
+		roomsPanel.add(new JLabel("seen:"));
+		weaponsPanel.add(new JLabel("seen:"));
+		
+		addCards(seen);
 	}
 	
-	public void addRoom(String room) {
-		// same idea as addPerson
-	}
-	
-	public void addWeapon(String weapon) {
-		// same idea as adPerson
+	private void addCards(Set<Card> cards) {
+		
+		for(Card c : cards) {
+			JTextField text = new JTextField(c.getName());
+			switch(c.getType()) {
+			case PERSON:
+				peoplePanel.add(text);
+				break;
+			case ROOM:
+				roomsPanel.add(text);
+				break;
+			case WEAPON:
+				weaponsPanel.add(text);
+			default:
+				break;
+				
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
 		CardInfoPanel cardInfoPanel = new CardInfoPanel();
+		cardInfoPanel.updateInHandAndSeen();
+		
+		
 		JFrame frame = new JFrame();
 		frame.setContentPane(cardInfoPanel);
-		
 		frame.setSize(200, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		frame.setVisible(true);
-		
 	}
 }
