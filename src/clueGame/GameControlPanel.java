@@ -18,6 +18,8 @@ public class GameControlPanel extends JPanel{
 	private static int CONTROL_PANEL_WIDTH = 750;
 	private static int CONTROL_PANEL_HEIGHT = 180;
 	
+	private static final String WHOSE_TURN_TEXT = "Whose turn?";
+	private static final String ROLL_PANEL_TEXT = "Roll:";
 	private static final String ACCUSE_BUTTON_TEXT = "Make Accusation";
 	private static final String NEXT_TURN_BUTTON_TEXT = "NEXT!";
 	
@@ -48,25 +50,22 @@ public class GameControlPanel extends JPanel{
 	}
 	
 	private void CreateLayout() {
-		GridLayout controlPanelLayout = new GridLayout(2,1);
-		this.setLayout(controlPanelLayout);
+		this.setLayout(new GridLayout(2,1));
 		
 		// turn information section
 		turnPanel = new JPanel();
-		JLabel turnLabel = new JLabel("Whose turn?");
+		JLabel turnLabel = new JLabel(WHOSE_TURN_TEXT);
 		turnLabel.setHorizontalAlignment(JLabel.CENTER);
 		turnText = new JLabel(nextPlayer.getName());
 		backgroundColor = new JPanel();
 		backgroundColor.setBackground(nextPlayer.getColor());
 		backgroundColor.add(turnText);
-		
-		GridLayout turnPanelLayout = new GridLayout(2,1);
-		turnPanel.setLayout(turnPanelLayout);
+		turnPanel.setLayout(new GridLayout(2,1));
 		turnPanel.add(turnLabel);
 		turnPanel.add(backgroundColor);
 		
 		// roll information section
-		JLabel rollLabel = new JLabel("Roll:");
+		JLabel rollLabel = new JLabel(ROLL_PANEL_TEXT);
 		rollText = new JTextField(diceRoll, 6);
 		JPanel rollPanel = new JPanel();
 		rollPanel.add(rollLabel);
@@ -79,8 +78,7 @@ public class GameControlPanel extends JPanel{
 		
 		// upper half of the control panel
 		JPanel upperSubPanel = new JPanel();
-		GridLayout upperLayout = new GridLayout(1,4);
-		upperSubPanel.setLayout(upperLayout);
+		upperSubPanel.setLayout(new GridLayout(1,4));
 		upperSubPanel.add(turnPanel);
 		upperSubPanel.add(rollPanel);
 		upperSubPanel.add(accuseButton);
@@ -88,21 +86,11 @@ public class GameControlPanel extends JPanel{
 		this.add(upperSubPanel, BorderLayout.NORTH);
 		
 		//Guess panel. It's going to be blank for now
-		JPanel guessPanel = new JPanel();
-		Border guessPanelBorder = BorderFactory.createTitledBorder("guess");
-		guessPanel.setBorder(guessPanelBorder);
-		GridLayout guessPanelLayout = new GridLayout(1,0);
-		guessPanel.setLayout(guessPanelLayout);
-		guessPanel.add(guessText);
+		JPanel guessPanel = createPanel("guess");
 		
 		//Guess Result panel. Nothing much is happening here either.
-		JPanel resultPanel = new JPanel();
-		Border resultPanelBorder = BorderFactory.createTitledBorder("result");
-		resultPanel.setBorder(resultPanelBorder);
-		GridLayout resultPanelLayout = new GridLayout(1,0);
-		resultPanel.setLayout(resultPanelLayout);
-		resultPanel.add(resultText);
-		
+		JPanel resultPanel = createPanel("result");
+
 		// lower half of the control panel
 		JPanel lowerSubPanel = new JPanel();
 		GridLayout lowerLayout = new GridLayout(1,2);
@@ -110,6 +98,15 @@ public class GameControlPanel extends JPanel{
 		lowerSubPanel.add(guessPanel);
 		lowerSubPanel.add(resultPanel);
 		add(lowerSubPanel,BorderLayout.CENTER);
+	}
+	
+	//TODO consider renaming this function
+	private JPanel createPanel(String name) {
+		JPanel panel = new JPanel();
+		panel.setBorder(BorderFactory.createTitledBorder(name));
+		panel.setLayout(new GridLayout(1,0));
+		panel.add(resultText);
+		return panel;
 	}
 	
 	private class nextTurnListener implements ActionListener{
