@@ -1,7 +1,6 @@
 package clueGame;
 
 import java.awt.GridLayout;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
@@ -13,11 +12,11 @@ import javax.swing.border.Border;
 
 public class CardInfoPanel extends JPanel { 
 	
-	private HumanPlayer thePlayer;
+	private HumanPlayer humanPlayer;
 	private JPanel peoplePanel, roomsPanel, weaponsPanel;
 	
-	public CardInfoPanel(HumanPlayer thePlayer) {
-		this.thePlayer = thePlayer;
+	public CardInfoPanel(HumanPlayer humanPlayer) {
+		this.humanPlayer = humanPlayer;
 		CreateLayout();
 	}
 	
@@ -35,7 +34,6 @@ public class CardInfoPanel extends JPanel {
 		this.add(weaponsPanel);
 	}
 
-	
 	private JPanel createPanel(String name) {
 		JPanel panel = new JPanel();
 		Border border = BorderFactory.createTitledBorder(name);
@@ -54,17 +52,16 @@ public class CardInfoPanel extends JPanel {
 		roomsPanel.add(new JLabel("In Hand:"));
 		weaponsPanel.add(new JLabel("In Hand:"));
 		
-		addCards(thePlayer.getHand());
+		addCards(humanPlayer.getHand());
 		
 		peoplePanel.add(new JLabel("seen:"));
 		roomsPanel.add(new JLabel("seen:"));
 		weaponsPanel.add(new JLabel("seen:"));
 		
-		addCards(thePlayer.getSeen());
+		addCards(humanPlayer.getSeen());
 	}
 	
 	private void addCards(Set<Card> cards) {
-		
 		for(Card c : cards) {
 			JTextField text = new JTextField(c.getName());
 			text.setEditable(false);
