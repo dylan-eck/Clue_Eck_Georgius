@@ -23,23 +23,9 @@ public class CardInfoPanel extends JPanel {
 	
 	public void CreateLayout() {
 		
-		peoplePanel = new JPanel();
-		Border peoplePanelBorder = BorderFactory.createTitledBorder("People");
-		peoplePanel.setBorder(peoplePanelBorder);
-		// number of rows will change throughout the game
-		peoplePanel.setLayout(new GridLayout(0,1));
-		
-		roomsPanel = new JPanel();
-		Border roomsPanelBorder = BorderFactory.createTitledBorder("Rooms");
-		roomsPanel.setBorder(roomsPanelBorder);
-		// number of rows will change throughout the game
-		roomsPanel.setLayout(new GridLayout(0,1));
-		
-		weaponsPanel = new JPanel();
-		Border weaponsPanelBorder = BorderFactory.createTitledBorder("Weapons");
-		weaponsPanel.setBorder(weaponsPanelBorder);
-		// number of rows will change throughout the game
-		weaponsPanel.setLayout(new GridLayout(0,1));
+		peoplePanel = createPanel("People");
+		roomsPanel = createPanel("Rooms");
+		weaponsPanel = createPanel("Weaponds");
 		
 		Border mainPanelBorder = BorderFactory.createTitledBorder("Known Cards");
 		this.setBorder(mainPanelBorder);
@@ -49,6 +35,14 @@ public class CardInfoPanel extends JPanel {
 		this.add(weaponsPanel);
 	}
 
+	
+	private JPanel createPanel(String name) {
+		JPanel panel = new JPanel();
+		Border border = BorderFactory.createTitledBorder(name);
+		panel.setBorder(border);
+		panel.setLayout(new GridLayout(0,1));
+		return panel;
+	}
 	
 	public void updateInHandAndSeen() {
 		//clears the panels before re making them
