@@ -32,12 +32,8 @@ public class GameControlPanel extends JPanel{
 	private String diceRoll;
 	private Player nextPlayer;
 
-	public GameControlPanel() {	
-		//This will be removed when we integrate this.
-		//probably by just calling get instance though if this is in the board class we won't have to waste the memory.
-		board = Board.getInstance();
-		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");		 
-		board.initialize();
+	public GameControlPanel(Board b) {	
+		board = b;
 		
 		diceRoll = Integer.toString(board.rollDie());
 		nextPlayer = board.getNextPlayer();
@@ -139,8 +135,13 @@ public class GameControlPanel extends JPanel{
 	}
 	
 	public static void main(String[] args) {
+		//This will be removed when we integrate this.
+		//probably by just calling get instance though if this is in the board class we won't have to waste the memory.
+		board = Board.getInstance();
+		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");		 
+		board.initialize();
 		
-		GameControlPanel controlPanel = new GameControlPanel();
+		GameControlPanel controlPanel = new GameControlPanel(board);
 		JFrame frame = new JFrame();
 		frame.setContentPane(controlPanel);
 		frame.setSize(CONTROL_PANEL_WIDTH, CONTROL_PANEL_HEIGHT);
