@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
@@ -9,7 +10,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Board {
+import javax.swing.JPanel;
+
+public class Board extends JPanel{
 	
 	private BoardCell[][] boardCellArray;
 	private int numRows, numCols;
@@ -519,5 +522,12 @@ public class Board {
 			nextPlayer = players.iterator();
 			return (Player) nextPlayer.next();
 		}
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(Color.GREEN);
+		g.drawRect(0, 0, 400, 400);
 	}
 }
