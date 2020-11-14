@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel{
 
-	private static int CONTROL_PANEL_WIDTH = 750;
-	private static int CONTROL_PANEL_HEIGHT = 750;
+	private static int CONTROL_PANEL_WIDTH = 1000;
+	private static int CONTROL_PANEL_HEIGHT = 1000;
 	
 	private JPanel visualBoard;
 	private int numCols,numRows;
@@ -36,7 +36,8 @@ public class BoardPanel extends JPanel{
 			for(int col = 0;col<numCols;col++) {
 				BoardCell tempCell = board.getCell(row, col);
 				JPanel tempPanel = new JPanel();
-
+				tempPanel.setSize(CONTROL_PANEL_WIDTH/numCols, CONTROL_PANEL_HEIGHT/numRows);
+				
 				//Add more options and colors
 				if(tempCell.getChar() == board.getHallways()) {
 					tempPanel.setBackground(Color.YELLOW);
