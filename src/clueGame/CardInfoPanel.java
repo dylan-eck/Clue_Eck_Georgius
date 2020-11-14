@@ -38,6 +38,8 @@ public class CardInfoPanel extends JPanel {
 		this.add(peoplePanel);
 		this.add(roomsPanel);
 		this.add(weaponsPanel);
+		
+		updateInHandAndSeen();
 	}
 
 	private JPanel createPanel(String name) {

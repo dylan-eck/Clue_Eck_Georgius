@@ -542,7 +542,7 @@ public class Board extends JPanel{
 			}
 		}
 		
-		int textWidth = 4*cellWidth;
+		int textWidth = 5*cellWidth;
 		int textHeight = cellHeight;
 		
 		/*for(Room r:rooms) {
@@ -551,7 +551,7 @@ public class Board extends JPanel{
 			//removes the unused and hall way "Rooms" that we had to add for a previous test
 			if(tempLableCell != null) {
 				this.add(roomLable);
-				roomLable.setLocation((tempLableCell.getLocation()[0]*cellWidth)-(textWidth/2), tempLableCell.getLocation()[1]*cellHeight);
+				roomLable.setLocation((tempLableCell.getLocation()[0]*cellWidth)-(textWidth/3), tempLableCell.getLocation()[1]*cellHeight);
 				roomLable.setSize(textWidth,textHeight);
 			}
 		}*/	
