@@ -33,7 +33,5 @@ public class ClueGame {
 	
 	public static void main(String[] args) throws BadConfigFormatException{
 		ClueGame clueGame = new ClueGame();
-		
-		
 	}
 }

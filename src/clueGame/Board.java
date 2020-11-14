@@ -541,8 +541,6 @@ public class Board extends JPanel{
 		for(int row = 0; row < this.numRows; row++) {
 			for(int column = 0; column < this.numCols; column++) {
 				getCell(row, column).draw(g, cellWidth, cellHeight);
-				
-				
 			}
 		}
 	}
