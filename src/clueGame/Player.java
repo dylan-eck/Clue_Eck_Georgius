@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -96,6 +97,11 @@ public abstract class Player {
 	
 	public Set<Card> getSeen() {
 		return seen;
+	}
+	
+	public void draw(Graphics g, int cellWidth, int cellHeight) {
+		g.setColor(this.getColor());	
+		g.fillOval(this.getLocation()[0]*cellWidth, this.getLocation()[1]*cellHeight, cellWidth, cellHeight);
 	}
 	
 	abstract public boolean isHuman();

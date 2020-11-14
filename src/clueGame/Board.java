@@ -577,8 +577,7 @@ public class Board extends JPanel{
 		}
 	
 		for(Player p:players) {
-			g.setColor(p.getColor());	
-			g.fillOval(p.getLocation()[0]*cellWidth, p.getLocation()[1]*cellHeight, cellWidth, cellHeight);
+			p.draw(g, cellWidth, cellHeight);
 		}
 	}
 }
