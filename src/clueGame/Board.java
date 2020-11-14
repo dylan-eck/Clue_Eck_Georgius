@@ -33,6 +33,8 @@ public class Board extends JPanel{
 	private Set<Card> deck, removableDeck,weapons,players2,rooms2;
 	private Solution solution;
 	
+	private Set<JLabel> roomNames;
+	
 	private static Board theInstance = new Board();
 	
 	public static Board getInstance() {
@@ -77,6 +79,15 @@ public class Board extends JPanel{
 		setSolution();
 		deal();
 		nextPlayer = players.iterator();
+		
+		//Sets up for drawing the names
+		//Makes sure there are only ever 9 JLabels on the screen
+		this.roomNames = new HashSet<JLabel>();
+		for(Room r:rooms) {
+			if(r.getLabelCell()!=null) {
+				roomNames.add(new JLabel(r.getName()));
+			}
+		}
 	}
 	
 	/**
@@ -408,6 +419,16 @@ public class Board extends JPanel{
 	public Room getRoom(BoardCell cell) {
 		return getRoom(cell.getChar());
 	}
+	
+	public Room getRoom(String name) {
+		for(Room i:rooms) {
+			if(i.getName().equals(name)) {
+				return i;
+			}
+		}
+		return null;
+	}
+	
 
 	public Set<Room> getAllRooms(){
 		return rooms;
@@ -545,16 +566,15 @@ public class Board extends JPanel{
 		int textWidth = 5*cellWidth;
 		int textHeight = cellHeight;
 		
-		/*for(Room r:rooms) {
-			JLabel roomLable = new JLabel(r.getName());
-			BoardCell tempLableCell = r.getLabelCell();
-			//removes the unused and hall way "Rooms" that we had to add for a previous test
-			if(tempLableCell != null) {
-				this.add(roomLable);
-				roomLable.setLocation((tempLableCell.getLocation()[0]*cellWidth)-(textWidth/3), tempLableCell.getLocation()[1]*cellHeight);
-				roomLable.setSize(textWidth,textHeight);
+		for(JLabel j:roomNames) {
+			String roomName = j.getText();
+			BoardCell tempLabelCell = this.getRoom(roomName).getLabelCell();
+			if(tempLabelCell != null) {
+				j.setLocation((tempLabelCell.getLocation()[0]*cellWidth)-(textWidth/3), tempLabelCell.getLocation()[1]*cellHeight);
+				j.setSize(textWidth,textHeight);
+				j.setForeground(Color.BLACK);
 			}
-		}*/	
+		}
 		
 		for(Player p:players) {
 			g.setColor(p.getColor());	

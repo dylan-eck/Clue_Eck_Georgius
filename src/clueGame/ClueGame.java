@@ -31,7 +31,6 @@ public class ClueGame {
 				player = (HumanPlayer) p;
 			}
 		}
-		System.out.println(player.getHand());
 		infoPanel = new CardInfoPanel(player);
 		
 		gameFrame.add(gameBoard, BorderLayout.CENTER);
