@@ -103,7 +103,7 @@ public class BoardCell {
 	}
 	
 	public void draw(Graphics g, int width, int height) {
-		g.drawRect(location[0], location[1], width, height);
+		g.drawRect(location[0]*width, location[1]*width, width, height);
 	}
 	
 	public void setRoomLabel() {

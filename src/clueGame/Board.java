@@ -535,15 +535,15 @@ public class Board extends JPanel{
 		int cellWidth = frameWidth / this.numCols;
 		int cellHeight = frameHeight / this.numRows;
 		
-		g.fillRect(0, 0, frameWidth, frameHeight);
+		//g.fillRect(0, 0, frameWidth, frameHeight);
 		
 		
-//		for(int row = 0; row < this.numRows; row++) {
-//			for(int column = 0; column < this.numCols; column++) {
-//				getCell(row, column).draw(g, cellWidth, cellHeight);
-//				
-//				
-//			}
-//		}
+		for(int row = 0; row < this.numRows; row++) {
+			for(int column = 0; column < this.numCols; column++) {
+				getCell(row, column).draw(g, cellWidth, cellHeight);
+				
+				
+			}
+		}
 	}
 }
