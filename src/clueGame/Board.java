@@ -527,7 +527,23 @@ public class Board extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.GREEN);
-		g.drawRect(0, 0, 400, 400);
+		
+		// TODO need to somehow get these values from the main JFrame
+		int frameWidth = 400;
+		int frameHeight = 400;
+		
+		int cellWidth = frameWidth / this.numCols;
+		int cellHeight = frameHeight / this.numRows;
+		
+		g.drawRect(0, 0, frameWidth, frameHeight);
+		
+		
+//		for(int row = 0; row < this.numRows; row++) {
+//			for(int column = 0; column < this.numCols; column++) {
+//				getCell(row, column).draw(g, cellWidth, cellHeight);
+//				
+//				
+//			}
+//		}
 	}
 }

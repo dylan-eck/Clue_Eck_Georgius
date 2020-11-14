@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -99,6 +100,10 @@ public class BoardCell {
 			default:
 				break;
 		}
+	}
+	
+	public void draw(Graphics g, int width, int height) {
+		g.drawRect(location[0], location[1], width, height);
 	}
 	
 	public void setRoomLabel() {

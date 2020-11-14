@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.GridLayout;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
@@ -24,7 +25,12 @@ public class CardInfoPanel extends JPanel {
 		
 		peoplePanel = createPanel("People");
 		roomsPanel = createPanel("Rooms");
-		weaponsPanel = createPanel("Weaponds");
+		weaponsPanel = createPanel("Weapons");
+		
+		JTextField tempText = new JTextField("");
+		tempText.setColumns(10);
+		tempText.setEditable(false);
+		peoplePanel.add(tempText);
 		
 		Border mainPanelBorder = BorderFactory.createTitledBorder("Known Cards");
 		this.setBorder(mainPanelBorder);
@@ -64,6 +70,7 @@ public class CardInfoPanel extends JPanel {
 	private void addCards(Set<Card> cards) {
 		for(Card c : cards) {
 			JTextField text = new JTextField(c.getName());
+			text.setColumns(20);
 			text.setEditable(false);
 			switch(c.getType()) {
 			case PERSON:
@@ -82,40 +89,40 @@ public class CardInfoPanel extends JPanel {
 		}
 	}
 	
-	public static void main(String[] args) throws BadConfigFormatException {
-		
-		HumanPlayer thePlayer = new HumanPlayer("Mrs. White", "White", 12, 12);
-		
-		CardInfoPanel cardInfoPanel = new CardInfoPanel(thePlayer);
-		
-		thePlayer.addToHand(new Card("testPersonInHand", "Person"));
-		thePlayer.addToHand(new Card("testRoomInHand", "Room"));
-		thePlayer.addToHand(new Card("testWeaponInHand", "Weapon"));
-
-		thePlayer.addToSeen(new Card("testPersonSeen", "Person"));
-		thePlayer.addToSeen(new Card("testRoomSeen", "Room"));
-		thePlayer.addToSeen(new Card("testWeaponSeen", "Weapon"));
-		
-		cardInfoPanel.updateInHandAndSeen();
-		
-		//Uncomment for a more full panel
-		//Later this will be done by the next button from the GameControlPanel
-		//Since we use a HashSet to store seen and hand the cards don't show up in the order they were added but that doesn't realy matter.
-		/*thePlayer.addToSeen(new Card("testPersonSeen#2", "Person"));
-		thePlayer.addToSeen(new Card("testPersonSeen#3", "Person"));
-		thePlayer.addToSeen(new Card("testRoomSeen#2", "Room"));
-		thePlayer.addToSeen(new Card("testRoomSeen#3", "Room"));
-		thePlayer.addToSeen(new Card("testRoomSeen#4", "Room"));
-		thePlayer.addToSeen(new Card("testRoomSeen#5", "Room"));
-		thePlayer.addToSeen(new Card("testWeaponSeen#2", "Weapon"));
-		
-		cardInfoPanel.updateInHandAndSeen();
-		*/
-		
-		JFrame frame = new JFrame();
-		frame.setContentPane(cardInfoPanel);
-		frame.setSize(200, 750);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		frame.setVisible(true);
-	}
+//	public static void main(String[] args) throws BadConfigFormatException {
+//		
+//		HumanPlayer thePlayer = new HumanPlayer("Mrs. White", "White", 12, 12);
+//		
+//		CardInfoPanel cardInfoPanel = new CardInfoPanel(thePlayer);
+//		
+//		thePlayer.addToHand(new Card("testPersonInHand", "Person"));
+//		thePlayer.addToHand(new Card("testRoomInHand", "Room"));
+//		thePlayer.addToHand(new Card("testWeaponInHand", "Weapon"));
+//
+//		thePlayer.addToSeen(new Card("testPersonSeen", "Person"));
+//		thePlayer.addToSeen(new Card("testRoomSeen", "Room"));
+//		thePlayer.addToSeen(new Card("testWeaponSeen", "Weapon"));
+//		
+//		cardInfoPanel.updateInHandAndSeen();
+//		
+//		//Uncomment for a more full panel
+//		//Later this will be done by the next button from the GameControlPanel
+//		//Since we use a HashSet to store seen and hand the cards don't show up in the order they were added but that doesn't realy matter.
+//		/*thePlayer.addToSeen(new Card("testPersonSeen#2", "Person"));
+//		thePlayer.addToSeen(new Card("testPersonSeen#3", "Person"));
+//		thePlayer.addToSeen(new Card("testRoomSeen#2", "Room"));
+//		thePlayer.addToSeen(new Card("testRoomSeen#3", "Room"));
+//		thePlayer.addToSeen(new Card("testRoomSeen#4", "Room"));
+//		thePlayer.addToSeen(new Card("testRoomSeen#5", "Room"));
+//		thePlayer.addToSeen(new Card("testWeaponSeen#2", "Weapon"));
+//		
+//		cardInfoPanel.updateInHandAndSeen();
+//		*/
+//		
+//		JFrame frame = new JFrame();
+//		frame.setContentPane(cardInfoPanel);
+//		frame.setSize(200, 750);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+//		frame.setVisible(true);
+//	}
 }
