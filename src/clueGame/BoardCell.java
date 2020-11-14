@@ -104,7 +104,10 @@ public class BoardCell {
 	}
 	
 	public void draw(Graphics g, int width, int height) {
-		if(letter != 'H') {
+		if(letter == 'X') {
+			g.setColor(Color.BLACK);	
+			g.fillRect(location[0]*width, location[1]*width, width, height);
+		} else if (letter != 'H') {
 			g.setColor(Color.CYAN);	
 			g.fillRect(location[0]*width, location[1]*width, width, height);
 		} else {
