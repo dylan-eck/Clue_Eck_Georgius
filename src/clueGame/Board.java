@@ -33,8 +33,6 @@ public class Board extends JPanel{
 	private Set<Card> deck, removableDeck,weapons,players2,rooms2;
 	private Solution solution;
 	
-	private Set<JLabel> roomNames;
-	
 	private static Board theInstance = new Board();
 	
 	public static Board getInstance() {
@@ -79,15 +77,6 @@ public class Board extends JPanel{
 		setSolution();
 		deal();
 		nextPlayer = players.iterator();
-		
-		//Sets up for drawing the names
-		//Makes sure there are only ever 9 JLabels on the screen
-		this.roomNames = new HashSet<JLabel>();
-		for(Room r:rooms) {
-			if(r.getLabelCell()!=null) {
-				roomNames.add(new JLabel(r.getName()));
-			}
-		}
 	}
 	
 	/**
@@ -559,20 +548,7 @@ public class Board extends JPanel{
 	
 		for(int row = 0; row < this.numRows; row++) {
 			for(int column = 0; column < this.numCols; column++) {
-				getCell(row, column).draw(g, cellWidth, cellHeight);
-			}
-		}
-		
-		int textWidth = 5*cellWidth;
-		int textHeight = cellHeight;
-		
-		g.setColor(Color.BLACK);
-		for(JLabel j:roomNames) {
-			String roomName = j.getText();
-			BoardCell tempLabelCell = this.getRoom(roomName).getLabelCell();
-						
-			if(tempLabelCell != null) {
-				g.drawString(roomName, (tempLabelCell.getLocation()[0]*cellWidth)-(textWidth/3), tempLabelCell.getLocation()[1]*cellHeight);
+				getCell(row, column).draw(g, cellWidth, cellHeight,this);
 			}
 		}
 	
