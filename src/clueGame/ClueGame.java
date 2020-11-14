@@ -15,7 +15,7 @@ public class ClueGame {
 	public ClueGame() throws BadConfigFormatException{
 
 		gameFrame = new JFrame();
-		gameFrame.setSize(600, 600);
+		gameFrame.setSize(800, 600);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		gameBoard = Board.getInstance();

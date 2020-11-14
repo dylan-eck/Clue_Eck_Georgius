@@ -556,7 +556,7 @@ public class Board extends JPanel{
 		
 		int cellWidth = frameWidth / this.numCols;
 		int cellHeight = frameHeight / this.numRows;
-		
+	
 		for(int row = 0; row < this.numRows; row++) {
 			for(int column = 0; column < this.numCols; column++) {
 				getCell(row, column).draw(g, cellWidth, cellHeight);
@@ -566,16 +566,16 @@ public class Board extends JPanel{
 		int textWidth = 5*cellWidth;
 		int textHeight = cellHeight;
 		
+		g.setColor(Color.BLACK);
 		for(JLabel j:roomNames) {
 			String roomName = j.getText();
 			BoardCell tempLabelCell = this.getRoom(roomName).getLabelCell();
+						
 			if(tempLabelCell != null) {
-				j.setLocation((tempLabelCell.getLocation()[0]*cellWidth)-(textWidth/3), tempLabelCell.getLocation()[1]*cellHeight);
-				j.setSize(textWidth,textHeight);
-				j.setForeground(Color.BLACK);
+				g.drawString(roomName, (tempLabelCell.getLocation()[0]*cellWidth)-(textWidth/3), tempLabelCell.getLocation()[1]*cellHeight);
 			}
 		}
-		
+	
 		for(Player p:players) {
 			g.setColor(p.getColor());	
 			g.fillOval(p.getLocation()[0]*cellWidth, p.getLocation()[1]*cellHeight, cellWidth, cellHeight);
