@@ -106,13 +106,13 @@ public class BoardCell {
 	public void draw(Graphics g, int width, int height) {
 		if(letter != 'H') {
 			g.setColor(Color.CYAN);	
+			g.fillRect(location[0]*width, location[1]*width, width, height);
 		} else {
 			g.setColor(Color.YELLOW);
-		}
-		g.fillRect(location[0]*width, location[1]*width, width, height);
-		
-		g.setColor(Color.BLACK);
-		g.drawRect(location[0]*width, location[1]*width, width, height);
+			g.fillRect(location[0]*width, location[1]*width, width, height);
+			g.setColor(Color.BLACK);
+			g.drawRect(location[0]*width, location[1]*width, width, height);
+		}	
 	}
 	
 	public void setRoomLabel() {

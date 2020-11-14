@@ -528,15 +528,11 @@ public class Board extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		// TODO need to somehow get these values from the main JFrame
 		int frameWidth = getWidth();
 		int frameHeight = getHeight();
 		
 		int cellWidth = frameWidth / this.numCols;
-		int cellHeight = frameHeight / this.numRows;
-		
-		//g.fillRect(0, 0, frameWidth, frameHeight);
-		
+		int cellHeight = frameHeight / this.numRows;		
 		
 		for(int row = 0; row < this.numRows; row++) {
 			for(int column = 0; column < this.numCols; column++) {
