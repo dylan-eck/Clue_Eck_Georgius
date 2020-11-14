@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Set;
@@ -103,6 +104,14 @@ public class BoardCell {
 	}
 	
 	public void draw(Graphics g, int width, int height) {
+		if(letter != 'H') {
+			g.setColor(Color.CYAN);	
+		} else {
+			g.setColor(Color.YELLOW);
+		}
+		g.fillRect(location[0]*width, location[1]*width, width, height);
+		
+		g.setColor(Color.BLACK);
 		g.drawRect(location[0]*width, location[1]*width, width, height);
 	}
 	
