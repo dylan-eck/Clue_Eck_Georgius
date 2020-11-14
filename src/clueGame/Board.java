@@ -529,13 +529,13 @@ public class Board extends JPanel{
 		super.paintComponent(g);
 		
 		// TODO need to somehow get these values from the main JFrame
-		int frameWidth = 400;
-		int frameHeight = 400;
+		int frameWidth = getWidth();
+		int frameHeight = getHeight();
 		
 		int cellWidth = frameWidth / this.numCols;
 		int cellHeight = frameHeight / this.numRows;
 		
-		g.drawRect(0, 0, frameWidth, frameHeight);
+		g.fillRect(0, 0, frameWidth, frameHeight);
 		
 		
 //		for(int row = 0; row < this.numRows; row++) {
