@@ -26,6 +26,7 @@ public class Board extends JPanel{
 	private Set<BoardCell> targets, visited;
 	private Set<Room> rooms;
 	private char hallwayLetter;
+	
 	public final char UNREACHABLE = 'X';
 	
 	private Set<Player> players;
@@ -533,7 +534,7 @@ public class Board extends JPanel{
 		int frameHeight = getHeight();
 		
 		int cellWidth = frameWidth / this.numCols;
-		int cellHeight = frameHeight / this.numRows;		
+		int cellHeight = frameHeight / this.numRows;
 		
 		for(int row = 0; row < this.numRows; row++) {
 			for(int column = 0; column < this.numCols; column++) {
@@ -541,10 +542,23 @@ public class Board extends JPanel{
 			}
 		}
 		
+		int textWidth = 4*cellWidth;
+		int textHeight = cellHeight;
+		
 		/*for(Room r:rooms) {
-			JLabel roomLabel = new JLabel(r.getName());
+			JLabel roomLable = new JLabel(r.getName());
 			BoardCell tempLableCell = r.getLabelCell();
-			
-		}*/
+			//removes the unused and hall way "Rooms" that we had to add for a previous test
+			if(tempLableCell != null) {
+				this.add(roomLable);
+				roomLable.setLocation((tempLableCell.getLocation()[0]*cellWidth)-(textWidth/2), tempLableCell.getLocation()[1]*cellHeight);
+				roomLable.setSize(textWidth,textHeight);
+			}
+		}*/	
+		
+		for(Player p:players) {
+			g.setColor(p.getColor());	
+			g.fillOval(p.getLocation()[0]*cellWidth, p.getLocation()[1]*cellHeight, cellWidth, cellHeight);
+		}
 	}
 }

@@ -111,10 +111,10 @@ public class BoardCell {
 			g.setColor(Color.BLACK);	
 			g.fillRect(location[0]*width, location[1]*height, width, height);
 		} else if (letter != 'H') {
-			g.setColor(Color.CYAN);	
+			g.setColor(Color.lightGray);	
 			g.fillRect(location[0]*width, location[1]*height, width, height);
 		} else {
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.ORANGE);
 			g.fillRect(location[0]*width, location[1]*height, width, height);
 			g.setColor(Color.BLACK);
 			g.drawRect(location[0]*width, location[1]*height, width, height);
