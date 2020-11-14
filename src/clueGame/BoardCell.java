@@ -106,15 +106,15 @@ public class BoardCell {
 	public void draw(Graphics g, int width, int height) {
 		if(letter == 'X') {
 			g.setColor(Color.BLACK);	
-			g.fillRect(location[0]*width, location[1]*width, width, height);
+			g.fillRect(location[0]*width, location[1]*height, width, height);
 		} else if (letter != 'H') {
 			g.setColor(Color.CYAN);	
-			g.fillRect(location[0]*width, location[1]*width, width, height);
+			g.fillRect(location[0]*width, location[1]*height, width, height);
 		} else {
 			g.setColor(Color.YELLOW);
-			g.fillRect(location[0]*width, location[1]*width, width, height);
+			g.fillRect(location[0]*width, location[1]*height, width, height);
 			g.setColor(Color.BLACK);
-			g.drawRect(location[0]*width, location[1]*width, width, height);
+			g.drawRect(location[0]*width, location[1]*height, width, height);
 		}	
 	}
 	
@@ -179,6 +179,10 @@ public class BoardCell {
 	
 	public char getChar() {
 		return letter;
+	}
+	
+	public int[] getLocation() {
+		return location;
 	}
 	
 	public String toString() {
