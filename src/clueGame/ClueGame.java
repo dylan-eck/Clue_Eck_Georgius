@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JFrame;
 
@@ -22,8 +23,16 @@ public class ClueGame {
 		gameBoard.initialize();
 		
 		controlPanel = new GameControlPanel(gameBoard);
-		// \/ TODO fix this \/
-		infoPanel = new CardInfoPanel(new HumanPlayer("Miss Scarlett", "Red", 0, 0));
+		
+		HumanPlayer player=null;
+		
+		for(Player p:gameBoard.getPlayers()) {
+			if(p.isHuman()) {
+				player = (HumanPlayer) p;
+			}
+		}
+		System.out.println(player.getHand());
+		infoPanel = new CardInfoPanel(player);
 		
 		gameFrame.add(gameBoard, BorderLayout.CENTER);
 		gameFrame.add(infoPanel, BorderLayout.EAST);

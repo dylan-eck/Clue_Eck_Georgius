@@ -123,4 +123,8 @@ public class ComputerPlayer extends Player{
 		
 		return targetCell;
 	}
+	
+	public boolean isHuman() {
+		return false;
+	}
 }

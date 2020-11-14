@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Board extends JPanel{
@@ -539,5 +540,11 @@ public class Board extends JPanel{
 				getCell(row, column).draw(g, cellWidth, cellHeight);
 			}
 		}
+		
+		/*for(Room r:rooms) {
+			JLabel roomLabel = new JLabel(r.getName());
+			BoardCell tempLableCell = r.getLabelCell();
+			
+		}*/
 	}
 }

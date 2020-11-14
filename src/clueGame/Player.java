@@ -97,4 +97,6 @@ public abstract class Player {
 	public Set<Card> getSeen() {
 		return seen;
 	}
+	
+	abstract public boolean isHuman();
 }

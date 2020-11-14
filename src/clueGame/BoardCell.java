@@ -13,6 +13,9 @@ public class BoardCell {
 	private DoorDirection doorDirection;
 	private Set<BoardCell> adjList;
 	
+	private static final int DOORWAY_HIGHT = 5;
+	private static final int DOORWAY_WIDTH = 5;
+	
 	public BoardCell(int xpos, int ypos, char letter, boolean isRoom) {
 		location = new int[] {xpos, ypos};
 		this.letter = letter;
@@ -116,6 +119,29 @@ public class BoardCell {
 			g.setColor(Color.BLACK);
 			g.drawRect(location[0]*width, location[1]*height, width, height);
 		}	
+		
+		if(this.isDoorway()) {
+			switch(doorDirection) {
+				case UP:
+					g.setColor(Color.BLACK);
+					g.fillRect(location[0]*width, location[1]*height, width, DOORWAY_HIGHT);
+					break;
+				case DOWN:
+					g.setColor(Color.BLACK);
+					g.fillRect(location[0]*width, (location[1]+1)*height-DOORWAY_HIGHT, width, DOORWAY_HIGHT);
+					break;
+				case RIGHT:
+					g.setColor(Color.BLACK);
+					g.fillRect((location[0]+1)*width-DOORWAY_WIDTH, location[1]*height, DOORWAY_WIDTH, height);
+					break;
+				case LEFT:
+					g.setColor(Color.BLACK);
+					g.fillRect(location[0]*width, location[1]*height, DOORWAY_WIDTH, height);
+					break;
+				default:
+					break;
+			}
+		}
 	}
 	
 	public void setRoomLabel() {
