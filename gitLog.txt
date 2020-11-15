@@ -1,3 +1,162 @@
+commit b22b3a00d7b1819bb959b6c19e5bef99ba39e340
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Fri Nov 13 22:37:10 2020 -0700
+
+    Tried re-working how the name was displayed but it nolonger works
+
+commit a039ab9b6d3143cb7bac02dc5bb7867efcf2cfe9
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Fri Nov 13 21:50:54 2020 -0700
+
+    Fixed the cardInfoPanel in the overall game JFrame
+
+commit 1023fcc6865c05a77899a6a77133051ee5761e23
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Fri Nov 13 21:39:02 2020 -0700
+
+    added players and the text fields for the rooms but the text fields cause the game to freeze after they are made.
+
+commit 57c8d3984b1f300e65801a565bb04a763ef28be8
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Fri Nov 13 21:09:56 2020 -0700
+
+    Added doors to the draw in BoardCells
+
+commit d5097cadbd9b263958a7830986913c68f51a0d37
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 20:34:51 2020 -0700
+
+    fixed window resizing
+
+commit cf2381d75967119b3d566fbd0547b8b85c368e7a
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 20:13:09 2020 -0700
+
+    unused cells now colored black
+
+commit bfb2ffc049bf675e7b9180f09453eb85e00082a4
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 20:11:08 2020 -0700
+
+    removed borders from room cells
+
+commit 3435531a60077892c0d740a252b92f7cde32bf23
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 20:02:56 2020 -0700
+
+    removed boardPanel class
+
+commit e10c949bc52bff59e0de071d7f7ead51bb9da1ce
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 20:00:45 2020 -0700
+
+    board is now colored properly
+
+commit 0fd92e42995060bc544a81b5f5638859d27b95a2
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 19:50:39 2020 -0700
+
+    cells draw themselves (not fully implemented yet)
+
+commit 3c14e792c97471e9e51216178105f5bd172c9a64
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 19:46:52 2020 -0700
+
+    board (drawn in painComponent, just a rectangle for now ) resizes with window.
+
+commit ba75140a5259ce30730834cace796432620c9c13
+Merge: 71e8ef2 4448e81
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 19:41:05 2020 -0700
+
+    Merge branch 'main' of https://github.com/rlord222/Clue_Eck_Georgius into main
+
+    "merging local changes with main"
+
+commit 71e8ef234c4d870ef198aeee022921fcc1fcbadb
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 19:39:34 2020 -0700
+
+    created ClueGame clase to hold main JFrame, added control and info panels
+
+commit 4448e8184ed91cb138a8db21737c1a19ac51d6bd
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Thu Nov 12 12:12:52 2020 -0700
+
+    Tried to resize the board but it's not working
+
+commit 208740c6239258883c85ce19b06c78bc505cfcdc
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Thu Nov 12 00:23:23 2020 -0700
+
+    modified board class to extend JPanel
+
+commit c4357624cee42efea068f6d18321dc8cd9e49536
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Wed Nov 11 22:54:54 2020 -0700
+
+    Board and indevidual BoardCells are now viewable but it's too small.
+
+commit a740cb13d6b80dd7141be63ba25e011bdbead14d
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Wed Nov 11 00:37:32 2020 -0700
+
+    added a helper method for createLayout in GameControlPanel
+
+commit 451af8c74bff3ccc01c16aaf82307b1be9070c11
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Wed Nov 11 00:21:45 2020 -0700
+
+    renamed variables in card info panel
+
+commit a0496205161872d1c94a8e0be1d1d1c26d65892a
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Wed Nov 11 00:05:03 2020 -0700
+
+    refactored createLayout() in card info panel class
+
+commit 2728e0d9be1cfd8c938643cb59100286a018d8e0
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 9 22:29:40 2020 -0700
+
+    Finnished off the CardInfoPanel and made it so that it was reliant on a HumanPlayer rather than independently stored hand and seen sets.
+
+commit bafd8e6662adc468058a0782f1f211ba2e5c182e
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 9 22:03:17 2020 -0700
+
+    Changed the seen set to be in the Player class so that it can be used by the humanPlayer to.
+
+commit 52b35e560c67d8608ca374968264e5fd494497db
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 21:34:22 2020 -0700
+
+    added code in main to test updating the displayed cards
+
+commit d51af6e020158bd5ce24ca216b767fef430df63a
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 21:18:15 2020 -0700
+
+    added setters for inHand and seen
+
+commit f442c3355638678defd1d3503e64fdc80fd9ce89
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 21:13:41 2020 -0700
+
+    added method to update displayed cards
+
+commit 3d56c1cf278845910722d372c9b9d3e421424fad
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 18:08:56 2020 -0700
+
+    added skeleton setter methods to CardInfoPanel
+
+commit e23e0d4a46b1b03e1f948c0f4a22f8e3fd30e24a
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 9 18:03:36 2020 -0700
+
+    set up basic card panel layout
+
 commit 45b6ec5462cb9ce7d1bb030155d90632d44ce284 (HEAD -> main, origin/main, origin/HEAD)
 Author: rlord222 <63765345+rlord222@users.noreply.github.com>
 Date:   Mon Nov 9 17:11:59 2020 -0700

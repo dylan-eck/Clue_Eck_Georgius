@@ -68,6 +68,13 @@ public class Board extends JPanel{
 				}
 			}
 			
+			//creates the introduction panel
+			for(Player p:players) {
+				if(p.isHuman()) {
+					new GameStartPanel(p);
+				}
+			}
+			
 		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
