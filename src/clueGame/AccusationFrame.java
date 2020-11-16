@@ -14,7 +14,7 @@ import javax.swing.border.Border;
 
 public class AccusationFrame {
 
-	private static int CONTROL_PANEL_WIDTH = 750;
+	private static int CONTROL_PANEL_WIDTH = 900;
 	private static int CONTROL_PANEL_HEIGHT = 400;
 	
 	JFrame frame;
@@ -25,11 +25,12 @@ public class AccusationFrame {
 	public AccusationFrame(Board b){
 		board = b;
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayout(1,3));
+		mainPanel.setLayout(new GridLayout(1,4));
 		
 		this.setUpPeople();
 		this.setUpWeapons();
 		this.setUpRooms();
+		this.setUpSubmit();
 		
 		frame = new JFrame();
 		frame.setContentPane(mainPanel);
@@ -80,6 +81,12 @@ public class AccusationFrame {
 		mainPanel.add(roomPanel);
 	}
 	
+	private void setUpSubmit() {
+		JButton submitButton = new JButton("Submit");
+		submitButton.addActionListener(new submitListener());
+		mainPanel.add(submitButton);
+	}
+	
 	//Same as from the card Type Panel
 	private JPanel createPanel(String name) {
 		JPanel panel = new JPanel();
@@ -113,7 +120,7 @@ public class AccusationFrame {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			person = new Card(text,"Weapon");
+			weapon = new Card(text,"Weapon");
 		}
 	}
 	
@@ -127,7 +134,19 @@ public class AccusationFrame {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			person = new Card(text,"Room");
+			room = new Card(text,"Room");
+		}
+	}
+	
+	private class submitListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if(person!=null && weapon!=null && room!=null) {
+				//A computer player can't win like this so ComputerWin is always false
+				board.accusationEndGame(board.checkAccusation(person, weapon, room));
+			}else {
+				new PlayerHasNotGoneErrorPanel();
+			}
 		}
 	}
 	

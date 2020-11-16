@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
@@ -10,7 +11,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Board extends JPanel{
@@ -582,4 +585,24 @@ public class Board extends JPanel{
 			p.draw(g, cellWidth, cellHeight);
 		}
 	}
+	
+	//This is called at when the game is over (either when the player uses their accusation or when a computer player gets the answer)
+	public void accusationEndGame(boolean hasPlayerWon) {
+		//Closes all windows when done. Might need it later.
+		
+		JFrame frame = new JFrame();
+		if(hasPlayerWon) {
+			JOptionPane.showMessageDialog(frame,"Congratulations! \n You won!");
+			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+		}else {
+			JOptionPane.showMessageDialog(frame,"OOHHH! Not quite. \n "
+					+ "The solution was:"
+					+ "\nCulprit: "+solution.getPerson().getName()
+					+ "\nWeapon: "+solution.getWeapon().getName()
+					+ "\nRoom: "+solution.getRoom().getName());
+			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+		}
+	}
+		
+	
 }

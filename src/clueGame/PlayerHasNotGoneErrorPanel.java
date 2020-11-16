@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 public class PlayerHasNotGoneErrorPanel {
 
-JFrame frame;
+	JFrame frame;
 	
 	public PlayerHasNotGoneErrorPanel() {
 		frame= new JFrame();
