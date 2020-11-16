@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
@@ -38,6 +39,11 @@ public class ClueGame {
 		gameFrame.add(infoPanel, BorderLayout.EAST);
 		gameFrame.add(controlPanel, BorderLayout.SOUTH);
 		gameFrame.setVisible(true);
+		
+		while(!gameBoard.getGameOver()) {
+			
+		}
+		gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
 	}
 	
 	public static void main(String[] args) throws BadConfigFormatException{

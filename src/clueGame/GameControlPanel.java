@@ -38,7 +38,7 @@ public class GameControlPanel extends JPanel{
 		playerHasGone = false;
 		
 		diceRoll = Integer.toString(board.rollDie());
-		nextPlayer = board.getNextPlayer();
+		nextPlayer = board.getCurrentPlayer();
 		
 		guessText = new JTextField();
 		resultText = new JTextField();
@@ -114,7 +114,8 @@ public class GameControlPanel extends JPanel{
 			//Doesn't actualy do anything but the diceRoll is stored for now incase we need it.
 			if(playerHasGone) {
 				diceRoll = Integer.toString(board.rollDie());
-				nextPlayer = board.getNextPlayer();
+				nextPlayer = board.getCurrentPlayer();
+				board.setNextPlayer();
 				rollText.setText(diceRoll);
 				turnText.setText(nextPlayer.getName());
 				backgroundColor.setBackground(nextPlayer.getColor());

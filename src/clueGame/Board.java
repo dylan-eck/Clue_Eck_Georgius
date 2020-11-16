@@ -21,7 +21,8 @@ public class Board extends JPanel{
 	private BoardCell[][] boardCellArray;
 	private int numRows, numCols;
 	private Random r;
-	private Iterator nextPlayer;
+	private Iterator<Player> nextPlayer;
+	private Player currentPlayer;
 	
 	private Scanner layoutFile, setupFile;
 	private String layoutFileName, setupFileName;
@@ -35,6 +36,8 @@ public class Board extends JPanel{
 	private Set<Player> players;
 	private Set<Card> deck, removableDeck,weapons,players2,rooms2;
 	private Solution solution;
+	
+	private boolean gameOver;
 	
 	private static Board theInstance = new Board();
 	
@@ -86,15 +89,14 @@ public class Board extends JPanel{
 		
 		removableDeck = new HashSet<Card>(deck);
 		solution = new Solution();
+		gameOver = false;
 		setSolution();
 		deal();
 		nextPlayer = players.iterator();
+		setNextPlayer();
 		//TODO: find a more elegant way to do this
-		while(!(this.getNextPlayer()).isHuman()) {
-			//getNextPlayer already cycles through till we get to the human
-		}
-		for(int i = 1;i<players.size();i++) {
-			this.getNextPlayer();
+		while(!(this.getCurrentPlayer()).isHuman()) {
+			setNextPlayer();
 		}
 	}
 	
@@ -556,13 +558,17 @@ public class Board extends JPanel{
 		return (r.nextInt(6)+1);
 	}
 	
-	public Player getNextPlayer() {
+	public void setNextPlayer() {
 		if(nextPlayer.hasNext()) {
-			return (Player) nextPlayer.next();
+			currentPlayer = nextPlayer.next();
 		}else {
 			nextPlayer = players.iterator();
-			return (Player) nextPlayer.next();
+			currentPlayer = nextPlayer.next();
 		}
+	}
+	
+	public Player getCurrentPlayer() {
+		return currentPlayer;
 	}
 	
 	@Override
@@ -586,21 +592,25 @@ public class Board extends JPanel{
 		}
 	}
 	
+	public boolean getGameOver() {
+		return gameOver;
+	}
+	
 	//This is called at when the game is over (either when the player uses their accusation or when a computer player gets the answer)
 	public void accusationEndGame(boolean hasPlayerWon) {
 		//Closes all windows when done. Might need it later.
 		
 		JFrame frame = new JFrame();
 		if(hasPlayerWon) {
+			gameOver = true;
 			JOptionPane.showMessageDialog(frame,"Congratulations! \n You won!");
-			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 		}else {
+			gameOver = true;
 			JOptionPane.showMessageDialog(frame,"OOHHH! Not quite. \n "
 					+ "The solution was:"
 					+ "\nCulprit: "+solution.getPerson().getName()
 					+ "\nWeapon: "+solution.getWeapon().getName()
 					+ "\nRoom: "+solution.getRoom().getName());
-			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 		}
 	}
 		
