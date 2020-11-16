@@ -51,6 +51,8 @@ public class Board extends JPanel{
 		this.rooms = new HashSet<Room>();
 		this.players = new HashSet<Player>();
 		this.weapons = new HashSet<Card>();
+		this.players2 = new HashSet<Card>();
+		this.rooms2 = new HashSet<Card>();
 		this.deck = new HashSet<Card>();
 		
 		r = new Random();
@@ -84,6 +86,13 @@ public class Board extends JPanel{
 		setSolution();
 		deal();
 		nextPlayer = players.iterator();
+		//TODO: find a more elegant way to do this
+		while(!(this.getNextPlayer()).isHuman()) {
+			//getNextPlayer already cycles through till we get to the human
+		}
+		for(int i = 1;i<players.size();i++) {
+			this.getNextPlayer();
+		}
 	}
 	
 	/**
@@ -128,6 +137,7 @@ public class Board extends JPanel{
 					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
 				}else if(lineInSplit[0].equals("Player")){
 					makeCard(lineInSplit[1],"Person");
+					players2.add(new Card(lineInSplit[1],"Person"));
 					if(lineInSplit[5].equals("H")) {
 						players.add(new HumanPlayer(lineInSplit[1],lineInSplit[2],Integer.parseInt(lineInSplit[3]),Integer.parseInt(lineInSplit[4])));
 					}else {	
@@ -139,6 +149,7 @@ public class Board extends JPanel{
 				}else {
 					//we start at index one because the format files have a space before each word or letter
 					makeCard(lineInSplit[1].substring(1),"Room");
+					rooms2.add(new Card(lineInSplit[1].substring(1),"Room"));
 					rooms.add(new Room(lineInSplit[1].substring(1),lineInSplit[2].charAt(1)));
 				}
 			}
@@ -453,6 +464,14 @@ public class Board extends JPanel{
 	
 	public Set<Card> getWeapons(){
 		return weapons;
+	}
+	
+	public Set<Card> getPlayerDeck(){
+		return players2;
+	}
+	
+	public Set<Card> getRoomDeck(){
+		return rooms2;
 	}
 	
 	public Set<Card> getCards(){

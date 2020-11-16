@@ -73,6 +73,7 @@ public class GameControlPanel extends JPanel{
 		JButton accuseButton = new JButton(ACCUSE_BUTTON_TEXT);
 		JButton nextTurnButton = new JButton(NEXT_TURN_BUTTON_TEXT);
 		nextTurnButton.addActionListener(new nextTurnListener());
+		accuseButton.addActionListener(new accusationListener());
 		
 		// upper half of the control panel
 		JPanel upperSubPanel = new JPanel();
@@ -127,11 +128,10 @@ public class GameControlPanel extends JPanel{
 	private class accusationListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			//Doesn't actualy do anything but the diceRoll is stored for now incase we need it.
 			if(playerHasGone) {
 				new PlayerHasGoneErrorPanel();
 			}else {
-				new PlayerHasNotGoneErrorPanel();
+				new AccusationFrame(board);
 			}
 		}
 		
