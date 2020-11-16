@@ -1,7 +1,10 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -92,6 +95,8 @@ public class Board extends JPanel{
 		while(!(this.getCurrentPlayer()).isHuman()) {
 			setNextPlayer();
 		}
+
+		this.addMouseListener(new Mouse(numCols,numRows,this));
 	}
 	
 	/**
@@ -595,10 +600,6 @@ public class Board extends JPanel{
 		}
 	}
 	
-	public void handleNextPlayer() {
-		
-	}
-	
 	public boolean getGameOver() {
 		return gameOver;
 	}
@@ -620,6 +621,57 @@ public class Board extends JPanel{
 					+ "\nRoom: "+solution.getRoom().getName());
 		}
 	}
-		
 	
+	class Mouse extends Frame implements MouseListener { 
+
+		int numCols,numRows;
+		Board board;
+		
+		Mouse(int numCol,int numRow,Board b){ 
+			numCols = numCol;
+			numRows = numRow;
+			board = b;
+	    }
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			int frameWidth = board.getWidth();
+			int frameHeight = board.getHeight();
+			
+			int cellWidth = frameWidth / numCols;
+			int cellHeight = frameHeight / numRows;
+			
+			for(BoardCell b:targets) {
+				if(e.getX()>(b.getLocation()[0]*cellWidth) && e.getX()<((b.getLocation()[0]+1)*cellWidth)) {
+					if(e.getY()>(b.getLocation()[1]*cellHeight) && e.getY()<((b.getLocation()[1]+1)*cellHeight)) {
+						currentPlayer.move(b.getLocation());
+					}
+				}
+			}
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		} 	
+	}
 }

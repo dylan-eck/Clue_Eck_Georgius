@@ -104,5 +104,10 @@ public abstract class Player {
 		g.fillOval(this.getLocation()[0]*cellWidth, this.getLocation()[1]*cellHeight, cellWidth, cellHeight);
 	}
 	
+	public void move(int[] loc) {
+		location = loc;
+	}
+	
 	abstract public boolean isHuman();
+
 }
