@@ -37,7 +37,8 @@ public class GameControlPanel extends JPanel{
 		board = b;
 		playerHasGone = false;
 		
-		diceRoll = Integer.toString(board.rollDie());
+		board.rollDie();
+		diceRoll = Integer.toString(board.getDice());
 		nextPlayer = board.getCurrentPlayer();
 		
 		guessText = new JTextField();
@@ -112,16 +113,19 @@ public class GameControlPanel extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			//Doesn't actualy do anything but the diceRoll is stored for now incase we need it.
-			if(playerHasGone) {
-				diceRoll = Integer.toString(board.rollDie());
-				nextPlayer = board.getCurrentPlayer();
+			//if(playerHasGone) {
+				board.rollDie();
+				diceRoll = Integer.toString(board.getDice());
+				
 				board.setNextPlayer();
+				nextPlayer = board.getCurrentPlayer();
+				
 				rollText.setText(diceRoll);
 				turnText.setText(nextPlayer.getName());
 				backgroundColor.setBackground(nextPlayer.getColor());
-			}else {
-				new PlayerHasNotGoneErrorPanel();
-			}
+			//}else {
+			//	new PlayerHasNotGoneErrorPanel();
+		//	}
 		}
 		
 	}

@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 public class Board extends JPanel{
 	
 	private BoardCell[][] boardCellArray;
-	private int numRows, numCols;
+	private int numRows, numCols,diceResult;
 	private Random r;
 	private Iterator<Player> nextPlayer;
 	private Player currentPlayer;
@@ -554,8 +554,12 @@ public class Board extends JPanel{
 	 * This function rolls the die when it's needed for player movement
 	 */
 	//This could be a private function since I think only board will call it but it still needs to be tested
-	public int rollDie() {
-		return (r.nextInt(6)+1);
+	public void rollDie() {
+		diceResult = (r.nextInt(6)+1);
+	}
+	
+	public int getDice() {
+		return diceResult;
 	}
 	
 	public void setNextPlayer() {
@@ -590,6 +594,10 @@ public class Board extends JPanel{
 		for(Player p:players) {
 			p.draw(g, cellWidth, cellHeight);
 		}
+	}
+	
+	public void handleNextPlayer() {
+		
 	}
 	
 	public boolean getGameOver() {

@@ -40,10 +40,7 @@ public class ClueGame {
 		gameFrame.add(controlPanel, BorderLayout.SOUTH);
 		gameFrame.setVisible(true);
 		
-		while(!gameBoard.getGameOver()) {
-			
-		}
-		gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
+		//gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
 	}
 	
 	public static void main(String[] args) throws BadConfigFormatException{
