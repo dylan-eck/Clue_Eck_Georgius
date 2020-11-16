@@ -24,15 +24,17 @@ public class ClueGame {
 		gameBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		gameBoard.initialize();
 		
-		controlPanel = new GameControlPanel(gameBoard);
 		
+		//creates the introduction panel and finds out who is the human
 		HumanPlayer player=null;
-		
 		for(Player p:gameBoard.getPlayers()) {
 			if(p.isHuman()) {
+				new GameStartPanel(p);
 				player = (HumanPlayer) p;
 			}
 		}
+		
+		controlPanel = new GameControlPanel(gameBoard);
 		infoPanel = new CardInfoPanel(player);
 		
 		gameFrame.add(gameBoard, BorderLayout.CENTER);
@@ -40,7 +42,21 @@ public class ClueGame {
 		gameFrame.add(controlPanel, BorderLayout.SOUTH);
 		gameFrame.setVisible(true);
 		
-		//gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
+		runGame();
+	}
+	
+	public void runGame() {
+		//could also change this to be recursive
+		while(!gameBoard.getGameOver()) {
+			Player currentPlayer = gameBoard.getCurrentPlayer();
+			if(currentPlayer.isHuman()) {
+				gameBoard.calcTargets(gameBoard.getCell(currentPlayer.getLocation()[1],currentPlayer.getLocation()[0]),gameBoard.getDice());
+				
+			}else {
+				
+			}
+		}
+		gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
 	}
 	
 	public static void main(String[] args) throws BadConfigFormatException{

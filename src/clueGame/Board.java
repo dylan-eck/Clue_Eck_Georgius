@@ -60,6 +60,7 @@ public class Board extends JPanel{
 		this.players2 = new HashSet<Card>();
 		this.rooms2 = new HashSet<Card>();
 		this.deck = new HashSet<Card>();
+		targets = new HashSet<BoardCell>();
 		
 		r = new Random();
 		
@@ -73,13 +74,6 @@ public class Board extends JPanel{
 			for(BoardCell b[]:boardCellArray) {
 				for(BoardCell a:b) {
 					a.setAdj(theInstance);
-				}
-			}
-			
-			//creates the introduction panel
-			for(Player p:players) {
-				if(p.isHuman()) {
-					new GameStartPanel(p);
 				}
 			}
 			
@@ -569,6 +563,7 @@ public class Board extends JPanel{
 			nextPlayer = players.iterator();
 			currentPlayer = nextPlayer.next();
 		}
+		this.rollDie();
 	}
 	
 	public Player getCurrentPlayer() {
@@ -587,10 +582,14 @@ public class Board extends JPanel{
 	
 		for(int row = 0; row < this.numRows; row++) {
 			for(int column = 0; column < this.numCols; column++) {
-				getCell(row, column).draw(g, cellWidth, cellHeight,this);
+				getCell(row, column).draw(g, cellWidth, cellHeight,this,false);
 			}
 		}
-	
+		
+		for(BoardCell c:targets) {
+			c.draw(g, cellWidth, cellHeight,this,true);
+		}
+
 		for(Player p:players) {
 			p.draw(g, cellWidth, cellHeight);
 		}

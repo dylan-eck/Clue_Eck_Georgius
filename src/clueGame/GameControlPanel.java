@@ -113,19 +113,19 @@ public class GameControlPanel extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			//Doesn't actualy do anything but the diceRoll is stored for now incase we need it.
-			//if(playerHasGone) {
-				board.rollDie();
-				diceRoll = Integer.toString(board.getDice());
-				
+			if(playerHasGone) {
+				//tells the board to start the next players turn
 				board.setNextPlayer();
 				nextPlayer = board.getCurrentPlayer();
+
+				diceRoll = Integer.toString(board.getDice());
 				
 				rollText.setText(diceRoll);
 				turnText.setText(nextPlayer.getName());
 				backgroundColor.setBackground(nextPlayer.getColor());
-			//}else {
-			//	new PlayerHasNotGoneErrorPanel();
-		//	}
+			}else {
+				new PlayerHasNotGoneErrorPanel();
+			}
 		}
 		
 	}

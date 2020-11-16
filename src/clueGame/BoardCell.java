@@ -106,19 +106,32 @@ public class BoardCell {
 		}
 	}
 	
-	public void draw(Graphics g, int width, int height,Board board) {
-		if(letter == 'X') {
-			g.setColor(Color.BLACK);	
-			g.fillRect(location[0]*width, location[1]*height, width, height);
-		} else if (letter != 'H') {
-			g.setColor(Color.lightGray);	
-			g.fillRect(location[0]*width, location[1]*height, width, height);
-		} else {
-			g.setColor(Color.ORANGE);
-			g.fillRect(location[0]*width, location[1]*height, width, height);
-			g.setColor(Color.BLACK);
-			g.drawRect(location[0]*width, location[1]*height, width, height);
-		}	
+	public void draw(Graphics g, int width, int height,Board board,boolean target) {
+		
+		if(!target) {
+			if(letter == 'X') {
+				g.setColor(Color.BLACK);	
+				g.fillRect(location[0]*width, location[1]*height, width, height);
+			} else if (letter != 'H') {
+				g.setColor(Color.lightGray);	
+				g.fillRect(location[0]*width, location[1]*height, width, height);
+			} else {
+				g.setColor(Color.ORANGE);
+				g.fillRect(location[0]*width, location[1]*height, width, height);
+				g.setColor(Color.BLACK);
+				g.drawRect(location[0]*width, location[1]*height, width, height);
+			}	
+		}else {
+			if (letter != 'H') {
+				g.setColor(Color.CYAN);	
+				g.fillRect(location[0]*width, location[1]*height, width, height);
+			} else {
+				g.setColor(Color.CYAN);
+				g.fillRect(location[0]*width, location[1]*height, width, height);
+				g.setColor(Color.BLACK);
+				g.drawRect(location[0]*width, location[1]*height, width, height);
+			}	
+		}
 		
 		if(this.isDoorway()) {
 			switch(doorDirection) {
@@ -141,6 +154,7 @@ public class BoardCell {
 				default:
 					break;
 			}
+		
 		}
 		
 		if(isRoomLabel) {
@@ -150,6 +164,7 @@ public class BoardCell {
 			g.setColor(Color.BLACK);
 			g.drawString((board.getRoom(this)).getName(), (location[0]*width)-(textWidth/3), location[1]*height);
 		}
+		
 	}
 	
 	public void setRoomLabel() {

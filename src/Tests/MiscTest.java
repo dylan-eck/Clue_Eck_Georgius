@@ -31,7 +31,8 @@ class MiscTest {
 		int numberRolled[] = {0,0,0,0,0,0};
 		int roll;
 		for(int i = 0;i<300;i++) {
-			roll = board.rollDie();
+			board.rollDie();
+			roll = board.getDice();
 			
 			switch(roll) {
 				case 1:
@@ -66,17 +67,20 @@ class MiscTest {
 	void nextPlayerTest() {
 		
 		Player nextPlayer;
-		Player firstPlayer = board.getNextPlayer();
+		Player firstPlayer = board.getCurrentPlayer();
 		Set playersSeen = new HashSet<Player>();
 		playersSeen.add(firstPlayer);
 		
 		for(int i = (board.getPlayers()).size();i>1;i--) {
-			nextPlayer = board.getNextPlayer();
+			board.setNextPlayer();
+			nextPlayer = board.getCurrentPlayer();
 			//makes sure there aren't any repeats until you've gone through all players.
 			assertFalse(playersSeen.contains(nextPlayer));
 			playersSeen.add(nextPlayer);
 		}
-		nextPlayer = board.getNextPlayer();
+		
+		board.setNextPlayer();
+		nextPlayer = board.getCurrentPlayer();
 		//Checks to see that the iterator keeps the order
 		assertEquals(nextPlayer,firstPlayer);
 		
