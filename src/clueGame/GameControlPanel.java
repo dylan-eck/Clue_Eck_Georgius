@@ -31,9 +31,11 @@ public class GameControlPanel extends JPanel{
 	
 	private String diceRoll;
 	private Player nextPlayer;
+	private boolean playerHasGone;
 
 	public GameControlPanel(Board b) {	
 		board = b;
+		playerHasGone = false;
 		
 		diceRoll = Integer.toString(board.rollDie());
 		nextPlayer = board.getNextPlayer();
@@ -109,11 +111,28 @@ public class GameControlPanel extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			//Doesn't actualy do anything but the diceRoll is stored for now incase we need it.
-			diceRoll = Integer.toString(board.rollDie());
-			nextPlayer = board.getNextPlayer();
-			rollText.setText(diceRoll);
-			turnText.setText(nextPlayer.getName());
-			backgroundColor.setBackground(nextPlayer.getColor());
+			if(playerHasGone) {
+				diceRoll = Integer.toString(board.rollDie());
+				nextPlayer = board.getNextPlayer();
+				rollText.setText(diceRoll);
+				turnText.setText(nextPlayer.getName());
+				backgroundColor.setBackground(nextPlayer.getColor());
+			}else {
+				new PlayerHasNotGoneErrorPanel();
+			}
+		}
+		
+	}
+	
+	private class accusationListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			//Doesn't actualy do anything but the diceRoll is stored for now incase we need it.
+			if(playerHasGone) {
+				new PlayerHasGoneErrorPanel();
+			}else {
+				new PlayerHasNotGoneErrorPanel();
+			}
 		}
 		
 	}
@@ -134,7 +153,11 @@ public class GameControlPanel extends JPanel{
 		resultText.setText(text);
 	}
 	
-	public static void main(String[] args) {
+	public void updatePlayerTurn() {
+		playerHasGone = !playerHasGone;
+	}
+	
+	/*public static void main(String[] args) {
 		//This will be removed when we integrate this.
 		//probably by just calling get instance though if this is in the board class we won't have to waste the memory.
 		board = Board.getInstance();
@@ -152,5 +175,5 @@ public class GameControlPanel extends JPanel{
 //		controlPanel.setRollText("setter test");
 		controlPanel.setGuessText("setter test");
 		controlPanel.setResultText("setter test");
-	}
+	}*/
 }

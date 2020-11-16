@@ -13,4 +13,8 @@ public class GameStartPanel {
 				+ "You are playing as "+player.getName()+". \n"
 				+ "Good luck discovering the murderer hiden among you.");
 	}
+	
+	public static void main(String[] args) throws BadConfigFormatException{
+		new GameStartPanel(new HumanPlayer("Test Person","Blue",0,0));
+	}
 }
