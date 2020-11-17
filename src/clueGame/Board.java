@@ -98,7 +98,7 @@ public class Board extends JPanel{
 			setNextPlayer();
 		}
 
-		this.addMouseListener(new Mouse(numCols,numRows,this));
+		this.addMouseListener(new Mouse());
 	}
 	
 	/**
@@ -595,7 +595,7 @@ public class Board extends JPanel{
 		
 		int cellWidth = frameWidth / this.numCols;
 		int cellHeight = frameHeight / this.numRows;
-	
+		
 		for(int row = 0; row < this.numRows; row++) {
 			for(int column = 0; column < this.numCols; column++) {
 				getCell(row, column).draw(g, cellWidth, cellHeight,this,false);
@@ -607,7 +607,7 @@ public class Board extends JPanel{
 				c.draw(g, cellWidth, cellHeight,this,true);
 			}
 		}
-
+		
 		for(Player p:players) {
 			p.draw(g, cellWidth, cellHeight);
 		}
@@ -637,20 +637,11 @@ public class Board extends JPanel{
 	
 	class Mouse extends Frame implements MouseListener { 
 
-		int numCols,numRows;
-		Board board;
-		
-		Mouse(int numCol,int numRow,Board b){ 
-			numCols = numCol;
-			numRows = numRow;
-			board = b;
-	    }
-
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			
-			int frameWidth = board.getWidth();
-			int frameHeight = board.getHeight();
+			int frameWidth = Board.this.getWidth();
+			int frameHeight = Board.this.getHeight();
 			
 			int cellWidth = frameWidth / numCols;
 			int cellHeight = frameHeight / numRows;
