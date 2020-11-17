@@ -9,4 +9,8 @@ public class HumanPlayer extends Player{
 	public boolean isHuman() {
 		return true;
 	}
+	
+	public Solution createSuggestion(Board b) {
+		return null;
+	}
 }

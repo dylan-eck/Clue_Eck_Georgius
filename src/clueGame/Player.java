@@ -109,5 +109,6 @@ public abstract class Player {
 	}
 	
 	abstract public boolean isHuman();
+	abstract public Solution createSuggestion(Board b);
 
 }

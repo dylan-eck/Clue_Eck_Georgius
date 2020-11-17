@@ -127,4 +127,5 @@ public class ComputerPlayer extends Player{
 	public boolean isHuman() {
 		return false;
 	}
+
 }
