@@ -46,15 +46,20 @@ public class ClueGame {
 	}
 	
 	public void runGame() {
-		//could also change this to be recursive
+		// initial calc targets
+		Player currentPlayer = gameBoard.getCurrentPlayer();
+		gameBoard.calcTargets(gameBoard.getCell(currentPlayer.getLocation()[1],currentPlayer.getLocation()[0]),gameBoard.getDice());
+
+		
 		while(!gameBoard.getGameOver()) {
-			Player currentPlayer = gameBoard.getCurrentPlayer();
+			
 			if(currentPlayer.isHuman()) {
-				gameBoard.calcTargets(gameBoard.getCell(currentPlayer.getLocation()[1],currentPlayer.getLocation()[0]),gameBoard.getDice());
 				controlPanel.updatePlayerTurn();
+				
 			}else {
 				
 			}
+
 		}
 		gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
 	}

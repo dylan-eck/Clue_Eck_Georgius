@@ -650,7 +650,6 @@ public class Board extends JPanel{
 					}
 				}
 			}
-			//System.out.println("x: "+currentPlayer.getLocation()[0]+" y: "+currentPlayer.getLocation()[1]);
 		}
 
 		@Override
