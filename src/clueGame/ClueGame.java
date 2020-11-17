@@ -50,9 +50,7 @@ public class ClueGame {
 		Player currentPlayer = gameBoard.getCurrentPlayer();
 		gameBoard.calcTargets(gameBoard.getCell(currentPlayer.getLocation()[1],currentPlayer.getLocation()[0]),gameBoard.getDice());
 
-		while(!gameBoard.getGameOver()) {
-			
-		}
+		while(!gameBoard.getGameOver()) {}
 		
 		gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
 	}

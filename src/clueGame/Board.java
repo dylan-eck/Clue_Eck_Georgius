@@ -564,22 +564,14 @@ public class Board extends JPanel{
 	}
 	
 	public void setNextPlayer() {
+		this.rollDie();
 		if(nextPlayer.hasNext()) {
 			currentPlayer = nextPlayer.next();
 		}else {
 			nextPlayer = players.iterator();
 			currentPlayer = nextPlayer.next();
 		}
-		if(currentPlayer.isHuman()) {
-			// flag turn as unfinished
-			playerHasGone = false;
-		} else {
-			// do computer player stuff
-			playerHasGone = true;
-		}
-		
-		
-		this.rollDie();
+		playerHasGone = false;
 	}
 	
 	public Player getCurrentPlayer() {
@@ -660,7 +652,7 @@ public class Board extends JPanel{
 					
 					playerHasGone = true;
 				}
-			}
+			} 
 		}
 
 		@Override
@@ -690,5 +682,9 @@ public class Board extends JPanel{
 	
 	public boolean playerHasGone() {
 		return playerHasGone;
+	}
+	
+	public void setPlayerHasGone() {
+		playerHasGone = true;
 	}
 }

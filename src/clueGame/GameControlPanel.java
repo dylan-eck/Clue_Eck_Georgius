@@ -110,8 +110,8 @@ public class GameControlPanel extends JPanel{
 	private class nextTurnListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			
 			if(board.playerHasGone()) {
-				// set up next turn
 				board.setNextPlayer();
 				nextPlayer = board.getCurrentPlayer();
 				int diceRoll = board.getDice();
@@ -123,11 +123,17 @@ public class GameControlPanel extends JPanel{
 				rollText.setText(diceRollText);
 				turnText.setText(nextPlayer.getName());
 				backgroundColor.setBackground(nextPlayer.getColor());
-			}else {
+				
+			} else if(board.getCurrentPlayer().isHuman()) {
 				new PlayerHasNotGoneErrorPanel();
+				
+			} else {
+				ComputerPlayer computerPlayer = (ComputerPlayer) board.getCurrentPlayer();
+				computerPlayer.move(computerPlayer.selectTargets(board, board.getDice()).getLocation());
+				board.setPlayerHasGone();
 			}
+			board.repaint();
 		}
-		
 	}
 	
 	private class accusationListener implements ActionListener{
