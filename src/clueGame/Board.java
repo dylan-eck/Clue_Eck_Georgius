@@ -648,17 +648,18 @@ public class Board extends JPanel{
 				int row = e.getY() / cellHeight;
 				BoardCell cell = Board.this.getCell(row, col);
 				
-				while(!Board.this.targets.contains(cell)) {
+				if(!Board.this.targets.contains(cell)) {
 					new InvalidMoveErrorPanel();
+				} else {
+					currentPlayer.move(cell.getLocation());
+					Board.this.repaint();
+					
+					if(cell.getChar() != 'H') {
+						// do suggestion stuff
+					}
+					
+					playerHasGone = true;
 				}
-				currentPlayer.move(cell.getLocation());
-				Board.this.repaint();
-				
-				if(cell.getChar() != 'H') {
-					// do suggestion stuff
-				}
-				
-				playerHasGone = true;
 			}
 		}
 
