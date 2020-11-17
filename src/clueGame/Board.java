@@ -635,6 +635,7 @@ public class Board extends JPanel{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			
 			int frameWidth = board.getWidth();
 			int frameHeight = board.getHeight();
 			
@@ -645,9 +646,11 @@ public class Board extends JPanel{
 				if(e.getX()>(b.getLocation()[0]*cellWidth) && e.getX()<((b.getLocation()[0]+1)*cellWidth)) {
 					if(e.getY()>(b.getLocation()[1]*cellHeight) && e.getY()<((b.getLocation()[1]+1)*cellHeight)) {
 						currentPlayer.move(b.getLocation());
+						Board.this.repaint();
 					}
 				}
 			}
+			//System.out.println("x: "+currentPlayer.getLocation()[0]+" y: "+currentPlayer.getLocation()[1]);
 		}
 
 		@Override
