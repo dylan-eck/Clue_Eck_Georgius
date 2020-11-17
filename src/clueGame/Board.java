@@ -639,22 +639,22 @@ public class Board extends JPanel{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+
+			int cellWidth = Board.this.getWidth() / numCols;
+			int cellHeight = Board.this.getHeight() / numRows;
 			
-			int frameWidth = Board.this.getWidth();
-			int frameHeight = Board.this.getHeight();
-			
-			int cellWidth = frameWidth / numCols;
-			int cellHeight = frameHeight / numRows;
-			
-			if(!playerHasGone) {
-				for(BoardCell b:targets) {
-					if(e.getX()>(b.getLocation()[0]*cellWidth) && e.getX()<((b.getLocation()[0]+1)*cellWidth)) {
-						if(e.getY()>(b.getLocation()[1]*cellHeight) && e.getY()<((b.getLocation()[1]+1)*cellHeight)) {
-							currentPlayer.move(b.getLocation());
-							playerHasGone = true;
-							Board.this.repaint();
-						}
-					}
+			if(currentPlayer.isHuman() && !playerHasGone) {
+				int col = e.getX() / cellWidth;
+				int row = e.getY() / cellHeight;
+				BoardCell cell = Board.this.getCell(row, col);
+				
+				if(Board.this.targets.contains(cell)) {
+					currentPlayer.move(cell.getLocation());
+					playerHasGone = true;
+					Board.this.repaint();
+					
+				} else {
+					new InvalidMoveErrorPanel();
 				}
 			}
 		}
