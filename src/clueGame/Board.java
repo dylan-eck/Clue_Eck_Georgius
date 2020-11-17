@@ -40,6 +40,7 @@ public class Board extends JPanel{
 	private Set<Card> deck, removableDeck,weapons,players2,rooms2;
 	private Solution solution;
 	
+	private boolean playerHasGone;
 	private boolean gameOver;
 	
 	private static Board theInstance = new Board();
@@ -86,6 +87,7 @@ public class Board extends JPanel{
 		
 		removableDeck = new HashSet<Card>(deck);
 		solution = new Solution();
+		playerHasGone = false;
 		gameOver = false;
 		setSolution();
 		deal();
@@ -568,6 +570,7 @@ public class Board extends JPanel{
 			nextPlayer = players.iterator();
 			currentPlayer = nextPlayer.next();
 		}
+		playerHasGone = false;
 		this.rollDie();
 	}
 	
@@ -642,11 +645,14 @@ public class Board extends JPanel{
 			int cellWidth = frameWidth / numCols;
 			int cellHeight = frameHeight / numRows;
 			
-			for(BoardCell b:targets) {
-				if(e.getX()>(b.getLocation()[0]*cellWidth) && e.getX()<((b.getLocation()[0]+1)*cellWidth)) {
-					if(e.getY()>(b.getLocation()[1]*cellHeight) && e.getY()<((b.getLocation()[1]+1)*cellHeight)) {
-						currentPlayer.move(b.getLocation());
-						Board.this.repaint();
+			if(!playerHasGone) {
+				for(BoardCell b:targets) {
+					if(e.getX()>(b.getLocation()[0]*cellWidth) && e.getX()<((b.getLocation()[0]+1)*cellWidth)) {
+						if(e.getY()>(b.getLocation()[1]*cellHeight) && e.getY()<((b.getLocation()[1]+1)*cellHeight)) {
+							currentPlayer.move(b.getLocation());
+							playerHasGone = true;
+							Board.this.repaint();
+						}
 					}
 				}
 			}
@@ -675,5 +681,9 @@ public class Board extends JPanel{
 			// TODO Auto-generated method stub
 			
 		} 	
+	}
+	
+	public boolean playerHasGone() {
+		return playerHasGone;
 	}
 }

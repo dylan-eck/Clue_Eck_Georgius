@@ -46,21 +46,14 @@ public class ClueGame {
 	}
 	
 	public void runGame() {
-		// initial calc targets
+		// initial calcTargets
 		Player currentPlayer = gameBoard.getCurrentPlayer();
 		gameBoard.calcTargets(gameBoard.getCell(currentPlayer.getLocation()[1],currentPlayer.getLocation()[0]),gameBoard.getDice());
 
-		
 		while(!gameBoard.getGameOver()) {
 			
-			if(currentPlayer.isHuman()) {
-				controlPanel.updatePlayerTurn();
-				
-			}else {
-				
-			}
-
 		}
+		
 		gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
 	}
 	
