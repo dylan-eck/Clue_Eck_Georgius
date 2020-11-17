@@ -110,17 +110,15 @@ public class GameControlPanel extends JPanel{
 	private class nextTurnListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			//Doesn't actually do anything but the diceRoll is stored for now in case we need it.
 			if(board.playerHasGone()) {
-				//tells the board to start the next players turn
+				// set up next turn
 				board.setNextPlayer();
 				nextPlayer = board.getCurrentPlayer();
-				
 				int diceRoll = board.getDice();
 				board.calcTargets(board.getCell(nextPlayer.getLocation()[1],nextPlayer.getLocation()[0]),diceRoll);
-				System.out.println("caclulated targets");
+				board.repaint();
 				
-				
+				// update panels
 				String diceRollText = Integer.toString(diceRoll);
 				rollText.setText(diceRollText);
 				turnText.setText(nextPlayer.getName());

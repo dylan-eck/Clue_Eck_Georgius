@@ -570,7 +570,15 @@ public class Board extends JPanel{
 			nextPlayer = players.iterator();
 			currentPlayer = nextPlayer.next();
 		}
-		playerHasGone = false;
+		if(currentPlayer.isHuman()) {
+			// flag turn as unfinished
+			playerHasGone = false;
+		} else {
+			// do computer player stuff
+			playerHasGone = true;
+		}
+		
+		
 		this.rollDie();
 	}
 	
