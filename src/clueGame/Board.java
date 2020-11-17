@@ -602,8 +602,10 @@ public class Board extends JPanel{
 			}
 		}
 		
-		for(BoardCell c:targets) {
-			c.draw(g, cellWidth, cellHeight,this,true);
+		if(currentPlayer.isHuman()) {
+			for(BoardCell c:targets) {
+				c.draw(g, cellWidth, cellHeight,this,true);
+			}
 		}
 
 		for(Player p:players) {
