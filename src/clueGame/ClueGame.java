@@ -49,10 +49,8 @@ public class ClueGame {
 		// initial calcTargets
 		Player currentPlayer = gameBoard.getCurrentPlayer();
 		gameBoard.calcTargets(gameBoard.getCell(currentPlayer.getLocation()[1],currentPlayer.getLocation()[0]),gameBoard.getDice());
-
-		while(!gameBoard.getGameOver()) {}
 		
-		gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
+		//gameFrame.dispatchEvent(new WindowEvent(gameFrame, WindowEvent.WINDOW_CLOSING));
 	}
 	
 	public static void main(String[] args) throws BadConfigFormatException{

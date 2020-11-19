@@ -134,21 +134,18 @@ public class BoardCell {
 		}
 		
 		if(this.isDoorway()) {
+			g.setColor(Color.BLACK);
 			switch(doorDirection) {
 				case UP:
-					g.setColor(Color.BLACK);
 					g.fillRect(location[0]*width, location[1]*height, width, DOORWAY_HIGHT);
 					break;
 				case DOWN:
-					g.setColor(Color.BLACK);
 					g.fillRect(location[0]*width, (location[1]+1)*height-DOORWAY_HIGHT, width, DOORWAY_HIGHT);
 					break;
 				case RIGHT:
-					g.setColor(Color.BLACK);
 					g.fillRect((location[0]+1)*width-DOORWAY_WIDTH, location[1]*height, DOORWAY_WIDTH, height);
 					break;
 				case LEFT:
-					g.setColor(Color.BLACK);
 					g.fillRect(location[0]*width, location[1]*height, DOORWAY_WIDTH, height);
 					break;
 				default:
