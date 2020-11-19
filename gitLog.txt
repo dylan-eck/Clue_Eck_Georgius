@@ -1,3 +1,142 @@
+commit 8d516e2a6ce65f59039230c28c4ad8a18505de28 (HEAD -> main, origin/main, origin/HEAD)
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 16 21:38:41 2020 -0700
+
+    Added a tiny bit for handeling suggestions but that's for later.
+
+commit b6f27a44c1c1983ac1e8d96a3116d42dedbd0c75
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 16 21:19:13 2020 -0700
+
+    computer players now move on their turn
+
+commit 7e773b4ad3b469e02ac62fde0648dda62d581536
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 16 20:48:57 2020 -0700
+
+    removed possible infinite loop in mouse listener in Board
+
+commit 8edb3df597449a9faf9da2820951714036d8d505
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 16 20:46:05 2020 -0700
+
+    refactored mouse listener in Board
+
+commit 906a0854437d514324d3a2fa3ebddd00228e484e
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 16 20:16:42 2020 -0700
+
+    refactored move method in board and added invalid move error panel
+
+commit 3ac580a414de2b1bff315d5bb765134f793820e4
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 16 20:02:31 2020 -0700
+
+    removed instance variables from mouse listener in Board
+
+commit 97a31d48fbb9842441b51e8cd23c6e0a78a96e4f
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 16 19:43:52 2020 -0700
+
+    targets now only display on the human player's turn
+
+commit 76b81de93a0b33b355811db797c3abe54357dcbb
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 16 19:40:47 2020 -0700
+
+    made it so playerHasGone is not set to false for computer players (this may be changed when computer player behavior is implemented)
+
+commit 3eef82c260e87391728bd56985461b51488645db
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 16 19:33:58 2020 -0700
+
+    moved playerHasGone variable to Board class so it can be accessed by both gameGontrolPanel and the button listener within Board
+
+commit 20089244f3336c7049e27d831c66bc605625680f
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 16 19:22:09 2020 -0700
+
+    moved calcTargets call to nextTurnListener to prevent it from bieng called multiple times per turn
+
+commit 0d089317e35b756914f13119bae16a1cb7eecc8d
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Mon Nov 16 18:30:37 2020 -0700
+
+    made so the board updates when a player moves
+
+commit cf23b2d069c8fafc3d108c2d6992083d4bca9190
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 16 16:20:58 2020 -0700
+
+    Added a mouseListener
+
+commit efa4ab7d30cdea7067ecad4f453059701c790ed2
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 16 14:12:32 2020 -0700
+
+    Added drawing the possible targets but occasionaly when yo start the program it gives a ConcurentModificationException and I'm not sure why this is.
+
+commit 633f6789c42fb0ebafd7a2a1bf94ce18b5b659ed
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 16 11:31:43 2020 -0700
+
+    Changed some minor pieces
+
+commit 7e3c828e36185c38f3753cf3336ee60eabc938f7
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 16 10:49:49 2020 -0700
+
+    Changed the board classes getNextPlayer into getCurrentPlyaer and setNextPlayer
+
+commit 02623edf62613dd54343344364f1ee562f0d8db8
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 16 00:49:18 2020 -0700
+
+    Accustaions work but they don't end the game and close the window.
+
+commit d870a8815f1f45ed076e06be0ad4745dc2b44d67
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Mon Nov 16 00:04:47 2020 -0700
+
+    Created the visual for the Accusatin panel but not most of the  functionality yet
+
+commit f8a09c9398d5934ca8c40859cd084a8225406f86
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Sun Nov 15 17:53:51 2020 -0700
+
+    Began adding functionality to the next and make accusation buttons.
+
+commit 8fece4244560ef8dbb6f1aa9e17fc932e323bfbc
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Sun Nov 15 16:46:34 2020 -0700
+
+    Added the opening panel that introduces the game
+
+commit 43a1d8c1f44bb166f79265e5ebef1d57a5615e4f
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Fri Nov 13 23:13:13 2020 -0700
+
+    Refactored so that the room labels are now created by the board cells
+
+commit 9d77996f287f051d59a7cc215918371db5e88f27
+Author: rlord222 <63765345+rlord222@users.noreply.github.com>
+Date:   Fri Nov 13 23:06:12 2020 -0700
+
+    Refactored so that players now draw themselves
+
+commit 6ba4f5dd9f08fbac540e4da3139bde14ddd9451e
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 23:01:50 2020 -0700
+
+    added title to main JFrame
+
+commit a6e117b2a382131a696442d77e06b6f0c15aea33
+Author: Dylan Eck <dylaneck@mymail.mines.edu>
+Date:   Fri Nov 13 22:50:37 2020 -0700
+
+    fixed room labels not showing
+
+
 commit b22b3a00d7b1819bb959b6c19e5bef99ba39e340
 Author: rlord222 <63765345+rlord222@users.noreply.github.com>
 Date:   Fri Nov 13 22:37:10 2020 -0700
