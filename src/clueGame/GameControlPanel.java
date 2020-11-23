@@ -114,24 +114,23 @@ public class GameControlPanel extends JPanel{
 			// update panel
 			int diceRoll = board.getDice();
 			String diceRollText = Integer.toString(diceRoll);
+			
+			board.setNextPlayer();
+			nextPlayer = board.getCurrentPlayer();
 			rollText.setText(diceRollText);
 			turnText.setText(nextPlayer.getName());
 			backgroundColor.setBackground(nextPlayer.getColor());
 			
 			if(board.playerHasGone()) {
-				board.setNextPlayer();
-				nextPlayer = board.getCurrentPlayer();
 				board.calcTargets(board.getCell(nextPlayer.getLocation()[1],nextPlayer.getLocation()[0]),diceRoll);
-				board.repaint();
-				
-			} else if(board.getCurrentPlayer().isHuman()) {
+			} else if(nextPlayer.isHuman()) {
 				new PlayerHasNotGoneErrorPanel();
 			} else {
-				ComputerPlayer computerPlayer = (ComputerPlayer) board.getCurrentPlayer();
-				computerPlayer.move(computerPlayer.selectTargets(board, board.getDice()).getLocation());
+				ComputerPlayer computerPlayer = (ComputerPlayer) nextPlayer;
+				computerPlayer.move(computerPlayer.selectTargets(board, diceRoll).getLocation());
 				board.setPlayerHasGone();
 			}
-			
+
 			board.repaint();
 		}
 	}
