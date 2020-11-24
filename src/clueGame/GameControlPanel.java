@@ -111,23 +111,24 @@ public class GameControlPanel extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
-			// update panel
-			int diceRoll = board.getDice();
-			String diceRollText = Integer.toString(diceRoll);
-			
-			board.setNextPlayer();
-			nextPlayer = board.getCurrentPlayer();
-			rollText.setText(diceRollText);
-			turnText.setText(nextPlayer.getName());
-			backgroundColor.setBackground(nextPlayer.getColor());
-			
 			if(board.playerHasGone()) {
+				// update panel
+				// this stuff needs to be inside the if statement
+				// the game breaks if it isn't
+				int diceRoll = board.getDice();
+				String diceRollText = Integer.toString(diceRoll);
+				
+				board.setNextPlayer();
+				nextPlayer = board.getCurrentPlayer();
+				rollText.setText(diceRollText);
+				turnText.setText(nextPlayer.getName());
+				backgroundColor.setBackground(nextPlayer.getColor());
 				board.calcTargets(board.getCell(nextPlayer.getLocation()[1],nextPlayer.getLocation()[0]),diceRoll);
 			} else if(nextPlayer.isHuman()) {
 				new PlayerHasNotGoneErrorPanel();
 			} else {
 				ComputerPlayer computerPlayer = (ComputerPlayer) nextPlayer;
-				computerPlayer.move(computerPlayer.selectTargets(board, diceRoll).getLocation());
+				computerPlayer.move(computerPlayer.selectTargets(board, board.getDice()).getLocation());
 				board.setPlayerHasGone();
 			}
 
