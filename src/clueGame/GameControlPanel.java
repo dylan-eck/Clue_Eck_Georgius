@@ -107,18 +107,15 @@ public class GameControlPanel extends JPanel{
 	private class nextTurnListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			int diceRoll = board.getDice();
+			String diceRollText = Integer.toString(diceRoll);
+			rollText.setText(diceRollText);
+			turnText.setText(nextPlayer.getName());
 			
 			if(board.playerHasGone()) {
-				// update panel
-				// this stuff needs to be inside the if statement
-				// the game breaks if it isn't
-				int diceRoll = board.getDice();
-				String diceRollText = Integer.toString(diceRoll);
-				
+	
 				board.setNextPlayer();
 				nextPlayer = board.getCurrentPlayer();
-				rollText.setText(diceRollText);
-				turnText.setText(nextPlayer.getName());
 				backgroundColor.setBackground(nextPlayer.getColor());
 				board.calcTargets(board.getCell(nextPlayer.getLocation()[1],nextPlayer.getLocation()[0]),diceRoll);
 				
@@ -133,7 +130,7 @@ public class GameControlPanel extends JPanel{
 					// TODO add accusation stuff
 					
 				} else {
-					BoardCell target = computerPlayer.selectTargets(board, board.getDice());
+					BoardCell target = computerPlayer.selectTargets(board, diceRoll);
 					computerPlayer.move(target.getLocation());
 					board.setPlayerHasGone();
 					
