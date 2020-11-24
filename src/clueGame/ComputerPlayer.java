@@ -11,11 +11,14 @@ public class ComputerPlayer extends Player{
 	private Card roomCard;
 	private Set<Card> allCards, possibleWeapons, possiblePeople;
 	
+	private boolean accusationReady;
+	
 	public ComputerPlayer(String name, String color, int x, int y) throws BadConfigFormatException {
 		super(name, color, x, y);
 		
 		possiblePeople = new HashSet<Card>();
 		possibleWeapons = new HashSet<Card>();
+		accusationReady = false;
 	}
 
 	/**
@@ -126,6 +129,10 @@ public class ComputerPlayer extends Player{
 	
 	public boolean isHuman() {
 		return false;
+	}
+	
+	public boolean accusationReady() {
+		return accusationReady;
 	}
 
 }

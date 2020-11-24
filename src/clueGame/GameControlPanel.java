@@ -31,6 +31,8 @@ public class GameControlPanel extends JPanel{
 	
 	private String diceRoll;
 	private Player nextPlayer;
+	
+	private JButton nextTurnButton;
 
 	public GameControlPanel(Board b) {	
 		board = b;
@@ -70,7 +72,7 @@ public class GameControlPanel extends JPanel{
 		
 		// buttons to make accusation and move to the next turn
 		JButton accuseButton = new JButton(ACCUSE_BUTTON_TEXT);
-		JButton nextTurnButton = new JButton(NEXT_TURN_BUTTON_TEXT);
+		nextTurnButton = new JButton(NEXT_TURN_BUTTON_TEXT);
 		nextTurnButton.addActionListener(new nextTurnListener());
 		accuseButton.addActionListener(new accusationListener());
 		
@@ -124,14 +126,42 @@ public class GameControlPanel extends JPanel{
 				turnText.setText(nextPlayer.getName());
 				backgroundColor.setBackground(nextPlayer.getColor());
 				board.calcTargets(board.getCell(nextPlayer.getLocation()[1],nextPlayer.getLocation()[0]),diceRoll);
+				
+				nextTurnButton.doClick();
+				
 			} else if(nextPlayer.isHuman()) {
 				new PlayerHasNotGoneErrorPanel();
 			} else {
 				ComputerPlayer computerPlayer = (ComputerPlayer) nextPlayer;
-				computerPlayer.move(computerPlayer.selectTargets(board, board.getDice()).getLocation());
-				board.setPlayerHasGone();
+				
+				if(computerPlayer.accusationReady()) {
+					// TODO add accusation stuff
+					
+				} else {
+					BoardCell target = computerPlayer.selectTargets(board, board.getDice());
+					computerPlayer.move(target.getLocation());
+					board.setPlayerHasGone();
+					
+					if(target.getChar() != 'H') {
+						Solution computerSuggestion = computerPlayer.createSuggestion(board);
+						Card accusedPerson = computerSuggestion.getPerson();
+						Card location = computerSuggestion.getRoom();
+//						int[] suggestionLocation = board.getCell(0, 0).getLocation();
+//						
+//						for(Room room : board.getAllRooms()) {
+//							if(room.getName() == location.getName()) {
+//								suggestionLocation = room.getCenterCell().getLocation();
+//							}
+//						}
+//						
+//						for(Player player : board.getPlayers()) {
+//							if(player.getName() == accusedPerson.getName()) {
+//								player.move(suggestionLocation);
+//							}
+//						}
+					}
+				}
 			}
-
 			board.repaint();
 		}
 	}
