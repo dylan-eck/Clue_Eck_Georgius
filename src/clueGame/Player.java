@@ -99,9 +99,9 @@ public abstract class Player {
 		return seen;
 	}
 	
-	public void draw(Graphics g, int cellWidth, int cellHeight) {
+	public void draw(Graphics g, int cellWidth, int cellHeight,int offset) {
 		g.setColor(this.getColor());	
-		g.fillOval(this.getLocation()[0]*cellWidth, this.getLocation()[1]*cellHeight, cellWidth, cellHeight);
+		g.fillOval((this.getLocation()[0]*cellWidth) + offset, this.getLocation()[1]*cellHeight, cellWidth, cellHeight);
 	}
 	
 	public void move(int[] loc) {

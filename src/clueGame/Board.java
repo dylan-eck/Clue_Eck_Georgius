@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
@@ -598,8 +599,24 @@ public class Board extends JPanel{
 			}
 		}
 		
+		int[][] locations = new int[6][2];
+		int i = 0;
 		for(Player p:players) {
-			p.draw(g, cellWidth, cellHeight);
+			locations[i] = p.getLocation();
+			i++;
+		}
+		
+		for(Player p:players) {
+			int offSet = -1;
+			for(int j = 0;j<locations.length;j++) {
+				if(locations[j][0] == p.getLocation()[0] && locations[j][1] == p.getLocation()[1]) {
+					offSet++;
+				}
+				if(offSet == 1) {
+					locations[j] = new int[] {-1,-1};
+				}
+			}
+			p.draw(g, cellWidth, cellHeight,(offSet*cellWidth/5));
 		}
 	}
 	
