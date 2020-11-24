@@ -30,7 +30,7 @@ public class AccusationFrame {
 		this.setUpPeople();
 		this.setUpWeapons();
 		this.setUpRooms();
-		this.setUpSubmit();
+		this.setUpConfirmationButtons();
 		
 		frame = new JFrame();
 		frame.setContentPane(mainPanel);
@@ -81,10 +81,20 @@ public class AccusationFrame {
 		mainPanel.add(roomPanel);
 	}
 	
-	private void setUpSubmit() {
+	private void setUpConfirmationButtons() {
+		
+		JPanel confirmationPanel = new JPanel();
+		confirmationPanel.setLayout(new GridLayout(0,1));
+		
 		JButton submitButton = new JButton("Submit");
 		submitButton.addActionListener(new submitListener());
-		mainPanel.add(submitButton);
+		confirmationPanel.add(submitButton);
+		
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new cancelListener());
+		confirmationPanel.add(cancelButton);
+		
+		mainPanel.add(confirmationPanel);
 	}
 	
 	//Same as from the card Type Panel
@@ -138,16 +148,24 @@ public class AccusationFrame {
 		}
 	}
 	
-	private class submitListener implements ActionListener{
+	private class submitListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if(person!=null && weapon!=null && room!=null) {
 				//A computer player can't win like this so ComputerWin is always false
+				AccusationFrame.this.frame.dispose();
 				board.accusationEndGame(board.checkAccusation(person, weapon, room));
 			}else {
 				new PlayerHasNotGoneErrorPanel();
 			}
 		}
+	}
+	
+	private class cancelListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			AccusationFrame.this.frame.dispose();
+		}	
 	}
 	
 	public static void main(String[] args) {
