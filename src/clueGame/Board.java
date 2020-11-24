@@ -5,7 +5,6 @@ import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
@@ -15,7 +14,6 @@ import java.util.Scanner;
 import java.util.Set;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -30,7 +28,7 @@ public class Board extends JPanel{
 	private Scanner layoutFile, setupFile;
 	private String layoutFileName, setupFileName;
 	
-	private Set<BoardCell> targets, visited;
+	private Set<BoardCell> targets;
 	private Set<Room> rooms;
 	private char hallwayLetter;
 	

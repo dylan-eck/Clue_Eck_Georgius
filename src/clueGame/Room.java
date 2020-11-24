@@ -1,9 +1,5 @@
 package clueGame;
 
-import java.awt.Graphics;
-
-import javax.swing.JLabel;
-
 public class Room {
 
 	private String roomName;

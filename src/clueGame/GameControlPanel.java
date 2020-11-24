@@ -7,16 +7,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 public class GameControlPanel extends JPanel{
-	
-	private static int CONTROL_PANEL_WIDTH = 750;
-	private static int CONTROL_PANEL_HEIGHT = 180;
 	
 	private static final String WHOSE_TURN_TEXT = "Whose turn?";
 	private static final String ROLL_PANEL_TEXT = "Roll:";
@@ -193,24 +188,4 @@ public class GameControlPanel extends JPanel{
 	public void setResultText(String text) {
 		resultText.setText(text);
 	}
-	
-	/*public static void main(String[] args) {
-		//This will be removed when we integrate this.
-		//probably by just calling get instance though if this is in the board class we won't have to waste the memory.
-		board = Board.getInstance();
-		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");		 
-		board.initialize();
-		
-		GameControlPanel controlPanel = new GameControlPanel(board);
-		JFrame frame = new JFrame();
-		frame.setContentPane(controlPanel);
-		frame.setSize(CONTROL_PANEL_WIDTH, CONTROL_PANEL_HEIGHT);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		frame.setVisible(true);
-		
-//		controlPanel.setTurnText("setter test");
-//		controlPanel.setRollText("setter test");
-		controlPanel.setGuessText("setter test");
-		controlPanel.setResultText("setter test");
-	}*/
 }

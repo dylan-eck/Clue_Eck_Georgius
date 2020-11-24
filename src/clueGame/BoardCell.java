@@ -156,7 +156,6 @@ public class BoardCell {
 		
 		if(isRoomLabel) {
 			int textWidth = 5*width;
-			int textHeight = height;
 			
 			g.setColor(Color.BLACK);
 			g.drawString((board.getRoom(this)).getName(), (location[0]*width)-(textWidth/3), location[1]*height);
