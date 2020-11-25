@@ -536,7 +536,7 @@ public class Board extends JPanel{
 			return false;
 	}
 
-	public Object handleSuggestion(Card person, Card weapon, Card room, Player guesser) {
+	public Card handleSuggestion(Card person, Card weapon, Card room, Player guesser) {
 		//We don't return imediatly in case we have to randomly return a card from someones hand
 		
 		for(Player p:players) {

@@ -21,6 +21,8 @@ public class SuggestionPanel {
 	Board board;
 	JPanel mainPanel;
 	
+	private JComboBox<String> people, weapons;
+	
 	public SuggestionPanel(Board b){
 		board = b;
 		CreateLayout();
@@ -45,10 +47,12 @@ public class SuggestionPanel {
 		mainPanel.add(roomName);
 		
 		mainPanel.add(new JLabel("Person"));
-		mainPanel.add(createComboBox(board.getPlayerDeck()));
+		people = createComboBox(board.getPlayerDeck());
+		mainPanel.add(people);
 		
 		mainPanel.add(new JLabel("Weapon"));
-		mainPanel.add(createComboBox(board.getWeapons()));
+		weapons = createComboBox(board.getWeapons());
+		mainPanel.add(weapons);
 		
 		setUpConfirmationButtons();
 	}
@@ -72,9 +76,27 @@ public class SuggestionPanel {
 	}
 	
 	private class submitListener implements ActionListener {
+		
+		Board board = SuggestionPanel.this.board;
+		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			//handle suggestion
+			Card person = board.getCard((String) people.getSelectedItem());
+			Card weapon = board.getCard((String) weapons.getSelectedItem());
+			int[] currentLocation = board.getCurrentPlayer().getLocation();
+			char roomChar = board.getCell(currentLocation[1], currentLocation[0]).getChar(); 
+			String roomName = board.getRoom(roomChar).getName();
+			Card room = board.getCard(roomName);
+			Player currentPlayer = board.getCurrentPlayer();
+			
+			Card disproved = board.handleSuggestion(person, weapon, room, currentPlayer);
+			
+			if(disproved != null) {
+				String cardName = disproved.getName();
+				new ErrorPanel("suggestion disproved - " + cardName);
+			}
+			
+			SuggestionPanel.this.frame.dispose();
 		}
 	}
 	
