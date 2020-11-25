@@ -157,7 +157,7 @@ public class AccusationPanel {
 				//A computer player can't win like this so ComputerWin is always false
 				board.accusationEndGame(board.checkAccusation(person, weapon, room));
 			}else {
-				new PlayerHasNotGoneErrorPanel();
+				new ErrorPanel("You have not finished your turn yet.");
 			}
 		}
 	}

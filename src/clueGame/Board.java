@@ -656,7 +656,7 @@ public class Board extends JPanel{
 				BoardCell cell = Board.this.getCell(row, col);
 				
 				if(!Board.this.targets.contains(cell)) {
-					new InvalidMoveErrorPanel();
+					new ErrorPanel("Invalid Move");
 				} else {
 					currentPlayer.move(cell.getLocation());
 					Board.this.repaint();

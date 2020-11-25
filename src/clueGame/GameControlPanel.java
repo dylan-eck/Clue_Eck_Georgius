@@ -120,7 +120,7 @@ public class GameControlPanel extends JPanel{
 				board.calcTargets(board.getCell(nextPlayer.getLocation()[1],nextPlayer.getLocation()[0]),diceRoll);
 				
 			} else if(nextPlayer.isHuman()) {
-				new PlayerHasNotGoneErrorPanel();
+				new ErrorPanel("You have not finished your turn yet.");
 			} else {
 				ComputerPlayer computerPlayer = (ComputerPlayer) nextPlayer;
 				
@@ -150,8 +150,8 @@ public class GameControlPanel extends JPanel{
 	private class accusationListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if(board.playerHasGone()) {
-				new PlayerHasGoneErrorPanel();
+			if(!board.getCurrentPlayer().isHuman()) {
+				new ErrorPanel("It is not your turn");
 			}else {
 				new AccusationPanel(board);
 			}
