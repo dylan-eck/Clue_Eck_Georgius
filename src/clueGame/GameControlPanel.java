@@ -119,8 +119,6 @@ public class GameControlPanel extends JPanel{
 				backgroundColor.setBackground(nextPlayer.getColor());
 				board.calcTargets(board.getCell(nextPlayer.getLocation()[1],nextPlayer.getLocation()[0]),diceRoll);
 				
-				nextTurnButton.doClick();
-				
 			} else if(nextPlayer.isHuman()) {
 				new PlayerHasNotGoneErrorPanel();
 			} else {
@@ -143,6 +141,7 @@ public class GameControlPanel extends JPanel{
 						GameControlPanel.this.board.handleSuggestion(person, weapon, room, guesser);
 					}
 				}
+				nextTurnButton.doClick();
 			}
 			board.repaint();
 		}
