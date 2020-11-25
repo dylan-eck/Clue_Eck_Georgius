@@ -164,7 +164,7 @@ public class GameControlPanel extends JPanel{
 			if(board.playerHasGone()) {
 				new PlayerHasGoneErrorPanel();
 			}else {
-				new AccusationFrame(board);
+				new SolutionPanel(board, "Make an Accusation");
 			}
 		}
 		

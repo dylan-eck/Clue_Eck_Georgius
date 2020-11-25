@@ -662,7 +662,7 @@ public class Board extends JPanel{
 					Board.this.repaint();
 					
 					if(cell.getChar() != 'H') {
-						// do suggestion stuff
+						new SolutionPanel(Board.this, "Make a Suggestion");
 					}
 					
 					playerHasGone = true;

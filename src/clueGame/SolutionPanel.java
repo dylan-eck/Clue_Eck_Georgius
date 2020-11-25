@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 
-public class AccusationFrame {
+public class SolutionPanel {
 
 	private static int CONTROL_PANEL_WIDTH = 900;
 	private static int CONTROL_PANEL_HEIGHT = 400;
@@ -22,7 +22,7 @@ public class AccusationFrame {
 	Board board;
 	JPanel mainPanel;
 	
-	public AccusationFrame(Board b){
+	public SolutionPanel(Board b, String title){
 		board = b;
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridLayout(1,4));
@@ -33,6 +33,7 @@ public class AccusationFrame {
 		this.setUpConfirmationButtons();
 		
 		frame = new JFrame();
+		frame.setTitle(title);
 		frame.setContentPane(mainPanel);
 		frame.setSize(CONTROL_PANEL_WIDTH, CONTROL_PANEL_HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
@@ -152,8 +153,8 @@ public class AccusationFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if(person!=null && weapon!=null && room!=null) {
+				SolutionPanel.this.frame.dispose();
 				//A computer player can't win like this so ComputerWin is always false
-				AccusationFrame.this.frame.dispose();
 				board.accusationEndGame(board.checkAccusation(person, weapon, room));
 			}else {
 				new PlayerHasNotGoneErrorPanel();
@@ -164,17 +165,7 @@ public class AccusationFrame {
 	private class cancelListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			AccusationFrame.this.frame.dispose();
+			SolutionPanel.this.frame.dispose();
 		}	
-	}
-	
-	public static void main(String[] args) {
-		//This will be removed when we integrate this.
-		//probably by just calling get instance though if this is in the board class we won't have to waste the memory.	
-		Board board = Board.getInstance();
-		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");		 
-		board.initialize();
-		
-		new AccusationFrame(board);
 	}
 }
