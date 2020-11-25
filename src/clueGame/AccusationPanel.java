@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 
-public class SolutionPanel {
+public class AccusationPanel {
 
 	private static int CONTROL_PANEL_WIDTH = 900;
 	private static int CONTROL_PANEL_HEIGHT = 400;
@@ -22,7 +22,7 @@ public class SolutionPanel {
 	Board board;
 	JPanel mainPanel;
 	
-	public SolutionPanel(Board b, String title){
+	public AccusationPanel(Board b){
 		board = b;
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridLayout(1,4));
@@ -33,7 +33,7 @@ public class SolutionPanel {
 		this.setUpConfirmationButtons();
 		
 		frame = new JFrame();
-		frame.setTitle(title);
+		frame.setTitle("Make an Accusation");
 		frame.setContentPane(mainPanel);
 		frame.setSize(CONTROL_PANEL_WIDTH, CONTROL_PANEL_HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
@@ -153,7 +153,7 @@ public class SolutionPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if(person!=null && weapon!=null && room!=null) {
-				SolutionPanel.this.frame.dispose();
+				AccusationPanel.this.frame.dispose();
 				//A computer player can't win like this so ComputerWin is always false
 				board.accusationEndGame(board.checkAccusation(person, weapon, room));
 			}else {
@@ -165,7 +165,7 @@ public class SolutionPanel {
 	private class cancelListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			SolutionPanel.this.frame.dispose();
+			AccusationPanel.this.frame.dispose();
 		}	
 	}
 }

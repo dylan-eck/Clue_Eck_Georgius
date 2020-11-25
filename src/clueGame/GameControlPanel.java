@@ -18,7 +18,7 @@ public class GameControlPanel extends JPanel{
 	private static final String ACCUSE_BUTTON_TEXT = "Make Accusation";
 	private static final String NEXT_TURN_BUTTON_TEXT = "NEXT!";
 	
-	private static Board board;
+	private Board board;
 	
 	private JTextField rollText, guessText, resultText;
 	private static JLabel turnText;
@@ -136,21 +136,11 @@ public class GameControlPanel extends JPanel{
 					
 					if(target.getChar() != 'H') {
 						Solution computerSuggestion = computerPlayer.createSuggestion(board);
-						Card accusedPerson = computerSuggestion.getPerson();
-						Card location = computerSuggestion.getRoom();
-//						int[] suggestionLocation = board.getCell(0, 0).getLocation();
-//						
-//						for(Room room : board.getAllRooms()) {
-//							if(room.getName() == location.getName()) {
-//								suggestionLocation = room.getCenterCell().getLocation();
-//							}
-//						}
-//						
-//						for(Player player : board.getPlayers()) {
-//							if(player.getName() == accusedPerson.getName()) {
-//								player.move(suggestionLocation);
-//							}
-//						}
+						Card person = computerSuggestion.getPerson();
+						Card room = computerSuggestion.getRoom();
+						Card weapon = computerSuggestion.getWeapon();
+						Player guesser = GameControlPanel.this.board.getCurrentPlayer();
+						GameControlPanel.this.board.handleSuggestion(person, weapon, room, guesser);
 					}
 				}
 			}
@@ -164,7 +154,7 @@ public class GameControlPanel extends JPanel{
 			if(board.playerHasGone()) {
 				new PlayerHasGoneErrorPanel();
 			}else {
-				new SolutionPanel(board, "Make an Accusation");
+				new AccusationPanel(board);
 			}
 		}
 		
