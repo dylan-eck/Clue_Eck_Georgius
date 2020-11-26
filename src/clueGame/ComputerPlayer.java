@@ -74,6 +74,9 @@ public class ComputerPlayer extends Player{
 			iterator++;
 		}
 		
+		(board.getPlayer(personGuess.getName())).move(currentLocation.getLocation());
+		board.repaint();
+		
 		return new Solution(roomCard, personGuess, weaponGuess);
 	}
 	
