@@ -11,14 +11,11 @@ public class ComputerPlayer extends Player{
 	private Card roomCard;
 	private Set<Card> allCards, possibleWeapons, possiblePeople;
 	
-	private boolean accusationReady;
-	
 	public ComputerPlayer(String name, String color, int x, int y) throws BadConfigFormatException {
 		super(name, color, x, y);
 		
 		possiblePeople = new HashSet<Card>();
 		possibleWeapons = new HashSet<Card>();
-		accusationReady = false;
 	}
 
 	/**
@@ -73,10 +70,10 @@ public class ComputerPlayer extends Player{
 			}
 			iterator++;
 		}
-		
+
 		(board.getPlayer(personGuess.getName())).move(currentLocation.getLocation());
 		board.repaint();
-		
+
 		return new Solution(roomCard, personGuess, weaponGuess);
 	}
 	
@@ -134,8 +131,39 @@ public class ComputerPlayer extends Player{
 		return false;
 	}
 	
-	public boolean accusationReady() {
-		return accusationReady;
+	public boolean accusationReady(Board b) {
+		if(seen.size() == (b.getCards().size()-3)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Solution getAccusation(Board b) {
+		
+		Card person = null;
+		Card room = null;
+		Card weapon = null;
+		if(accusationReady(b)) {
+			for(Card c:seen) {
+				if(c.getType() == CardType.PERSON) {
+					if(! (b.getPlayerDeck()).contains(c)) {
+						person = c;
+					}
+				}else if(c.getType() == CardType.ROOM) {
+					if(! (b.getRoomDeck()).contains(c)) {
+						room = c;
+					}
+				}else {
+					if(! (b.getWeapons()).contains(c)) {
+						weapon = c;
+					}
+				}
+			}
+			
+			return new Solution(room,person,weapon);
+		}
+		return null;
+		
 	}
 
 }

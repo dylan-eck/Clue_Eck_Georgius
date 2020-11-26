@@ -642,15 +642,19 @@ public class Board extends JPanel{
 	}
 	
 	//This is called at when the game is over (either when the player uses their accusation or when a computer player gets the answer)
-	public void accusationEndGame(boolean hasPlayerWon) {
+	public void accusationEndGame(boolean hasPlayerWon,boolean compWon) {
 		
 		JFrame frame = new JFrame();
 		if(hasPlayerWon) {
-			gameOver = true;
 			JOptionPane.showMessageDialog(frame,"Congratulations! \n You won!");
-		}else {
-			gameOver = true;
+		}else if(!compWon){
 			JOptionPane.showMessageDialog(frame,"OOHHH! Not quite. \n "
+					+ "The solution was:"
+					+ "\nCulprit: "+solution.getPerson().getName()
+					+ "\nWeapon: "+solution.getWeapon().getName()
+					+ "\nRoom: "+solution.getRoom().getName());
+		}else {
+			JOptionPane.showMessageDialog(frame,"Looks like a Computer beat you to it. \n "
 					+ "The solution was:"
 					+ "\nCulprit: "+solution.getPerson().getName()
 					+ "\nWeapon: "+solution.getWeapon().getName()

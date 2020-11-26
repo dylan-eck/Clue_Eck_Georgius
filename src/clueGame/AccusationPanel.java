@@ -155,7 +155,7 @@ public class AccusationPanel {
 			if(person!=null && weapon!=null && room!=null) {
 				AccusationPanel.this.frame.dispose();
 				//A computer player can't win like this so ComputerWin is always false
-				board.accusationEndGame(board.checkAccusation(person, weapon, room));
+				board.accusationEndGame(board.checkAccusation(person, weapon, room),false);
 			}else {
 				new ErrorPanel("You have not finished your turn yet.");
 			}

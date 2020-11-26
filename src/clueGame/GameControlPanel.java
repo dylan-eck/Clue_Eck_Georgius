@@ -123,22 +123,23 @@ public class GameControlPanel extends JPanel{
 			} else {
 				ComputerPlayer computerPlayer = (ComputerPlayer) nextPlayer;
 				
-				if(computerPlayer.accusationReady()) {
-					// TODO add accusation stuff
-					
+				if(computerPlayer.accusationReady(board)) {
+					//This is just temporary but the computer will always be right when this is called.
+					computerPlayer.getAccusation(board);
+					board.accusationEndGame(false,true);
 				} else {
 					BoardCell target = computerPlayer.selectTargets(board, diceRoll);
 					computerPlayer.move(target.getLocation());
 					board.setPlayerHasGone();
 					
-//					if(target.getChar() != 'H') {
-//						Solution computerSuggestion = computerPlayer.createSuggestion(board);
-//						Card person = computerSuggestion.getPerson();
-//						Card room = computerSuggestion.getRoom();
-//						Card weapon = computerSuggestion.getWeapon();
-//						Player guesser = GameControlPanel.this.board.getCurrentPlayer();
-//						GameControlPanel.this.board.handleSuggestion(person, weapon, room, guesser);
-//					}
+					if(target.getChar() != 'H') {
+						Solution computerSuggestion = computerPlayer.createSuggestion(board);
+						Card person = computerSuggestion.getPerson();
+						Card room = computerSuggestion.getRoom();
+						Card weapon = computerSuggestion.getWeapon();
+						Player guesser = GameControlPanel.this.board.getCurrentPlayer();
+						GameControlPanel.this.board.handleSuggestion(person, weapon, room, guesser);
+					}
 				}
 				nextTurnButton.doClick();
 			}
