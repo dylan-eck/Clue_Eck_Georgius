@@ -48,9 +48,14 @@ public class Board extends JPanel{
 	private static Board theInstance = new Board();
 	
 	private GameControlPanel controlPanel;
+	private CardInfoPanel cardPanel;
 	
 	public void setControlPanel(GameControlPanel controlPanel) {
 		this.controlPanel = controlPanel;
+	}
+	
+	public void setCardInfoPanel(CardInfoPanel cardPan) {
+		this.cardPanel = cardPan;
 	}
 	
 	public static Board getInstance() {
@@ -564,6 +569,7 @@ public class Board extends JPanel{
 			}
 		}
 		controlPanel.updateSuggestionAndResult(lastSuggestion, disprovingCard);
+		cardPanel.updateInHandAndSeen();
 		return disprovingCard;
 	}
 	

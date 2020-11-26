@@ -177,10 +177,9 @@ public class GameControlPanel extends JPanel{
 		guessPanel.add(new JLabel(room));
 		
 		if(disprovingCard != null) {
+			board.getCurrentPlayer().addToSeen(disprovingCard);
 			if(board.getCurrentPlayer().isHuman()) {
 				resultPanel.add(new JLabel("Suggestion disproved with the folowing card: " + disprovingCard.getName()));
-				board.getCurrentPlayer().addToSeen(disprovingCard);
-				System.out.println(board.getCurrentPlayer().getSeen());
 			} else {
 				resultPanel.add(new JLabel("Suggestion disproved"));
 			}

@@ -35,6 +35,7 @@ public class ClueGame {
 		controlPanel = new GameControlPanel(gameBoard);
 		gameBoard.setControlPanel(controlPanel);
 		infoPanel = new CardInfoPanel(player);
+		gameBoard.setCardInfoPanel(infoPanel);
 		
 		gameFrame.add(gameBoard, BorderLayout.CENTER);
 		gameFrame.add(infoPanel, BorderLayout.EAST);
