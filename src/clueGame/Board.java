@@ -39,10 +39,19 @@ public class Board extends JPanel{
 	private Set<Card> deck, removableDeck,weapons,players2,rooms2;
 	private Solution solution;
 	
+	private Solution lastSuggestion;
+	private Card disprovingCard;
+	
 	private boolean playerHasGone;
 	private boolean gameOver;
 	
 	private static Board theInstance = new Board();
+	
+	private GameControlPanel controlPanel;
+	
+	public void setControlPanel(GameControlPanel controlPanel) {
+		this.controlPanel = controlPanel;
+	}
 	
 	public static Board getInstance() {
 		return theInstance;
@@ -537,17 +546,15 @@ public class Board extends JPanel{
 	}
 
 	public Card handleSuggestion(Card person, Card weapon, Card room, Player guesser) {
-		//We don't return imediatly in case we have to randomly return a card from someones hand
+		lastSuggestion = new Solution(room, person, weapon);
 		
 		for(Player p:players) {
 			if(!(p.equals(guesser))) {
-				Card disproved = p.disproveSuggestion(person, weapon, room);
-				if(disproved!=null) {
-					return disproved;
-				}
+				disprovingCard = p.disproveSuggestion(person, weapon, room);
+				controlPanel.updateSuggestionAndResult(lastSuggestion, disprovingCard);
 			}
 		}
-		return null;
+		return disprovingCard;
 	}
 	
 	/**

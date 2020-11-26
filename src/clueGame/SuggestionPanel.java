@@ -89,12 +89,7 @@ public class SuggestionPanel {
 			Card room = board.getCard(roomName);
 			Player currentPlayer = board.getCurrentPlayer();
 			
-			Card disproved = board.handleSuggestion(person, weapon, room, currentPlayer);
-			
-			if(disproved != null) {
-				String cardName = disproved.getName();
-				new ErrorPanel("suggestion disproved - " + cardName);
-			}
+			board.handleSuggestion(person, weapon, room, currentPlayer);
 			
 			SuggestionPanel.this.frame.dispose();
 		}

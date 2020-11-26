@@ -20,7 +20,7 @@ public class GameControlPanel extends JPanel{
 	
 	private Board board;
 	
-	private JTextField rollText, guessText, resultText;
+	private JTextField rollText;
 	private static JLabel turnText;
 	private static JPanel turnPanel,backgroundColor;
 	
@@ -28,6 +28,8 @@ public class GameControlPanel extends JPanel{
 	private Player nextPlayer;
 	
 	private JButton nextTurnButton;
+	
+	private JPanel guessPanel, resultPanel;
 
 	public GameControlPanel(Board b) {	
 		board = b;
@@ -35,11 +37,7 @@ public class GameControlPanel extends JPanel{
 		board.rollDie();
 		diceRoll = Integer.toString(board.getDice());
 		nextPlayer = board.getCurrentPlayer();
-		
-		guessText = new JTextField();
-		resultText = new JTextField();
-		setGuessText("not implemented yet");
-		setResultText("not implemented yet");
+
 		CreateLayout();
 	}
 	
@@ -81,10 +79,12 @@ public class GameControlPanel extends JPanel{
 		this.add(upperSubPanel, BorderLayout.NORTH);
 		
 		//Guess panel. It's going to be blank for now
-		JPanel guessPanel = createPanel("guess");
+		guessPanel = createPanel("guess");
+		guessPanel.setLayout(new GridLayout(1,0));
 		
 		//Guess Result panel. Nothing much is happening here either.
-		JPanel resultPanel = createPanel("result");
+		resultPanel = createPanel("result");
+		resultPanel.setLayout(new GridLayout(1,0));
 
 		// lower half of the control panel
 		JPanel lowerSubPanel = new JPanel();
@@ -100,7 +100,6 @@ public class GameControlPanel extends JPanel{
 		JPanel panel = new JPanel();
 		panel.setBorder(BorderFactory.createTitledBorder(name));
 		panel.setLayout(new GridLayout(1,0));
-		panel.add(resultText);
 		return panel;
 	}
 	
@@ -132,14 +131,14 @@ public class GameControlPanel extends JPanel{
 					computerPlayer.move(target.getLocation());
 					board.setPlayerHasGone();
 					
-					if(target.getChar() != 'H') {
-						Solution computerSuggestion = computerPlayer.createSuggestion(board);
-						Card person = computerSuggestion.getPerson();
-						Card room = computerSuggestion.getRoom();
-						Card weapon = computerSuggestion.getWeapon();
-						Player guesser = GameControlPanel.this.board.getCurrentPlayer();
-						GameControlPanel.this.board.handleSuggestion(person, weapon, room, guesser);
-					}
+//					if(target.getChar() != 'H') {
+//						Solution computerSuggestion = computerPlayer.createSuggestion(board);
+//						Card person = computerSuggestion.getPerson();
+//						Card room = computerSuggestion.getRoom();
+//						Card weapon = computerSuggestion.getWeapon();
+//						Player guesser = GameControlPanel.this.board.getCurrentPlayer();
+//						GameControlPanel.this.board.handleSuggestion(person, weapon, room, guesser);
+//					}
 				}
 				nextTurnButton.doClick();
 			}
@@ -159,19 +158,38 @@ public class GameControlPanel extends JPanel{
 		
 	}
 	
+	public void updateSuggestionAndResult(Solution suggestion, Card disprovingCard) {
+		guessPanel.removeAll();
+		resultPanel.removeAll();
+		
+		String person = suggestion.getPerson().getName();
+		String weapon = suggestion.getWeapon().getName();
+		String room = suggestion.getRoom().getName();
+		
+		guessPanel.add(new JLabel(person));
+		guessPanel.add(new JLabel(weapon));
+		guessPanel.add(new JLabel(room));
+		
+		if(disprovingCard != null) {
+			if(board.getCurrentPlayer().isHuman()) {
+				resultPanel.add(new JLabel("Suggestion disproved with the folowing card: " + disprovingCard.getName()));
+				
+			} else {
+				resultPanel.add(new JLabel("Suggestion disproved"));
+			}
+						
+		} else {
+			resultPanel.add(new JLabel("Suggestion could not be disproved."));
+		}
+		
+		this.revalidate();
+	}
+	
 	public void setTurnText(String text) {
 		turnText.setText(text);
 	}
 
 	public void setRollText(String text) {
 		rollText.setText(text);
-	}
-
-	public void setGuessText(String text) {
-		guessText.setText(text);
-	}
-
-	public void setResultText(String text) {
-		resultText.setText(text);
 	}
 }
