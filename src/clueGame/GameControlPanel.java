@@ -149,10 +149,15 @@ public class GameControlPanel extends JPanel{
 	private class accusationListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if(!board.getCurrentPlayer().isHuman()) {
-				new ErrorPanel("It is not your turn");
+			
+			if(board.playerHasGone()) {
+				new ErrorPanel("You've already perforemed an action this turn.");
 			}else {
-				new AccusationPanel(board);
+				if(!board.getCurrentPlayer().isHuman()) {
+					new ErrorPanel("It is not your turn");
+				}else {
+					new AccusationPanel(board);
+				}
 			}
 		}
 		

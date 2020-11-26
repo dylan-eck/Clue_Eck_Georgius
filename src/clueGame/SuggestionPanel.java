@@ -91,6 +91,9 @@ public class SuggestionPanel {
 			
 			board.handleSuggestion(person, weapon, room, currentPlayer);
 			
+			(board.getPlayer(person.getName())).move(currentPlayer.getLocation());
+			board.repaint();
+			
 			SuggestionPanel.this.frame.dispose();
 		}
 	}

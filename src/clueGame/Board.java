@@ -467,6 +467,16 @@ public class Board extends JPanel{
 		return players;
 	}
 	
+	
+	public Player getPlayer(String name) {
+		for(Player p:players) {
+			if(p.getName()==name) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	public Player getPlayer(Color color) {
 		for(Player p:players) {
 			if(p.getColor()==color) {
@@ -633,7 +643,6 @@ public class Board extends JPanel{
 	
 	//This is called at when the game is over (either when the player uses their accusation or when a computer player gets the answer)
 	public void accusationEndGame(boolean hasPlayerWon) {
-		//Closes all windows when done. Might need it later.
 		
 		JFrame frame = new JFrame();
 		if(hasPlayerWon) {
@@ -647,6 +656,8 @@ public class Board extends JPanel{
 					+ "\nWeapon: "+solution.getWeapon().getName()
 					+ "\nRoom: "+solution.getRoom().getName());
 		}
+		
+		gameOver = true;
 	}
 	
 	class Mouse extends Frame implements MouseListener { 
@@ -668,12 +679,12 @@ public class Board extends JPanel{
 					currentPlayer.move(cell.getLocation());
 					Board.this.repaint();
 					
+					playerHasGone = true;
+					
 					if(cell.getChar() != 'H') {
 						//player suggestion stuff
 						new SuggestionPanel(Board.this);
 					}
-					
-					playerHasGone = true;
 				}
 			} 
 		}
