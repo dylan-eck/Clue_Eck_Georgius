@@ -109,12 +109,12 @@ public class GameControlPanel extends JPanel{
 			int diceRoll = board.getDice();
 			String diceRollText = Integer.toString(diceRoll);
 			rollText.setText(diceRollText);
-			turnText.setText(nextPlayer.getName());
 			
 			if(board.playerHasGone()) {
 	
 				board.setNextPlayer();
 				nextPlayer = board.getCurrentPlayer();
+				turnText.setText(nextPlayer.getName());
 				backgroundColor.setBackground(nextPlayer.getColor());
 				board.calcTargets(board.getCell(nextPlayer.getLocation()[1],nextPlayer.getLocation()[0]),diceRoll);
 				
