@@ -179,7 +179,8 @@ public class GameControlPanel extends JPanel{
 		if(disprovingCard != null) {
 			if(board.getCurrentPlayer().isHuman()) {
 				resultPanel.add(new JLabel("Suggestion disproved with the folowing card: " + disprovingCard.getName()));
-				
+				board.getCurrentPlayer().addToSeen(disprovingCard);
+				System.out.println(board.getCurrentPlayer().getSeen());
 			} else {
 				resultPanel.add(new JLabel("Suggestion disproved"));
 			}
@@ -198,4 +199,5 @@ public class GameControlPanel extends JPanel{
 	public void setRollText(String text) {
 		rollText.setText(text);
 	}
+
 }

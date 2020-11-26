@@ -561,9 +561,9 @@ public class Board extends JPanel{
 		for(Player p:players) {
 			if(!(p.equals(guesser))) {
 				disprovingCard = p.disproveSuggestion(person, weapon, room);
-				controlPanel.updateSuggestionAndResult(lastSuggestion, disprovingCard);
 			}
 		}
+		controlPanel.updateSuggestionAndResult(lastSuggestion, disprovingCard);
 		return disprovingCard;
 	}
 	
