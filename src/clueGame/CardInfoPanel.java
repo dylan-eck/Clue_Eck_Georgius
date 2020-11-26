@@ -65,6 +65,8 @@ public class CardInfoPanel extends JPanel {
 		weaponsPanel.add(new JLabel("seen:"));
 		
 		addCards(humanPlayer.getSeen());
+		
+		this.revalidate();
 	}
 	
 	private void addCards(Set<Card> cards) {
